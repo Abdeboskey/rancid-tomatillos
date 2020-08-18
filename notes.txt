@@ -1,0 +1,22 @@
+UI Elements the we need to wireframe -
+
+---> Homepage view of the App
+
+-----> Header (Navbar) with Title, and button to Login 
+-------> On login the User's name is displayed on navbar and button changes to Logout
+
+-----> Main section with card layout for all available movies
+-------> Movie cards are potentially laid out on strips of film.
+-------> Each card has a Piccy-pic with a title and rating below.
+
+---> Detail view for a movie card:
+
+------> Movie poster from main view exists in top left corner
+------> Title is centered across the top
+------> Rating lives below the title
+------> Details/info section exists below rating (on Clapboard Blank)
+------> Background image is the alternate image from API (possibly opaque or blurred for clarity)
+------> Videos will exist in a video section below the info-clapboard?
+--------> When videos are played, they pop up as a centered overlay? 
+
+

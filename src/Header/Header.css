@@ -2,11 +2,11 @@
 
 header {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 	background: linear-gradient(135deg, rgb(131, 19, 19) 60%, #333); 
 	font-family: 'Fredericka the Great';
-	font-size: larger;
+	font-size: 1.75em;
 	color: rgb(128, 177, 43)
 }
 
@@ -15,4 +15,16 @@ header img {
 	border-radius: 50%;
 	height: 10vh;
 	margin: 1em;
+}
+
+header h1{
+	margin-left: 0.5vw;
+	margin-right: 40vw;
+}
+
+header button{
+	height: 5em;
+	width: 5em;
+	border-radius: 50%;
+	outline: none;
 }

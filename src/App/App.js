@@ -11,7 +11,11 @@ class App extends Component {
     }
   }
 
-  render = () => {
+  componentDidMount() {
+
+  }
+
+  render() {
     return (
       <main>
         <Header />

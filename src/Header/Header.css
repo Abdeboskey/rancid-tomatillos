@@ -1,6 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+
 header {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: radial-gradient(circle at 100%, rgb(131, 19, 19), #333 50%, #eee 75%, #333 75%); 
+	background: linear-gradient(135deg, rgb(131, 19, 19) 60%, #333); 
+	font-family: 'Fredericka the Great';
+	font-size: larger;
+	color: rgb(128, 177, 43)
+}
+
+header img {
+	object-fit: cover;
+	border-radius: 50%;
+	height: 10vh;
+	margin: 1em;
 }

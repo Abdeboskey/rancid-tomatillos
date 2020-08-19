@@ -1,12 +1,12 @@
 import React from 'react'
 import './Card.css'
 
-const Card = (props) => {
+const Card = ({ title, poster, rating }) => {
 	return (
 		<div className='Card'>
-			<img className='Card-poster' src={props.poster} />
-			<h3>{props.title}</h3>
-			<p>{props.averageRating}/10</p>
+			<img className='Card-poster' src={poster} alt='Movie Poster'/>
+			<h3>{title}</h3>
+			<p>{rating}/10</p>
 		</div>
 	)
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
+import Login from '../Login/Login'
 import './App.css'
 
 class App extends Component {
@@ -8,7 +9,8 @@ class App extends Component {
     super()
     this.state = {
       movies: [],
-      error: ''
+      error: '',
+      isLoggedIn: false
     }
   }
 
@@ -25,9 +27,10 @@ class App extends Component {
   render() {
     return (
       <main>
-        <Header />
-        {this.state.error && <h2>{this.state.error}</h2>}
-				<Movies movies={this.state.movies}/>
+        <Header loginStatus={this.state.isLoggedIn} />
+          {this.state.error && <h2>{this.state.error}</h2>}
+        <Movies movies={this.state.movies}/>
+        <Login />
       </main>
     )
   }

@@ -1,0 +1,69 @@
+@import '../scss/variables';
+
+.Login-form {
+  width: 558px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: $login-font;
+}
+
+.Login-form img {
+  position: absolute;
+}
+
+.Login-form h2 {
+  position: relative;
+  margin-top: 295px;
+  margin-left: 40px;
+  color: white;
+  font-size: 2.4em;
+}
+
+label {
+  position: relative;
+  color: white;
+  font-size: 1.8em;
+}
+
+.Login-form div {
+  display: flex;
+  margin-left: 40px;
+}
+
+.username-input,
+.password-input {
+  position: relative;
+  width: 324px;
+  height: 24px;
+  border: none;
+  border-bottom: solid 2px white;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-family: $login-font;
+  font-size: 1.5em;
+  text-align: center;
+  margin-bottom: 32px;
+  margin-left: 20px;
+}
+
+.Login-form button {
+  position: relative;
+  align-self: center;
+  background: none;
+  border: solid 2px white;
+  border-radius: .75em;
+  padding: 10px;
+  font-family: $login-font;
+  font-size: 2em;
+  color: white;
+
+  &:hover {
+    background: $tomatillo-red;
+    color: $rancid-green;
+    border: solid 2px $rancid-green;
+  }
+}
+
+

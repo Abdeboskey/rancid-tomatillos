@@ -1,14 +1,15 @@
 import React, {Component} from 'react'
 import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
-import './App.css'
+import Login from '../Login/Login'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       movies: [],
-      error: ''
+      error: '',
+      isLoggedIn: false
     }
   }
 
@@ -18,16 +19,17 @@ class App extends Component {
       .then(data => this.setState({ movies: data.movies }))
       .catch(error => {
         console.log(error)
-        this.setState({error: 'Oops, something smells RANCID 🥴'})
+        this.setState({error: 'Ew, something smells RANCID 🥴'})
       })
   }
 
   render() {
     return (
       <main>
-        <Header />
-        {this.state.error && <h2>{this.state.error}</h2>}
-				<Movies movies={this.state.movies}/>
+        <Header loginStatus={this.state.isLoggedIn} />
+          {this.state.error && <h2>{this.state.error}</h2>}
+        <Movies movies={this.state.movies} />
+        <Login />
       </main>
     )
   }

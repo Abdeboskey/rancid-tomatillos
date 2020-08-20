@@ -4,10 +4,10 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-	background: linear-gradient(135deg, rgb(131, 19, 19) 60%, #333); 
+	background: linear-gradient(135deg, $tomatillo-red 60%, #333); 
 	font-family: $title-font;
 	font-size: 1.75em;
-	color: rgb(128, 177, 43);
+	color: $rancid-green;
 }
 
 header img {

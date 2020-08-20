@@ -35,13 +35,14 @@ label {
 .password-input {
   position: relative;
   width: 324px;
-  height: 21px;
+  height: 24px;
   border: none;
   border-bottom: solid 2px white;
   outline: none;
   background: transparent;
   color: white;
   font-family: 'Gochi Hand';
+  font-size: 1.5em;
   text-align: center;
   margin-bottom: 32px;
   margin-left: 20px;

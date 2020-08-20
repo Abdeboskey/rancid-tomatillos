@@ -19,7 +19,7 @@ class App extends Component {
       .then(data => this.setState({ movies: data.movies }))
       .catch(error => {
         console.log(error)
-        this.setState({error: 'Oops, something smells RANCID 🥴'})
+        this.setState({error: 'Ew, something smells RANCID 🥴'})
       })
   }
 

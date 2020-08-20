@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './_Login.scss'
+import '../scss/_Login.scss'
 import clapboard from '../assets/clapboard.png'
 
 class Login extends Component {

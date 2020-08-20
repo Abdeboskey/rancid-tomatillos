@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from '../Card/Card'
-import './_Movies.scss'
+import '../scss/_Movies.scss'
 
 const Movies = ({ movies }) => {
 	const moviesList = movies.map(movie => {

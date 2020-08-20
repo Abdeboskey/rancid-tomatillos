@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+@import 'variables';
 
 header {
   display: flex;
   justify-content: center;
   align-items: center;
 	background: linear-gradient(135deg, rgb(131, 19, 19) 60%, #333); 
-	font-family: 'Fredericka the Great';
+	font-family: $title-font;
 	font-size: 1.75em;
 	color: rgb(128, 177, 43);
 }

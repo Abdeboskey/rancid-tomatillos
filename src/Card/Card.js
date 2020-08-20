@@ -1,5 +1,5 @@
 import React from 'react'
-import './Card.css'
+import './_Card.scss'
 
 const Card = ({ title, poster, rating }) => {
 	return (

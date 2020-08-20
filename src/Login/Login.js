@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import '../assets/clapboard.png'
+import './Login.css'
+import clapboard from '../assets/clapboard.png'
 
 class Login extends Component {
   constructor() {
@@ -12,25 +13,30 @@ class Login extends Component {
 
   render() {
     return (
-      <>
-        <img src='../assets/clapboard.png' alt='Classic Film-Production Clapboard' />
-        <form>
+      <form className="Login-form">
+        <img src={clapboard} alt="Classic Film-Production Clapboard" />
+        <h2>Rancid Tomatillos</h2>
+        <div>
+          <label for="username">Username:</label>
           <input
-            type='text'
-            name='username'
-            placeholder='Username'
+            className="username-input"
+            type="text"
+            name="username"
             value={this.state.username}
-            />
+          />
+        </div>
+        <div>
+          <label for="password">Password:</label>
           <input
-            type='text'
-            name='password'
-            placeholder='Password'
+            className="password-input"
+            type="text"
+            name="password"
             value={this.state.password}
           />
-          <button>Sign In!</button>
-        </form>
-      </>
-    )
+        </div>
+        <button>ACTION!</button>
+      </form>
+    );
   }
 }
 

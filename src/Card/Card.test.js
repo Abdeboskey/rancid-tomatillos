@@ -17,9 +17,14 @@ describe('Card Component', () => {
 		)
 
 		// execution
-
+		const poster = screen.getByAltText('Movie Poster')
+		const title = screen.getByText(/im a title/i)
+		const rating = screen.getByText(/67/)
 
 		// assertion
+		expect(poster).toBeInTheDocument()
+		expect(title).toBeInTheDocument()
+		expect(rating).toBeInTheDocument()
 	})
 
 	it('Should', () => {

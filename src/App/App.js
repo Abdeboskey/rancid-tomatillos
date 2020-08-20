@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
-import './App.css'
 
 class App extends Component {
   constructor() {
@@ -29,7 +28,7 @@ class App extends Component {
       <main>
         <Header loginStatus={this.state.isLoggedIn} />
           {this.state.error && <h2>{this.state.error}</h2>}
-        <Movies movies={this.state.movies}/>
+        <Movies movies={this.state.movies} />
         <Login />
       </main>
     )

@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 
 describe('Card Component', () => {
 
-	it('Should show the correct content when rendered', () => {
+	it('should show the correct content when rendered', () => {
 		
 		render(
 			<Card
@@ -25,7 +25,7 @@ describe('Card Component', () => {
 		
 	})
 
-	it('Should', () => {
+	it('should', () => {
 		// setup
 
 		// execution

@@ -7,7 +7,8 @@ class Login extends Component {
 		super()
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			error: ''
 		}
 	}
 
@@ -29,6 +30,9 @@ class Login extends Component {
 		})
 			.then(response => response.json())
 			.then(userInfo => console.log(userInfo))
+			.catch(error => this.setState({
+				error: 'Invalid login information, please try again.'
+			}))
 	}
 
 	render() {

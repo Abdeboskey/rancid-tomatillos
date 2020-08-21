@@ -38,7 +38,7 @@ class Login extends Component {
 				username: '',
 				password: '',
 			})
-				this.props.hideLoginPage()
+				this.props.hideLoginPage(this.state.name)
 			})
 			.catch(error => this.setState({
 				error: 'Invalid login information, please try again.',

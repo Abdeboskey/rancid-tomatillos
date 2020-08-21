@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
+import '../scss/_App.scss'
 
 class App extends Component {
   constructor() {
@@ -9,7 +10,9 @@ class App extends Component {
     this.state = {
       movies: [],
       error: '',
-      isLoggedIn: false
+			displayLoginPage: false,
+			isLoggedIn: false,
+			name: ''
     }
   }
 
@@ -21,15 +24,47 @@ class App extends Component {
         console.log(error)
         this.setState({error: 'Ew, something smells RANCID 🥴'})
       })
-  }
+	}
+	
+	showLoginPage = () => {
+		this.setState({ displayLoginPage: true })
+	}
+
+	hideLoginPage = (name) => {
+		this.setState({
+			displayLoginPage: false,
+			isLoggedIn: true,
+			name: name
+		})
+	}
+
+	logOut = () => {
+		this.setState({
+			isLoggedIn: false,
+			name: ''
+		})
+	}
 
   render() {
     return (
-      <main>
-        <Header loginStatus={this.state.isLoggedIn} />
-          {this.state.error && <h2>{this.state.error}</h2>}
-        <Movies movies={this.state.movies} />
-        <Login />
+      <main className='App'>
+				{!this.state.displayLoginPage &&
+					<>
+						<Header
+							loginStatus={this.state.isLoggedIn}
+							showLoginPage={this.showLoginPage}
+							logOut={this.logOut}
+							name={this.state.name}
+						/>
+						{this.state.error && <h2>{this.state.error}</h2>}
+						<Movies movies={this.state.movies} />
+					</>
+				}
+        {this.state.displayLoginPage &&
+					<Login
+						hideLoginPage={this.hideLoginPage}
+					/>
+				}
       </main>
     )
   }

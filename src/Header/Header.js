@@ -1,7 +1,7 @@
 import React from 'react'
 import '../scss/_Header.scss'
 
-const Header = ({ loginStatus, showLoginPage }) => {
+const Header = ({ loginStatus, showLoginPage, name }) => {
   return (
     <header>
 			<img src='https://media.giphy.com/media/KXBtTtm3kB8BO/giphy.gif'alt='Website Icon'/>
@@ -9,7 +9,7 @@ const Header = ({ loginStatus, showLoginPage }) => {
       {
         loginStatus && 
         <>
-          <p>Hello, username!</p>
+          <p>Hello, {name}</p>
           <button>Log Out</button>
         </>  
       }

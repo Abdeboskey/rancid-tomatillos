@@ -51,7 +51,8 @@ label {
 .Login-form button {
   position: relative;
   align-self: center;
-  background: none;
+	background: none;
+	outline: none;
   border: solid 2px white;
   border-radius: .75em;
   padding: 10px;
@@ -64,6 +65,13 @@ label {
     color: $rancid-green;
     border: solid 2px $rancid-green;
   }
+}
+
+.Login-form p {
+	margin-top: 60px;
+	color: $rancid-green;
+	font-size: 3em;
+	text-align: center;
 }
 
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import Movies from './Movies'
-import Card from '../Card/Card'
 import { screen, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
@@ -32,7 +31,18 @@ describe('Movies Component', () => {
         "average_rating": 6,
         "release_date": "1994-03-24"
       }
-    ]
+		]
+		
+		render(<Movies movies={movies} />)
 
-  })
+		const title1 = screen.getByRole('heading', { name: 'Brave Little Toasty' })
+		const title2 = screen.getByRole('heading', { name: 'Hack3r5' })
+		const title3 = screen.getByRole('heading', { name: 'Jurassic Perks' })
+
+		expect(title1).toBeInTheDocument()
+		expect(title2).toBeInTheDocument()
+		expect(title3).toBeInTheDocument()
+
+	})
+	
 })

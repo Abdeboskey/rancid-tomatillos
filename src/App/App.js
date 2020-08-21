@@ -11,7 +11,7 @@ class App extends Component {
       movies: [],
       error: '',
 			isLoggedIn: false,
-			displayLoginPage: true
+			displayLoginPage: false
     }
   }
 
@@ -34,12 +34,17 @@ class App extends Component {
       <main className='App'>
 				{!this.state.displayLoginPage &&
 					<>
-						<Header loginStatus={this.state.isLoggedIn} />
-							{this.state.error && <h2>{this.state.error}</h2>}
+						<Header
+							loginStatus={this.state.isLoggedIn}
+							showLoginPage={this.showLoginPage}
+						/>
+						{this.state.error && <h2>{this.state.error}</h2>}
 						<Movies movies={this.state.movies} />
 					</>
 				}
-        {this.state.displayLoginPage && <Login />}
+        {this.state.displayLoginPage &&
+					<Login />
+				}
       </main>
     )
   }

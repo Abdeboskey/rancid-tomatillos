@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
+import '../scss/_App.scss'
 
 class App extends Component {
   constructor() {
@@ -30,7 +31,7 @@ class App extends Component {
 
   render() {
     return (
-      <main>
+      <main className='App'>
 				{!this.state.displayLoginPage &&
 					<>
 						<Header loginStatus={this.state.isLoggedIn} />

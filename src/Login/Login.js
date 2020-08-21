@@ -31,12 +31,15 @@ class Login extends Component {
 			})
 		})
 			.then(response => response.json())
-			.then(userInfo => this.setState({
+			.then(userInfo => {
+				this.setState({
 				id: userInfo.user.id,
 				name: userInfo.user.name,
 				username: '',
 				password: '',
-			}))
+			})
+				this.props.hideLoginPage()
+			})
 			.catch(error => this.setState({
 				error: 'Invalid login information, please try again.',
 				username: '',

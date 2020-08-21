@@ -10,8 +10,8 @@ class App extends Component {
     this.state = {
       movies: [],
       error: '',
-			isLoggedIn: false,
 			displayLoginPage: false,
+			isLoggedIn: false,
 			name: ''
     }
   }
@@ -38,6 +38,13 @@ class App extends Component {
 		})
 	}
 
+	logOut = () => {
+		this.setState({
+			isLoggedIn: false,
+			name: ''
+		})
+	}
+
   render() {
     return (
       <main className='App'>
@@ -46,6 +53,7 @@ class App extends Component {
 						<Header
 							loginStatus={this.state.isLoggedIn}
 							showLoginPage={this.showLoginPage}
+							logOut={this.logOut}
 							name={this.state.name}
 						/>
 						{this.state.error && <h2>{this.state.error}</h2>}

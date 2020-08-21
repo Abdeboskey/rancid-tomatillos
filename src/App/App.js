@@ -9,7 +9,8 @@ class App extends Component {
     this.state = {
       movies: [],
       error: '',
-      isLoggedIn: false
+			isLoggedIn: false,
+			displayLoginPage: true
     }
   }
 
@@ -21,15 +22,23 @@ class App extends Component {
         console.log(error)
         this.setState({error: 'Ew, something smells RANCID 🥴'})
       })
-  }
+	}
+	
+	showLoginPage = () => {
+		this.setState({ displayLoginPage: true })
+	}
 
   render() {
     return (
       <main>
-        <Header loginStatus={this.state.isLoggedIn} />
-          {this.state.error && <h2>{this.state.error}</h2>}
-        <Movies movies={this.state.movies} />
-        <Login />
+				{!this.state.displayLoginPage &&
+					<>
+						<Header loginStatus={this.state.isLoggedIn} />
+							{this.state.error && <h2>{this.state.error}</h2>}
+						<Movies movies={this.state.movies} />
+					</>
+				}
+        {this.state.displayLoginPage && <Login />}
       </main>
     )
   }

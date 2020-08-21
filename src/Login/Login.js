@@ -6,6 +6,8 @@ class Login extends Component {
 	constructor() {
 		super()
 		this.state = {
+			id: '',
+			name: '',
 			username: '',
 			password: '',
 			error: ''
@@ -29,9 +31,16 @@ class Login extends Component {
 			})
 		})
 			.then(response => response.json())
-			.then(userInfo => console.log(userInfo))
+			.then(userInfo => this.setState({
+				id: userInfo.user.id,
+				name: userInfo.user.name,
+				username: '',
+				password: '',
+			}))
 			.catch(error => this.setState({
-				error: 'Invalid login information, please try again.'
+				error: 'Invalid login information, please try again.',
+				username: '',
+				password: ''
 			}))
 	}
 
@@ -64,6 +73,7 @@ class Login extends Component {
 					/>
 				</div>
 				<button type='Submit'>ACTION!</button>
+				{this.state.error && <p>{this.state.error}</p>}
 			</form>
 		);
 	}

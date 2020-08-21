@@ -1,8 +1,6 @@
 import React from 'react'
 import Movies from './Movies'
-import Card from '../Card/Card'
-// import { screen, render } from '@testing-library/react'
-import ShallowRenderer from 'react-test-renderer/shallow'
+import { screen, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('Movies Component', () => {
@@ -10,55 +8,41 @@ describe('Movies Component', () => {
   it('should be able to render a list of cards', () => {
     const movies = [
       {
-        "id": 149,
-        "poster_path": "https://image.tmdb.org/t/p/original//5KlRFKKSbyCiyYpZSS3A6G5bW0K.jpg",
-        "backdrop_path": "https://image.tmdb.org/t/p/original//qZ4NYuwME0j6QgJmIE6AZMgmCaj.jpg",
-        "title": "Akira",
-        "average_rating": 9,
+        "id": 1,
+        "poster_path": "www.posterpath.com/poster1",
+				"backdrop_path": "www.posterpath.com/backdrop1",
+        "title": "Brave Little Toasty",
+        "average_rating": 37,
         "release_date": "1988-07-16"
       },
       {
-        "id": 437518,
-        "poster_path": "https://image.tmdb.org/t/p/original//puVA7UoLuu7Q7OtGRWINhT2XpOB.jpg",
-        "backdrop_path": "https://image.tmdb.org/t/p/original//z8PntmDQqNt8ertwoXQTFoMQg5u.jpg",
-        "title": "Friend of the World",
-        "average_rating": 1,
+        "id": 2,
+				"poster_path": "www.posterpath.com/poster2",
+				"backdrop_path": "www.posterpath.com/backdrop2",
+        "title": "Hack3r5",
+        "average_rating": 2,
         "release_date": "2020-08-15"
       },
       {
-        "id": 521034,
-        "poster_path": "https://image.tmdb.org/t/p/original//5MSDwUcqnGodFTvtlLiLKK0XKS.jpg",
-        "backdrop_path": "https://image.tmdb.org/t/p/original//8PK4X8U3C79ilzIjNTkTgjmc4js.jpg",
-        "title": "The Secret Garden",
+        "id": 3,
+				"poster_path": "www.posterpath.com/poster3",
+				"backdrop_path": "www.posterpath.com/backdrop3",
+        "title": "Jurassic Perks",
         "average_rating": 6,
-        "release_date": "2020-07-08"
+        "release_date": "1994-03-24"
       }
-    ]
+		]
+		
+		render(<Movies movies={movies} />)
 
-    const renderer = new ShallowRenderer()
-    renderer.render(<Movies movies={movies}/>)
-    const result = renderer.getRenderOutput()
+		const title1 = screen.getByRole('heading', { name: 'Brave Little Toasty' })
+		const title2 = screen.getByRole('heading', { name: 'Hack3r5' })
+		const title3 = screen.getByRole('heading', { name: 'Jurassic Perks' })
 
-    expect(result.type).toBe('section')
-    expect(result.props.children).toEqual([
-      <Card
-        key={149}
-        title={"Akira"}
-        poster={"https://image.tmdb.org/t/p/original//5KlRFKKSbyCiyYpZSS3A6G5bW0K.jpg"}
-        rating={9}
-      />,
-      <Card
-        key={437518}
-        title={'Friend of the World'}
-        poster={'https://image.tmdb.org/t/p/original//puVA7UoLuu7Q7OtGRWINhT2XpOB.jpg'}
-        rating={1}
-      />,
-      <Card
-        key={521034}
-        title={'The Secret Garden'}
-        poster={'https://image.tmdb.org/t/p/original//5MSDwUcqnGodFTvtlLiLKK0XKS.jpg'}
-        rating={6}
-      />
-    ]);
-  })
+		expect(title1).toBeInTheDocument()
+		expect(title2).toBeInTheDocument()
+		expect(title3).toBeInTheDocument()
+
+	})
+	
 })

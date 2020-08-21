@@ -29,6 +29,10 @@ class App extends Component {
 		this.setState({ displayLoginPage: true })
 	}
 
+	hideLoginPage = () => {
+		this.setState({ displayLoginPage: false })
+	}
+
   render() {
     return (
       <main className='App'>
@@ -43,7 +47,9 @@ class App extends Component {
 					</>
 				}
         {this.state.displayLoginPage &&
-					<Login />
+					<Login
+						hideLoginPage={this.hideLoginPage}
+					/>
 				}
       </main>
     )

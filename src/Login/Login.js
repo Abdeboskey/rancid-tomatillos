@@ -21,27 +21,31 @@ class Login extends Component {
 		this.setState({ [inputName]: inputValue })
 	}
 
+	setUserInfo(userInfo) {
+		this.setState({
+      id: userInfo.user.id,
+      name: userInfo.user.name,
+      username: "",
+      password: "",
+    })
+	}
+
+	showErrorMessage() {
+    this.setState({
+			error: "Invalid login information, please try again.",
+			username: "",
+			password: "",
+		})
+	}
+
 	handleSubmit(event) {
 		event.preventDefault()
 		submitLoginCredentials(this.state)
 			.then((userInfo) => {
-				this.setState({
-					// Turn this into the guts of a method called updateUserInfo()
-					id: userInfo.user.id,
-					name: userInfo.user.name,
-					username: "",
-					password: "",
-				});
+				this.setUserInfo(userInfo)
 				this.props.hideLoginPage(this.state.name);
 			})
-			.catch((error) =>
-				this.setState({
-					// this should be a method called show
-					error: "Invalid login information, please try again.",
-					username: "",
-					password: "",
-				})
-			);
+			.catch((error) => this.showErrorMessage())
 	}
 
 	render() {

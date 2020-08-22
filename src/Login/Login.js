@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../scss/_Login.scss'
 import clapboard from '../assets/clapboard.png'
+import { submitLoginCredentials } from '../apiCalls'
 
 class Login extends Component {
 	constructor() {
@@ -22,29 +23,25 @@ class Login extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault()
-		fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
-			method: 'post',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				email: this.state.username,
-				password: this.state.password
+		submitLoginCredentials(this.state)
+			.then((userInfo) => {
+				this.setState({
+					// Turn this into the guts of a method called updateUserInfo()
+					id: userInfo.user.id,
+					name: userInfo.user.name,
+					username: "",
+					password: "",
+				});
+				this.props.hideLoginPage(this.state.name);
 			})
-		})
-			.then(response => response.json())
-			.then(userInfo => {
-				this.setState({ // Turn this into the guts of a method called updateUserInfo()
-				id: userInfo.user.id,
-				name: userInfo.user.name,
-				username: '',
-				password: '',
-			})
-				this.props.hideLoginPage(this.state.name)
-			})
-			.catch(error => this.setState({ // this should be a method called show
-				error: 'Invalid login information, please try again.',
-				username: '',
-				password: ''
-			}))
+			.catch((error) =>
+				this.setState({
+					// this should be a method called show
+					error: "Invalid login information, please try again.",
+					username: "",
+					password: "",
+				})
+			);
 	}
 
 	render() {

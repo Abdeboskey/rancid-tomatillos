@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../scss/_Login.scss'
 import clapboard from '../assets/clapboard.png'
+import { submitLoginCredentials } from '../apiCalls'
 
 class Login extends Component {
 	constructor() {
@@ -15,36 +16,36 @@ class Login extends Component {
 	}
 
 	handleInput(event) {
-		const inputName = event.target.name
+		const inputName = event.target.id
 		const inputValue = event.target.value
 		this.setState({ [inputName]: inputValue })
 	}
 
+	setUserInfo(userInfo) {
+		this.setState({
+      id: userInfo.user.id,
+      name: userInfo.user.name,
+      username: "",
+      password: "",
+    })
+	}
+
+	showErrorMessage() {
+    this.setState({
+			error: "Invalid login information, please try again.",
+			username: "",
+			password: "",
+		})
+	}
+
 	handleSubmit(event) {
 		event.preventDefault()
-		fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
-			method: 'post',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				email: this.state.username,
-				password: this.state.password
+		submitLoginCredentials(this.state)
+			.then((userInfo) => {
+				this.setUserInfo(userInfo)
+				this.props.hideLoginPage(this.state.name);
 			})
-		})
-			.then(response => response.json())
-			.then(userInfo => {
-				this.setState({ // Turn this into the guts of a method called updateUserInfo()
-				id: userInfo.user.id,
-				name: userInfo.user.name,
-				username: '',
-				password: '',
-			})
-				this.props.hideLoginPage(this.state.name)
-			})
-			.catch(error => this.setState({ // this should be a method called show
-				error: 'Invalid login information, please try again.',
-				username: '',
-				password: ''
-			}))
+			.catch((error) => this.showErrorMessage())
 	}
 
 	render() {
@@ -60,7 +61,7 @@ class Login extends Component {
 					<input
 						className='username-input'
 						type='text'
-						name='username'
+						id='username'
 						value={this.state.username}
 						onChange={event => this.handleInput(event)}
 					/>
@@ -70,7 +71,7 @@ class Login extends Component {
 					<input
 						className='password-input'
 						type='password'
-						name='password'
+						id='password'
 						value={this.state.password}
 						onChange={event => this.handleInput(event)}
 					/>

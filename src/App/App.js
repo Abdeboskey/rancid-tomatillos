@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
+import { getMovies } from '../apiCalls'
 import '../scss/_App.scss'
 
 class App extends Component {
@@ -17,13 +18,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-      .then(response => response.json())
-      .then(data => this.setState({ movies: data.movies }))
-      .catch(error => {
-        console.log(error)
-        this.setState({error: 'Ew, something smells RANCID 🥴'})
-      })
+		getMovies()
+			.then(data => this.setState({ movies: data.movies }))
+			.catch(error => {
+				console.log(error)
+				this.setState({error: 'Ew, something smells RANCID 🥴'})
+			})
 	}
 	
 	showLoginPage = () => {

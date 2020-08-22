@@ -15,7 +15,7 @@ class Login extends Component {
 	}
 
 	handleInput(event) {
-		const inputName = event.target.name
+		const inputName = event.target.id
 		const inputValue = event.target.value
 		this.setState({ [inputName]: inputValue })
 	}
@@ -60,7 +60,7 @@ class Login extends Component {
 					<input
 						className='username-input'
 						type='text'
-						name='username'
+						id='username'
 						value={this.state.username}
 						onChange={event => this.handleInput(event)}
 					/>
@@ -70,7 +70,7 @@ class Login extends Component {
 					<input
 						className='password-input'
 						type='password'
-						name='password'
+						id='password'
 						value={this.state.password}
 						onChange={event => this.handleInput(event)}
 					/>

@@ -44,6 +44,4 @@ describe('App Component', () => {
     expect(movie).toBeInTheDocument()
   })
 
-  // it('')
-
 })

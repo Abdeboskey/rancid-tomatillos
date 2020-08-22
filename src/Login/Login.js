@@ -32,7 +32,7 @@ class Login extends Component {
 		})
 			.then(response => response.json())
 			.then(userInfo => {
-				this.setState({
+				this.setState({ // Turn this into the guts of a method called updateUserInfo()
 				id: userInfo.user.id,
 				name: userInfo.user.name,
 				username: '',
@@ -40,7 +40,7 @@ class Login extends Component {
 			})
 				this.props.hideLoginPage(this.state.name)
 			})
-			.catch(error => this.setState({
+			.catch(error => this.setState({ // this should be a method called show
 				error: 'Invalid login information, please try again.',
 				username: '',
 				password: ''

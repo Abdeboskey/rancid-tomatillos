@@ -12,6 +12,8 @@ class App extends Component {
       movies: [],
       error: '',
 			displayLoginPage: false,
+			displayMovieDetails: false,
+			currentMovieId: '',
 			isLoggedIn: false,
 			name: ''
     }
@@ -26,6 +28,13 @@ class App extends Component {
 			})
 	}
 	
+	showMovieDetails = (movieId) => {
+		this.setState({
+      displayMovieDetails: true,
+      currentMovieId: movieId,
+    })
+	}
+
 	showLoginPage = () => {
 		this.setState({ displayLoginPage: true })
 	}
@@ -64,6 +73,9 @@ class App extends Component {
 					<Login
 						hideLoginPage={this.hideLoginPage}
 					/>
+				}
+				{this.state.displayMovieDetails &&
+					<MovieDetails movieId={movieId} />
 				}
       </main>
     )

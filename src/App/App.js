@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
+import MovieDetails from '../Movie-details/MovieDetails'
 import { getMovies } from '../apiCalls'
 import '../scss/_App.scss'
 
@@ -12,6 +13,8 @@ class App extends Component {
       movies: [],
       error: '',
 			displayLoginPage: false,
+			displayMovieDetails: false,
+			currentMovieId: '',
 			isLoggedIn: false,
 			name: ''
     }
@@ -26,6 +29,13 @@ class App extends Component {
 			})
 	}
 	
+	showMovieDetails = (movieId) => {
+		this.setState({
+      displayMovieDetails: true,
+      currentMovieId: movieId,
+    })
+	}
+
 	showLoginPage = () => {
 		this.setState({ displayLoginPage: true })
 	}
@@ -48,7 +58,7 @@ class App extends Component {
   render() {
     return (
       <main className='App'>
-				{!this.state.displayLoginPage &&
+				{!this.state.displayLoginPage && !this.state.displayMovieDetails &&
 					<>
 						<Header
 							loginStatus={this.state.isLoggedIn}
@@ -57,13 +67,27 @@ class App extends Component {
 							name={this.state.name}
 						/>
 						{this.state.error && <h2>{this.state.error}</h2>}
-						<Movies movies={this.state.movies} />
+						<Movies
+							movies={this.state.movies}
+							showMovieDetails={this.showMovieDetails}
+						/>
 					</>
 				}
         {this.state.displayLoginPage &&
 					<Login
-						hideLoginPage={this.hideLoginPage}
+					hideLoginPage={this.hideLoginPage}
 					/>
+				}
+				{this.state.displayMovieDetails &&
+					<>
+						<Header
+							loginStatus={this.state.isLoggedIn}
+							showLoginPage={this.showLoginPage}
+							logOut={this.logOut}
+							name={this.state.name}
+						/>
+						<MovieDetails movieId={this.state.currentMovieId} />
+					</>	
 				}
       </main>
     )

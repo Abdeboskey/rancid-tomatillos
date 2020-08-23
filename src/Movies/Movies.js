@@ -16,6 +16,7 @@ const Movies = ({ movies }) => {
 
 	return (
 		<section className='Movies-container'>
+			<h2>View All Movies</h2>
 			{moviesList}
 		</section>
 	)

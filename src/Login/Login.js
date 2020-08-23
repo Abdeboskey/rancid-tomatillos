@@ -43,7 +43,7 @@ class Login extends Component {
 		submitLoginCredentials(this.state)
 			.then((userInfo) => {
 				this.setUserInfo(userInfo)
-				this.props.hideLoginPage(this.state.name);
+				this.props.hideLoginPage(this.state.name)
 			})
 			.catch((error) => this.showErrorMessage())
 	}

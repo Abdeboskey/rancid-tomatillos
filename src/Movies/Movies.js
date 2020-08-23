@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Card from '../Card/Card'
 import '../scss/_Movies.scss'
 
@@ -23,3 +24,7 @@ const Movies = ({ movies }) => {
 }
 
 export default Movies
+
+Movies.propTypes = {
+	movies: PropTypes.array.isRequired
+}

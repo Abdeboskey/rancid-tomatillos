@@ -1,62 +1,68 @@
 import React from 'react'
 import Login from './Login'
-import { screen, render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
+
+import { submitLoginCredentials } from '../apiCalls'
+jest.mock('../apiCalls.js')
+
+import MutationObserver from '@sheerun/mutationobserver-shim'
+window.MutationObserver = MutationObserver
 
 describe('Login Component', () => {
 
-  it('should fire handlesubmit when a user tries to log in', () => {
-    
+	it('should log a user in if the login credentials are valid', async () => {
+		submitLoginCredentials.mockResolvedValueOnce(
+			{
+				"user": {
+					"id": 36,
+					"name": "Twillie",
+					"email": "twillie@manillie.vanillie"
+				}
+			}
+		)
+
+		const hideLoginPage = jest.fn()
+		const { getByRole } = render(
+			<Login
+				hideLoginPage={hideLoginPage}
+			/>
+		)
+
+		const button = getByRole('button')
+		fireEvent.click(button)
+		
+		await waitFor(() => {
+			expect(hideLoginPage).toBeCalledTimes(1)
+			expect(hideLoginPage).toBeCalledWith('Twillie')
+		})
+	})
+
+  it('should notify the user if login credentials are invalid', async () => {
+		submitLoginCredentials.mockResolvedValueOnce(
+			{ "error": "Username or password is incorrect" }
+		)
+
+    const { getByRole, findByText } = render(<Login />)
+		
+    const button = getByRole('button')
+		fireEvent.click(button)
+    const errorMessage = await findByText(
+			/invalid login information, please try again./i
+		)
+
+    expect(errorMessage).toBeInTheDocument()
   })
 
-  // it('should notify the user if login credentials are INVALID', () => {
-  //   // setup
-  //   // render the login component
-  //   render(<Login />)
+  // it('should clear the input fields upon clicking submit', () => {
+	// 	const { getByRole } = render(<Login />)
 
-  //   // execution
-  //   // find the inputs and the button
-  //   // fire an event by clicking the button with incorrect credentials
-
-  //   const usernameInput = screen.getByRole('textbox', { id: /username/i })
-  //   const passwordInput = screen.getByRole('textbox', { id: /password/i })
-  //   const button = screen.getByRole('button')
-  //   fireEvent.change(usernameInput, { target: { value: 'tinzel@turing.io' } })
-  //   fireEvent.change(passwordInput, { target: { value: 'zcvb' } })
+	// 	const usernameInput = getByRole('textbox', { id: /username/i })
+	// 	const passwordInput = getByRole('textbox', { id: /password/i })
+	// 	const button = getByRole('button')
+	// 	fireEvent.change(usernameInput, { target: { value: '' } })
+  //   fireEvent.change(passwordInput, { target: { value: '' } })
   //   fireEvent.click(button)
-  //   const errorMessage = screen.getByText(
-  //     /invalid login information, please try again./i
-  //   );
-    
-  //   // assertion 
-  //   // make sure that the error renders on the page
-
-  //   expect(errorMessage).toBeInTheDocument()
-
   // })
-
-  it('should clear the input fields upon clicking submit', () => {
-
-  })
-
-  it('should not need the username to be case sensitive', () => {
-
-  })
-
-  it('should need the password to be case sensitive', () => {
-
-  })
-
-  it('should log a user in if the login credentials are correct', () => {
-
-  })
-
-  it('should fire the correct methods when the \'ACTION!\' button is clicked', () => {
-
-  })
-
-  it('should pass \'name\' as an argument when firing hideLoginPage', () => {
-    
-  })
 
 })

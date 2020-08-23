@@ -54,20 +54,15 @@ describe('Login Component', () => {
     expect(errorMessage).toBeInTheDocument()
   })
 
-  it('should clear the input fields upon clicking submit', () => {
+  // it('should clear the input fields upon clicking submit', () => {
+	// 	const { getByRole } = render(<Login />)
 
-  })
-
-  it('should not need the username to be case sensitive', () => {
-
-  })
-
-  it('should need the password to be case sensitive', () => {
-
-  })
-
-  it('should fire the correct methods when the \'ACTION!\' button is clicked', () => {
-
-  })
+	// 	const usernameInput = getByRole('textbox', { id: /username/i })
+	// 	const passwordInput = getByRole('textbox', { id: /password/i })
+	// 	const button = getByRole('button')
+	// 	fireEvent.change(usernameInput, { target: { value: '' } })
+  //   fireEvent.change(passwordInput, { target: { value: '' } })
+  //   fireEvent.click(button)
+  // })
 
 })

@@ -32,11 +32,10 @@ describe('Login Component', () => {
 		const button = getByRole('button')
 		fireEvent.click(button)
 		
-		await waitFor(() => expect(hideLoginPage).toBeCalledTimes(1))
-	})
-
-	it('should pass \'name\' as an argument when firing hideLoginPage', () => {
-
+		await waitFor(() => {
+			expect(hideLoginPage).toBeCalledTimes(1)
+			expect(hideLoginPage).toBeCalledWith('Twillie')
+		})
 	})
 
   it('should notify the user if login credentials are invalid', async () => {

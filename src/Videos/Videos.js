@@ -1,11 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import '../scss/Videos.scss'
+import '../scss/_Videos.scss'
 
 const Videos = ({ videos }) => {
-	return (
+	const videosList = videos.map(video => {
+		return (
+			<li>{video}</li>
+		)
+	})
 
-	);
+	return (
+		<section className='MovieDetails-Videos'>
+			<ul>
+				{videosList}
+			</ul>
+		</section>
+	)
 }
 
 export default Videos

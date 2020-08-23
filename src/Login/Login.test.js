@@ -1,15 +1,39 @@
 import React from 'react'
 import Login from './Login'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
+
 import { submitLoginCredentials } from '../apiCalls'
 jest.mock('../apiCalls.js')
 
+import MutationObserver from '@sheerun/mutationobserver-shim'
+window.MutationObserver = MutationObserver
+
 describe('Login Component', () => {
 
-  it('should fire handleSubmit when a user tries to log in', () => {
-    
-  })
+	it('should log a user in if the login credentials are correct', async () => {
+		submitLoginCredentials.mockResolvedValueOnce(
+			{
+				"user": {
+					"id": 36,
+					"name": "Twillie",
+					"email": "twillie@manillie.vanillie"
+				}
+			}
+		)
+
+		const hideLoginPage = jest.fn()
+		const { getByRole } = render(
+			<Login
+				hideLoginPage={hideLoginPage}
+			/>
+		)
+
+		const button = getByRole('button')
+		fireEvent.click(button)
+		
+		await waitFor(() => expect(hideLoginPage).toBeCalledTimes(1))
+	})
 
   it('should notify the user if login credentials are INVALID', async () => {
 		submitLoginCredentials.mockResolvedValueOnce(
@@ -36,10 +60,6 @@ describe('Login Component', () => {
   })
 
   it('should need the password to be case sensitive', () => {
-
-  })
-
-  it('should log a user in if the login credentials are correct', () => {
 
   })
 

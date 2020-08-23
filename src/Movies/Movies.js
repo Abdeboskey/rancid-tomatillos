@@ -3,14 +3,16 @@ import PropTypes from 'prop-types'
 import Card from '../Card/Card'
 import '../scss/_Movies.scss'
 
-const Movies = ({ movies }) => {
+const Movies = ({ movies, showMovieDetails }) => {
 	const moviesList = movies.map(movie => {
 		return (
 			<Card
 				key={movie.id}
+				movieId={movie.id}
 				title={movie.title}
 				poster={movie.poster_path}
 				rating={movie.average_rating}
+				showMovieDetails={showMovieDetails}
 			/>
 		)
 	})

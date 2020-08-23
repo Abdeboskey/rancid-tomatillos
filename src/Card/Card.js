@@ -2,14 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import '../scss/_Card.scss'
 
-const Card = ({ title, poster, rating }) => {
+const Card = ({ movieId, title, poster, rating, showMovieDetails }) => {
 	return (
-		<div className='Card'>
-			<img className='Card-poster' src={poster} alt='Movie Poster'/>
-			<h3>{title}</h3>
-			<p>{rating}/10</p>
-		</div>
-	)
+    <div className="Card">
+      <img
+        className="Card-poster"
+        src={poster}
+        alt="Movie Poster"
+        onClick={() => showMovieDetails(movieId)}
+      />
+      <h3>{title}</h3>
+      <p>{rating}/10</p>
+    </div>
+  );
 }
 
 export default Card

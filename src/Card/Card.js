@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import '../scss/_Card.scss'
 
 const Card = ({ title, poster, rating }) => {
@@ -12,3 +13,9 @@ const Card = ({ title, poster, rating }) => {
 }
 
 export default Card
+
+Card.propTypes = {
+	title: PropTypes.string,
+	poster: PropTypes.string,
+	rating: PropTypes.number
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import '../scss/_Header.scss'
 
 const Header = ({ loginStatus, showLoginPage, logOut, name }) => {
@@ -19,3 +20,10 @@ const Header = ({ loginStatus, showLoginPage, logOut, name }) => {
 }
 
 export default Header
+
+Header.propTypes = {
+	loginStatus: PropTypes.bool.isRequired,
+	showLoginPage: PropTypes.func.isRequired,
+	logOut: PropTypes.func.isRequired,
+	name: PropTypes.string.isRequired
+}

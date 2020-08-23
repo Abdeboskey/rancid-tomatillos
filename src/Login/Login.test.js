@@ -11,7 +11,7 @@ window.MutationObserver = MutationObserver
 
 describe('Login Component', () => {
 
-	it('should log a user in if the login credentials are correct', async () => {
+	it('should log a user in if the login credentials are valid', async () => {
 		submitLoginCredentials.mockResolvedValueOnce(
 			{
 				"user": {
@@ -35,7 +35,11 @@ describe('Login Component', () => {
 		await waitFor(() => expect(hideLoginPage).toBeCalledTimes(1))
 	})
 
-  it('should notify the user if login credentials are INVALID', async () => {
+	it('should pass \'name\' as an argument when firing hideLoginPage', () => {
+
+	})
+
+  it('should notify the user if login credentials are invalid', async () => {
 		submitLoginCredentials.mockResolvedValueOnce(
 			{ "error": "Username or password is incorrect" }
 		)
@@ -65,10 +69,6 @@ describe('Login Component', () => {
 
   it('should fire the correct methods when the \'ACTION!\' button is clicked', () => {
 
-  })
-
-  it('should pass \'name\' as an argument when firing hideLoginPage', () => {
-    
   })
 
 })

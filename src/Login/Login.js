@@ -25,16 +25,16 @@ class Login extends Component {
 		this.setState({
       id: userInfo.user.id,
       name: userInfo.user.name,
-      username: "",
-      password: "",
+      username: '',
+      password: '',
     })
 	}
 
 	showErrorMessage() {
     this.setState({
-			error: "Invalid login information, please try again.",
-			username: "",
-			password: "",
+			error: 'Invalid login information, please try again.',
+			username: '',
+			password: '',
 		})
 	}
 

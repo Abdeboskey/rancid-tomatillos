@@ -8,7 +8,7 @@ const Ratings = ({ title, poster, releaseDate, averageRating, userRating }) => {
       <img src={poster} alt='Movie Poster' />
       <article>
         <h2>{title}</h2>
-        <p>{releaseDate.slice(0, 3)}</p>
+        <p>{releaseDate.slice(-4)}</p>
         <p>Average Rating: {averageRating}</p>
         {/* <p>{userRating}</p> */}
       </article>
@@ -23,5 +23,5 @@ Ratings.propTypes = {
   poster: PropTypes.string.isRequired,
   releaseDate: PropTypes.string.isRequired,
   averageRating: PropTypes.number.isRequired,
-  userRating: PropTypes.number.isRequired
+  // userRating: PropTypes.number.isRequired
 }

@@ -4,6 +4,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('Ratings Component', () => {
+	
 	it('should show the correct content when rendered', () => {
 		render(
 			<Ratings
@@ -29,5 +30,5 @@ describe('Ratings Component', () => {
 	it('should fire the correct method for user rating', () => {
 
 	})
-	
+
 })

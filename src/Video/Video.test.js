@@ -4,6 +4,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('Video Component', () => {
+
 	it('should show the correct content when rendered', () => {
 		render(
 			<Video
@@ -17,4 +18,5 @@ describe('Video Component', () => {
 
 		expect(videoType).toBeInTheDocument()
 	})
+	
 })

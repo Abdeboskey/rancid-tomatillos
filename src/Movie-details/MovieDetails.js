@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // import Ratings from '../Ratings/Ratings'
 // import Details from '../Details/Details'
 import Videos from '../Videos/Videos'
-import { getMovieDetails, getMovieVideos } from '../apiCalls'
+import { getMovieDetails } from '../apiCalls'
 import '../scss/_MovieDetails.scss'
 
 class MovieDetails extends Component {
@@ -18,9 +18,9 @@ class MovieDetails extends Component {
       overview: '',
       averageRating: '',
       genres: [],
-      budget: 'number',
-      revenue: 'number',
-      runtime: 'number',
+      budget: 0,
+      revenue: 0,
+      runtime: 0,
       tagline: '',
       videos: [],
       error: '',
@@ -29,16 +29,14 @@ class MovieDetails extends Component {
   
   componentDidMount() {
     getMovieDetails(this.state.movieId)
-      .then(data => this.setMovieInfo(data))
+      .then(data => {
+				console.log(data)
+				this.setMovieInfo(data[0])
+				this.setState({ videos: data[1].videos })
+			})
       .catch(error => {
         console.log(error)
         this.setState({ error: error })
-			})
-		getMovieVideos(this.state.movieId)
-			.then(data => this.setState({ videos: data }))
-			.catch(error => {
-				console.log(error)
-				this.setState({ error: error })
 			})
   }
 

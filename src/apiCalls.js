@@ -18,4 +18,9 @@ export const submitLoginCredentials = state => {
 export const getMovieDetails = movieId => {
   return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
   .then((response) => response.json())
-} 
+}
+
+export const getMovieVideos = movieId => {
+  return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}/videos`)
+  .then((response) => response.json())
+}

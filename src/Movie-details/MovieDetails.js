@@ -62,7 +62,6 @@ class MovieDetails extends Component {
   render() {
     return (
       <>
-        <h2>Bonknanas</h2>
         <Billboard
           backdrop={this.state.backdrop}
           tagline={this.state.tagline}

@@ -1,5 +1,6 @@
 @import 'variables';
 
+
 header {
   display: flex;
   justify-content: center;
@@ -10,21 +11,31 @@ header {
 	color: $rancid-green;
 }
 
-header img {
+.logo {
 	object-fit: cover;
 	border-radius: 50%;
 	height: 10vh;
 	margin: 1em;
 }
 
-header h1{
+header h1 {
 	margin-left: 0.5vw;
 	margin-right: 40vw;
 }
 
-header button{
-	height: 5em;
-	width: 5em;
-	border-radius: 50%;
-	outline: none;
+.button {
+	cursor: pointer;
+}
+
+.button img {
+	height: 100px;
+	position: absolute;
+}
+
+.button p {
+	position: relative;
+	font-family: $login-font;
+	color: white;
+	margin-top: 50px;
+	margin-left: 12px;
 }

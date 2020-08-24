@@ -38,31 +38,39 @@ describe('Login Component', () => {
 		})
 	})
 
-  it('should notify the user if login credentials are invalid', async () => {
+	it('should notify the user if login credentials are invalid', async () => {
 		submitLoginCredentials.mockResolvedValueOnce(
 			{ "error": "Username or password is incorrect" }
 		)
 
-    const { getByRole, findByText } = render(<Login />)
-		
-    const button = getByRole('button')
+		const { getByRole, findByText } = render(<Login />)
+
+		const button = getByRole('button')
 		fireEvent.click(button)
-    const errorMessage = await findByText(
+		const errorMessage = await findByText(
 			/invalid login information, please try again./i
 		)
 
-    expect(errorMessage).toBeInTheDocument()
-  })
+		expect(errorMessage).toBeInTheDocument()
+	})
 
-  // it('should clear the input fields upon clicking submit', () => {
-	// 	const { getByRole } = render(<Login />)
+	it('should clear the input fields upon clicking submit', () => {
+		submitLoginCredentials.mockResolvedValueOnce(
+			{
+				"user": {
+					"id": 36,
+					"name": "Twillie",
+					"email": "twillie@manillie.vanillie"
+				}
+			}
+		)
+		const { getByLabelText } = render(<Login />)
 
-	// 	const usernameInput = getByRole('textbox', { id: /username/i })
-	// 	const passwordInput = getByRole('textbox', { id: /password/i })
-	// 	const button = getByRole('button')
-	// 	fireEvent.change(usernameInput, { target: { value: '' } })
-  //   fireEvent.change(passwordInput, { target: { value: '' } })
-  //   fireEvent.click(button)
-  // })
+		const usernameInput = getByLabelText(/username/i)
+		const passwordInput = getByLabelText(/password/i)
+
+		expect(usernameInput.value).toEqual('')
+		expect(passwordInput.value).toEqual('')
+	})
 
 })

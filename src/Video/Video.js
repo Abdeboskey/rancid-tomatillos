@@ -2,16 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import '../scss/_Videos.scss'
 
-const Video = ({ videoId, key }) => {
+const Video = ({ videoId, movieKey }) => {
 	return (
 		<iframe
 			title={videoId}
 			width='560'
 			height='315'
-			src={`https://www.youtube.com/embed/${key}`}
-			frameborder='0'
+			src={`https://www.youtube.com/embed/${movieKey}`}
+			frameBorder='0'
 			allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
-			allowfullscreen>
+			allowFullScreen
+			>
 		</iframe>
 	)
 }
@@ -19,5 +20,5 @@ const Video = ({ videoId, key }) => {
 export default Video
 
 Video.propTypes = {
-	key: PropTypes.string.isRequired
+	movieKey: PropTypes.string.isRequired
 }

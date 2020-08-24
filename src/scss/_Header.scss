@@ -12,8 +12,6 @@ header {
 }
 
 .logo {
-	// object-fit: cover;
-	// border-radius: 50%;
 	height: 85px;
 	margin: 1em;
 }
@@ -22,32 +20,56 @@ header {
 	display: flex;
 }
 
-.button {
+.title img,
+.title h1 {
+	filter: drop-shadow(8px 5px 8px #4444dd);
+}
+
+.logged-out {
+	display: flex;
 	cursor: pointer;
-	margin-right: 40px;
+	margin: 20px 50px 15px 0;
 }
 
-.button img {
+.login-button img {
 	height: 120px;
-	// margin-right: 60px;
 	position: absolute;
-
+	filter: drop-shadow(8px 5px 8px #585864);
 }
 
-.button p {
+.login-button p {
 	position: relative;
 	font-family: $login-font;
 	color: white;
 	margin-top: 70px;
-	margin-left: 12px;
+	margin-left: 20px;
 }
 
 .logged-in {
 	display: flex;
-	// margin-right: 40px;
+	margin: 20px 39px 15px 0;
+}
+
+.logout-button {
+	margin-left: 20px;
+}
+
+.logout-button img {
+	height: 120px;
+	position: absolute;
+	filter: drop-shadow(8px 5px 8px #585864);
+}
+
+.logout-button p {
+	position: relative;
+	font-family: $login-font;
+	color: white;
+	margin-top: 70px;
+	margin-left: 10px;
 }
 
 .username {
+	margin: 50px 0 0 0;
 	margin-right: 15px;
 	font-family: $login-font;
 }

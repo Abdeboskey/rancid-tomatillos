@@ -10,11 +10,13 @@ describe('Videos Component', () => {
 				'videoId': 1,
 				'movieId': 123,
 				'key': 'key1',
+				'type': 'trailer',
 			},
 			{
 				'videoId': 2,
 				'movieId': 321,
 				'key': 'key2',
+				'type': 'bloopers',
 			}
 		]
 

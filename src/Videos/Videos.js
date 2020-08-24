@@ -11,6 +11,7 @@ const Videos = ({ videos }) => {
 					videoId={video.id}
 					movieId={video.movie_id}
 					movieKey={video.key}
+					type={video.type}
 				/>
 			</li>
 		)

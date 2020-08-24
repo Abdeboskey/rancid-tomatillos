@@ -6,10 +6,10 @@ import '../scss/_Header.scss'
 const Header = ({ loginStatus, showLoginPage, logOut, name }) => {
   return (
     <header>
-      <div className='title'>
+      <div className="title">
         <img
           className="logo"
-          src="https://media.giphy.com/media/KXBtTtm3kB8BO/giphy.gif"
+          src="https://www.iconspng.com/uploads/tomatillo/tomatillo.png"
           alt="Website Icon"
         />
         <h1>Rancid Tomatillos</h1>

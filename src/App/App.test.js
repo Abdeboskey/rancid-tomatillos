@@ -58,6 +58,24 @@ describe('App Component', () => {
 		expect(errorMessage).toBeInTheDocument()
 	})
 
+	it('should notify user if there are no movies', async () => {
+		// need to add in p tag to display "There are currently no movies to rate" if the movies array is empty
+		// add conditional rendering so that if movies array is empty, it does not load to movies component but instead shows p tag with message
+		// to test:
+		// set up
+		// getMovies.mockResolvedValueOnce({movies: []})
+		// mockResolvedValueOnce with empty movies array
+		// render the App
+		// const { getByText, findByText } = render(<App />)
+		// execution
+		// const moviesContainer = getByText(/view all movies/i)
+		// find the p tag
+		// const noMoviesMessage = await findByText(/there are currently no movies to rate. please come back later!/i)
+		// assertion
+		// assert that the p tag is in the document
+		// expect(noMoviesMessage).toBeInTheDocument()
+	})
+
 	// will there ever be a case where there is NO response from the server??
 
 })

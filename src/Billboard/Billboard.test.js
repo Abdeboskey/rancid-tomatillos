@@ -13,7 +13,9 @@ describe('Billboard Component', () => {
 		)
 
 		const backdrop = screen.getByAltText(/movie backdrop/i)
+		const tagline = screen.getByRole('heading', {name: /best. tagline. ever!/i})
 
 		expect(backdrop).toBeInTheDocument()
+		expect(tagline).toBeInTheDocument()
 	})
 })

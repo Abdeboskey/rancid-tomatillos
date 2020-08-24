@@ -9,8 +9,12 @@ describe('Video Component', () => {
 			<Video
 				videoId={3}
 				movieKey='thisisareallylongkey'
+				type='trailer'
 			/>
 		)
-		
+
+		const videoType = screen.getByRole('heading', { name: /trailer/i })
+
+		expect(videoType).toBeInTheDocument()
 	})
 })

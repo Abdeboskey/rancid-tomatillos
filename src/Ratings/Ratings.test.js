@@ -25,4 +25,9 @@ describe('Ratings Component', () => {
 		expect(releaseDate).toBeInTheDocument()
 		expect(averageRating).toBeInTheDocument()
 	})
+
+	it('should fire the correct method for user rating', () => {
+
+	})
+	
 })

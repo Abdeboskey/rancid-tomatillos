@@ -5,7 +5,7 @@ import "../scss/_Billboard.scss";
 const Billboard = ({ backdrop, tagline }) => {
   return (
     <section className='MovieDetails-Billboard'>
-      <img src={backdrop} alt='Image from Movie' />
+      <img src={backdrop} alt='Movie Backdrop' />
       <h2>{tagline}</h2>
     </section>
   )

@@ -52,13 +52,7 @@ class MovieDetails extends Component {
   }
 
   formatGenres(genres) {
-    return genres.map((genre, i) => {
-      if (i === 0) {
-        return ` ${genre} `
-      } else {
-        return `/ ${genre} `
-      }
-    })
+    return genres.map((genre, i) => !i ? ` ${genre} ` : `/ ${genre} `)
   }
 
   formatRuntime(time) {

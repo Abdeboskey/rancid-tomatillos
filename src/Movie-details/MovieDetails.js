@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+// import Billboard from '../Billboard/Billboard'
 // import Ratings from '../Ratings/Ratings'
 // import Details from '../Details/Details'
+import Videos from '../Videos/Videos'
 import { getMovieDetails, getMovieVideos } from '../apiCalls'
 import '../scss/_MovieDetails.scss'
 
@@ -60,9 +62,10 @@ class MovieDetails extends Component {
     return (
       <>
         <h2>Bonknanas</h2>
-        {/* <Billboard />
-        <Ratings />
-        <Details /> */}
+        {/* <Billboard /> */}
+        {/* <Ratings /> */}
+        {/* <Details /> */}
+        <Videos videos={this.state.videos}/>
       </>
     )
   }

@@ -3,7 +3,7 @@
 
 header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 	background: linear-gradient(135deg, $tomatillo-red 60%, #333); 
 	font-family: $title-font;
@@ -18,24 +18,36 @@ header {
 	margin: 1em;
 }
 
-header h1 {
-	margin-left: 0.5vw;
-	margin-right: 40vw;
+.title {
+	display: flex;
 }
 
 .button {
 	cursor: pointer;
+	margin-right: 40px;
 }
 
 .button img {
-	height: 100px;
+	height: 120px;
+	// margin-right: 60px;
 	position: absolute;
+
 }
 
 .button p {
 	position: relative;
 	font-family: $login-font;
 	color: white;
-	margin-top: 50px;
+	margin-top: 70px;
 	margin-left: 12px;
+}
+
+.logged-in {
+	display: flex;
+	// margin-right: 40px;
+}
+
+.username {
+	margin-right: 15px;
+	font-family: $login-font;
 }

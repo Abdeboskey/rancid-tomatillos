@@ -54,4 +54,21 @@ describe('MovieDetails Component', () => {
 		expect(errorMessage).toBeInTheDocument()
 	})
 
+	it('should notify user if there are no movie details', async () => {
+		// for this, we will need to add in a p tag "There are currently no details for this movie. Please try another one!" if the movie key is assigned to an empty object
+		// add conditional rendering so that if movie details obj is empty, it shows p tag with message
+		// to test:
+		// set up
+		// getMovieDetails.mockResolvedValueOnce({movie: {}})
+		// mockResolvedValueOnce with empty movie obj
+		// render the component
+		// const { getByText, findByText } = render(<MovieDetails />)
+		// execution
+		// find the p tag
+		// const noDetailsMessage = await findByText(/there are currently no details for this movie. please try another one!/i)
+		// assertion
+		// assert that the p tag is in the document
+		// expect(noDetailsMessage).toBeInTheDocument()
+	})
+
 })

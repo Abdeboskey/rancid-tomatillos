@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import Ratings from '../Ratings/Ratings'
 // import Details from '../Details/Details'
-import { getMovieDetails } from '../apiCalls'
+import { getMovieDetails, getMovieVideos } from '../apiCalls'
 import '../scss/_MovieDetails.scss'
 
 class MovieDetails extends Component {
@@ -31,7 +31,13 @@ class MovieDetails extends Component {
       .catch(error => {
         console.log(error)
         this.setState({ error: error })
-      })
+			})
+		getMovieVideos(this.state.movieId)
+			.then(data => this.setState({ videos: data }))
+			.catch(error => {
+				console.log(error)
+				this.setState({ error: error })
+			})
   }
 
   setMovieInfo({ movie }) {

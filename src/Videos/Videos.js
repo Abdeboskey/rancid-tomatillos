@@ -1,11 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Video from '../Video/Video'
 import '../scss/_Videos.scss'
 
 const Videos = ({ videos }) => {
 	const videosList = videos.map(video => {
 		return (
-			<li>{video}</li>
+			<li key={video.id}>
+				<Video
+					videoId={video.id}
+					movieId={video.movie_id}
+					movieKey={video.key}
+				/>
+			</li>
 		)
 	})
 

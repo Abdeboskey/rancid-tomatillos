@@ -15,7 +15,19 @@ export const submitLoginCredentials = state => {
   .then(response => response.json())
 }
 
-export const getMovieDetails = movieId => {
+const getMovieInfo = movieId => {
   return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
   .then((response) => response.json())
-} 
+}
+
+const getMovieVideos = movieId => {
+  return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}/videos`)
+  .then((response) => response.json())
+}
+
+export const getMovieDetails = movieId => {
+	return Promise.all([getMovieInfo(movieId), getMovieVideos(movieId)])
+		.then(data => {
+			return data
+		})
+}

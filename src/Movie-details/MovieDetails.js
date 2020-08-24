@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
+import Billboard from '../Billboard/Billboard'
 import Ratings from '../Ratings/Ratings'
 import Details from '../Details/Details'
-import Billboard from '../Billboard/Billboard'
+import Videos from '../Videos/Videos'
 import { getMovieDetails } from '../apiCalls'
 import '../scss/_MovieDetails.scss'
 
 class MovieDetails extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       movieId: this.props.movieId,
       title: '',
@@ -23,16 +24,19 @@ class MovieDetails extends Component {
       tagline: '',
       videos: [],
       error: '',
-    };
+    }
   }
 
   componentDidMount() {
     getMovieDetails(this.state.movieId)
-      .then((data) => this.setMovieInfo(data))
-      .catch((error) => {
-        console.log(error);
-        this.setState({ error: error });
-      });
+      .then(data => {
+				this.setMovieInfo(data[0])
+				this.setState({ videos: data[1].videos })
+			})
+      .catch(error => {
+        console.log(error)
+        this.setState({ error: error })
+			})
   }
 
   setMovieInfo({ movie }) {
@@ -48,7 +52,7 @@ class MovieDetails extends Component {
       revenue: movie.revenue,
       runtime: movie.runtime,
       tagline: movie.tagline,
-    });
+    })
   }
 
   formatDate(date) {
@@ -80,8 +84,9 @@ class MovieDetails extends Component {
           revenue={this.state.revenue}
           runtime={this.state.runtime}
         />
+        <Videos videos={this.state.videos} />
       </>
-    );
+    )
   }
 }
 

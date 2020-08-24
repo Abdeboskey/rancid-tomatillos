@@ -30,7 +30,6 @@ class MovieDetails extends Component {
   componentDidMount() {
     getMovieDetails(this.state.movieId)
       .then(data => {
-				console.log(data)
 				this.setMovieInfo(data[0])
 				this.setState({ videos: data[1].videos })
 			})

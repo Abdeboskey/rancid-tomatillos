@@ -20,5 +20,9 @@ describe('Videos Component', () => {
 
 		render(<Videos videos={videos} />)
 
+		const videoHeading = screen.getByRole('heading', {name: /videos/i})
+
+		expect(videoHeading).toBeInTheDocument()
+
 	})
 })

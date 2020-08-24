@@ -6,15 +6,17 @@ import '../scss/_Header.scss'
 const Header = ({ loginStatus, showLoginPage, logOut, name }) => {
   return (
     <header>
-      <img
-        className="logo"
-        src="https://media.giphy.com/media/KXBtTtm3kB8BO/giphy.gif"
-        alt="Website Icon"
-      />
-      <h1>Rancid Tomatillos</h1>
+      <div className='title'>
+        <img
+          className="logo"
+          src="https://media.giphy.com/media/KXBtTtm3kB8BO/giphy.gif"
+          alt="Website Icon"
+        />
+        <h1>Rancid Tomatillos</h1>
+      </div>
       {loginStatus && (
-        <>
-          <p>Hello, {name}</p>
+        <div className="logged-in">
+          <h2 className="username">Hello, {name}</h2>
           <div className="button">
             <img
               src={clapboard}
@@ -23,12 +25,11 @@ const Header = ({ loginStatus, showLoginPage, logOut, name }) => {
             />
             <p onClick={logOut}>Log Out</p>
           </div>
-        </>
+        </div>
       )}
       {!loginStatus && (
         <div className="button">
           <img
-            className="button"
             src={clapboard}
             onClick={showLoginPage}
             alt="Movie-Production Clapboard"

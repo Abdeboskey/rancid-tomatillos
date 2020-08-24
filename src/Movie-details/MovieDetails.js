@@ -35,7 +35,7 @@ class MovieDetails extends Component {
 			})
       .catch(error => {
         console.log(error)
-        this.setState({ error: error })
+				this.setState({ error: 'Ew, something smells RANCID 🥴' })
 			})
   }
 
@@ -78,25 +78,26 @@ class MovieDetails extends Component {
   render() {
     return (
       <>
-        <Billboard
-          backdrop={this.state.backdrop}
-          tagline={this.state.tagline}
-        />
-        <Ratings
-          title={this.state.title}
-          poster={this.state.poster}
-          releaseDate={this.state.releaseDate}
-          averageRating={this.state.averageRating}
-        />
-        <Details
-          releaseDate={this.state.releaseDate}
-          overview={this.state.overview}
-          genres={this.state.genres}
-          budget={this.state.budget}
-          revenue={this.state.revenue}
-          runtime={this.state.runtime}
-        />
-        <Videos videos={this.state.videos} />
+				{this.state.error && <h2>{this.state.error}</h2>}
+					<Billboard
+						backdrop={this.state.backdrop}
+						tagline={this.state.tagline}
+						/>
+					<Ratings
+						title={this.state.title}
+						poster={this.state.poster}
+						releaseDate={this.state.releaseDate}
+						averageRating={this.state.averageRating}
+						/>
+					<Details
+						releaseDate={this.state.releaseDate}
+						overview={this.state.overview}
+						genres={this.state.genres}
+						budget={this.state.budget}
+						revenue={this.state.revenue}
+						runtime={this.state.runtime}
+						/>
+					<Videos videos={this.state.videos} />
       </>
     )
   }

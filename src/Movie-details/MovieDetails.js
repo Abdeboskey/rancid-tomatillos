@@ -20,7 +20,7 @@ class MovieDetails extends Component {
       genres: [],
       budget: 0,
       revenue: 0,
-      runtime: 0,
+      runtime: '',
       tagline: '',
       videos: [],
       error: '',
@@ -47,20 +47,32 @@ class MovieDetails extends Component {
       releaseDate: this.formatDate(movie.release_date),
       overview: movie.overview,
       averageRating: movie.average_rating,
-      genres: movie.genres,
+      genres: this.formatGenres(movie.genres),
       budget: movie.budget,
       revenue: movie.revenue,
-      runtime: movie.runtime,
+      runtime: this.formatRuntime(movie.runtime),
       tagline: movie.tagline,
     })
   }
 
+  formatGenres(genres) {
+    return genres.map(
+      (genre, i) => !i ? ` ${genre} ` : `/ ${genre} `
+    )
+  }
+
+  formatRuntime(totalMin) {
+    const hours = (totalMin / 60).toFixed(0)
+    const minutes = totalMin % 60
+    return `${hours}hr ${minutes}min`;
+  }
+
   formatDate(date) {
-    date = date.split('-');
-    date.push(date.shift());
-    if (date[0].charAt(0) === '0') date[0] = date[0].slice(1);
-    if (date[1].charAt(0) === '0') date[1] = date[1].slice(1);
-    return date.join('/');
+    date = date.split('-')
+    date.push(date.shift())
+    if (date[0].charAt(0) === '0') date[0] = date[0].slice(1)
+    if (date[1].charAt(0) === '0') date[1] = date[1].slice(1)
+    return date.join('/')
   }
 
   render() {

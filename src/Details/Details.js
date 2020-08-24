@@ -9,8 +9,8 @@ const Details = ({ releaseDate, overview, genres, budget, revenue, runtime }) =>
 			<p>Runtime: {runtime}</p>
 			<p>Genres: {genres}</p>
 			<p>Release Date: {releaseDate}</p>
-			<p>Budget: {budget}</p>
-			<p>Revenue: {revenue}</p>
+			<p>Budget: ${budget.toLocaleString()}.00</p>
+			<p>Revenue: ${revenue.toLocaleString()}.00</p>
 		</section>
 	)
 }
@@ -23,5 +23,5 @@ Details.propTypes = {
 	genres: PropTypes.array.isRequired,
 	budget: PropTypes.number.isRequired,
 	revenue: PropTypes.number.isRequired,
-	runtime: PropTypes.number.isRequired
+	runtime: PropTypes.string.isRequired
 }

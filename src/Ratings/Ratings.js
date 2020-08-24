@@ -9,7 +9,7 @@ const Ratings = ({ title, poster, releaseDate, averageRating, userRating }) => {
       <article>
         <h2>{title}</h2>
         <p>{releaseDate.slice(-4)}</p>
-        <p>Average Rating: {averageRating}</p>
+        <p>Average Rating: {averageRating} / 10</p>
         {/* <p>{userRating}</p> */}
       </article>
     </section>

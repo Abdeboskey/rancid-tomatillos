@@ -7,7 +7,7 @@ import '../scss/_MovieDetails.scss'
 
 class MovieDetails extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       movieId: this.props.movieId,
       title: '',
@@ -30,8 +30,8 @@ class MovieDetails extends Component {
     getMovieDetails(this.state.movieId)
       .then((data) => this.setMovieInfo(data))
       .catch((error) => {
-        console.log(error);
-        this.setState({ error: error });
+        console.log(error)
+        this.setState({ error: error })
       });
   }
 
@@ -52,21 +52,23 @@ class MovieDetails extends Component {
   }
 
   formatGenres(genres) {
-    return genres.map((genre, i) => !i ? ` ${genre} ` : `/ ${genre} `)
+    return genres.map(
+      (genre, i) => !i ? ` ${genre} ` : `/ ${genre} `
+    )
   }
 
-  formatRuntime(time) {
-    const hours = (time / 60).toFixed(0);
-    const minutes = time % 60;
+  formatRuntime(totalMin) {
+    const hours = (totalMin / 60).toFixed(0)
+    const minutes = totalMin % 60
     return `${hours}hr ${minutes}min`;
   }
 
   formatDate(date) {
-    date = date.split('-');
-    date.push(date.shift());
-    if (date[0].charAt(0) === '0') date[0] = date[0].slice(1);
-    if (date[1].charAt(0) === '0') date[1] = date[1].slice(1);
-    return date.join('/');
+    date = date.split('-')
+    date.push(date.shift())
+    if (date[0].charAt(0) === '0') date[0] = date[0].slice(1)
+    if (date[1].charAt(0) === '0') date[1] = date[1].slice(1)
+    return date.join('/')
   }
 
   render() {

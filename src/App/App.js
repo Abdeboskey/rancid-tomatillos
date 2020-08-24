@@ -67,6 +67,8 @@ class App extends Component {
 							name={this.state.name}
 						/>
 						{this.state.error && <h2>{this.state.error}</h2>}
+						{this.state.movies.length === 0 &&
+							<h2>There are currently no movies to rate.</h2>}
 						<Movies
 							movies={this.state.movies}
 							showMovieDetails={this.showMovieDetails}

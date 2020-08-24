@@ -18,6 +18,7 @@ const Videos = ({ videos }) => {
 
 	return (
 		<section className='MovieDetails-Videos'>
+			<h2>Videos</h2>
 			<ul>
 				{videosList}
 			</ul>

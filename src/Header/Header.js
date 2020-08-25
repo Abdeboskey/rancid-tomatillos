@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import clapboard from '../assets/clapboard.png'
 import tomatillo from '../assets/tomatillo.png'
@@ -8,12 +9,8 @@ const Header = ({ loginStatus, showLoginPage, logOut, name }) => {
   return (
     <header>
       <div className="title">
-        <img
-          className="logo"
-          src={tomatillo}
-          alt="Website Icon"
-        />
-        <h1>Rancid Tomatillos</h1>
+        <img className="logo" src={tomatillo} alt="Website Icon" />
+        <Link to="/"><h1>Rancid Tomatillos</h1></Link>
       </div>
       {loginStatus && (
         <div className="logged-in">
@@ -29,14 +26,12 @@ const Header = ({ loginStatus, showLoginPage, logOut, name }) => {
         </div>
       )}
       {!loginStatus && (
-        <div className='logged-out'>
+        <div className="logged-out">
           <div className="login-button">
-            <img
-              src={clapboard}
-              onClick={showLoginPage}
-              alt="Movie-Production Clapboard"
-            />
-            <p onClick={showLoginPage}>Log In</p>
+            <Link to="/login">
+              <img src={clapboard} alt="Movie-Production Clapboard" />
+              <p >Log In</p>
+            </Link>
           </div>
         </div>
       )}

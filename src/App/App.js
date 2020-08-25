@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { Route } from 'react-router-dom'
 import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
@@ -57,42 +58,31 @@ class App extends Component {
 
   render() {
     return (
-      <main className='App'>
-				{!this.state.displayLoginPage && !this.state.displayMovieDetails &&
-					<>
-						<Header
-							loginStatus={this.state.isLoggedIn}
-							showLoginPage={this.showLoginPage}
-							logOut={this.logOut}
-							name={this.state.name}
-						/>
-						{this.state.error && <h2>{this.state.error}</h2>}
-						{this.state.movies.length === 0 &&
-							<h2>There are currently no movies to rate.</h2>}
+      <main className="App">
+        <Header
+          loginStatus={this.state.isLoggedIn}
+          showLoginPage={this.showLoginPage}
+          logOut={this.logOut}
+          name={this.state.name}
+        />
+        {this.state.error && <h2>{this.state.error}</h2>}
+        <Route exact path="/" render={() => (
 						<Movies
 							movies={this.state.movies}
 							showMovieDetails={this.showMovieDetails}
 						/>
-					</>
-				}
-        {this.state.displayLoginPage &&
-					<Login
-					hideLoginPage={this.hideLoginPage}
-					/>
-				}
-				{this.state.displayMovieDetails &&
-					<>
-						<Header
-							loginStatus={this.state.isLoggedIn}
-							showLoginPage={this.showLoginPage}
-							logOut={this.logOut}
-							name={this.state.name}
-						/>
-						<MovieDetails movieId={this.state.currentMovieId} />
-					</>	
-				}
+					)}
+        />
+				<Route exact path="/login" render={() => (
+						<Login hideLoginPage={this.hideLoginPage} />
+					)} 
+				/>
+				<Route exact path="/movies/:movieId" render={({ match }) => (
+						<MovieDetails movieId={match.params.movieId} />
+					)}
+				/>
       </main>
-    )
+    );
   }
 }
 

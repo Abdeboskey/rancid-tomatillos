@@ -31,6 +31,11 @@ header {
 	margin: 20px 50px 15px 0;
 	filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.924));
 	transition: all .5s ease-in-out;
+
+	&:hover {
+		filter: drop-shadow(0px 0px 10px $rancid-green);
+		color: $rancid-green;
+	}
 }
 
 .login-button img {
@@ -38,10 +43,6 @@ header {
 	position: absolute;
 }
 
-.logged-out:hover {
-	filter: drop-shadow(0px 0px 10px $rancid-green);
-	color: $rancid-green;
-}
 
 .login-button p {
 	position: relative;
@@ -50,15 +51,22 @@ header {
 	margin-top: 70px;
 	margin-left: 20px;
 	transition: all .5s ease-in-out;
+
+	&:hover {
+		color: $rancid-green;
+	}
 }
 
-.login-button p:hover {
-	color: $rancid-green;
-}
 
 .logged-in {
 	display: flex;
 	margin: 20px 39px 15px 0;
+	transition: all .5s ease-in-out;
+
+	&:hover {
+		filter: drop-shadow(0px 0px 10px $rancid-green);
+		color: $rancid-green;
+	}
 }
 
 .logout-button {
@@ -77,11 +85,12 @@ header {
 	color: white;
 	margin-top: 70px;
 	margin-left: 10px;
+
+	&:hover {
+		color: $rancid-green;
+	}
 }
 
-.logout-button p:hover {
-	color: $rancid-green;
-}
 
 .username {
 	margin: 50px 0 0 0;

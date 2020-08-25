@@ -8,10 +8,10 @@
 	height: 35vh;
 	box-shadow: -6px 7px 11px 0px rgba(0, 0, 0, 0.562);
 	transition: all .5s ease-in-out;
-}
-
-.Card-poster:hover {
-	box-shadow: -6px 7px 12px 0px $rancid-green;
-	cursor: pointer;
-	transform: scale(1.05);
+	
+	&:hover {
+		box-shadow: -6px 7px 12px 0px $rancid-green;
+		cursor: pointer;
+		transform: scale(1.05);
+	}
 }

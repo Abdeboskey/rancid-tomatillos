@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../scss/_Login.scss'
 import clapboard from '../assets/clapboard.png'
+import tomatillo from '../assets/tomatillo.png'
 import { submitLoginCredentials } from '../apiCalls'
 
 class Login extends Component {
@@ -32,7 +33,7 @@ class Login extends Component {
 
 	showErrorMessage() {
     this.setState({
-			error: 'Invalid login information, please try again.',
+			error: 'Invalid login information',
 			username: '',
 			password: '',
 		})
@@ -50,36 +51,37 @@ class Login extends Component {
 
 	render() {
 		return (
-			<form
-				className='Login-form'
-				onSubmit={event => this.handleSubmit(event)}
-			>
-				<img src={clapboard} alt='Classic Film-Production Clapboard' />
-				<h2>Rancid Tomatillos</h2>
-				<div>
-					<label htmlFor='username'>Username:</label>
-					<input
-						className='username-input'
-						type='text'
-						id='username'
-						value={this.state.username}
-						onChange={event => this.handleInput(event)}
-					/>
-				</div>
-				<div>
-					<label htmlFor='password'>Password:</label>
-					<input
-						className='password-input'
-						type='password'
-						id='password'
-						value={this.state.password}
-						onChange={event => this.handleInput(event)}
-					/>
-				</div>
-				<button type='Submit'>ACTION!</button>
-				{this.state.error && <p>{this.state.error}</p>}
-			</form>
-		);
+      <form
+        className="Login-form"
+        onSubmit={(event) => this.handleSubmit(event)}
+      >
+        <img className='tomatillo' src={tomatillo} alt="Green Tomatillo" />
+        <img src={clapboard} alt="Classic Film-Production Clapboard" />
+        <h2>Rancid Tomatillos</h2>
+					{this.state.error && <p>{this.state.error}</p>}
+        <div>
+          <label htmlFor="username">Username:</label>
+          <input
+            className="username-input"
+            type="text"
+            id="username"
+            value={this.state.username}
+            onChange={(event) => this.handleInput(event)}
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input
+            className="password-input"
+            type="password"
+            id="password"
+            value={this.state.password}
+            onChange={(event) => this.handleInput(event)}
+          />
+        </div>
+        <button type="Submit">ACTION!</button>
+      </form>
+    );
 	}
 }
 

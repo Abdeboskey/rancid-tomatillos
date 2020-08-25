@@ -1,30 +1,100 @@
 @import 'variables';
 
+
 header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-	background: linear-gradient(135deg, $tomatillo-red 60%, #333); 
+	background: linear-gradient(135deg, $tomatillo-red 60%, black); 
 	font-family: $title-font;
 	font-size: 1.75em;
 	color: $rancid-green;
 }
 
-header img {
-	object-fit: cover;
-	border-radius: 50%;
-	height: 10vh;
+.logo {
+	height: 85px;
 	margin: 1em;
 }
 
-header h1{
-	margin-left: 0.5vw;
-	margin-right: 40vw;
+.title {
+	display: flex;
 }
 
-header button{
-	height: 5em;
-	width: 5em;
-	border-radius: 50%;
-	outline: none;
+.title img,
+.title h1 {
+	filter: drop-shadow(-8px 5px 5px black);
+}
+
+.logged-out {
+	display: flex;
+	cursor: pointer;
+	margin: 20px 50px 15px 0;
+	filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.924));
+	transition: all .5s ease-in-out;
+
+	&:hover {
+		filter: drop-shadow(0px 0px 10px $rancid-green);
+		color: $rancid-green;
+	}
+}
+
+.login-button img {
+	height: 120px;
+	position: absolute;
+}
+
+
+.login-button p {
+	position: relative;
+	font-family: $login-font;
+	color: white;
+	margin-top: 70px;
+	margin-left: 20px;
+	transition: all .5s ease-in-out;
+
+	&:hover {
+		color: $rancid-green;
+	}
+}
+
+
+.logged-in {
+	display: flex;
+	margin: 20px 39px 15px 0;
+	transition: all .5s ease-in-out;
+
+	&:hover {
+		filter: drop-shadow(0px 0px 10px $rancid-green);
+		color: $rancid-green;
+	}
+}
+
+.logout-button {
+	margin-left: 20px;
+}
+
+.logout-button img {
+	height: 120px;
+	position: absolute;
+	filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.924));
+}
+
+.logout-button p {
+	position: relative;
+	font-family: $login-font;
+	color: white;
+	margin-top: 70px;
+	margin-left: 10px;
+
+	&:hover {
+		color: $rancid-green;
+	}
+}
+
+
+.username {
+	margin: 50px 0 0 0;
+	margin-right: 15px;
+	font-family: $login-font;
+	filter: drop-shadow(-8px 5px 5px black)
 }

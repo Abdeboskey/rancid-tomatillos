@@ -13,11 +13,9 @@ class App extends Component {
     this.state = {
       movies: [],
       error: '',
-			displayLoginPage: false,
-			displayMovieDetails: false,
-			currentMovieId: '',
 			isLoggedIn: false,
-			name: ''
+			name: '',
+			id: ''
     }
   }
 
@@ -29,23 +27,12 @@ class App extends Component {
 				this.setState({error: 'Ew, something smells RANCID 🥴'})
 			})
 	}
-	
-	showMovieDetails = (movieId) => {
-		this.setState({
-      displayMovieDetails: true,
-      currentMovieId: movieId,
-    })
-	}
 
-	showLoginPage = () => {
-		this.setState({ displayLoginPage: true })
-	}
-
-	hideLoginPage = (name) => {
+	logIn = (userInfo) => {
 		this.setState({
-			displayLoginPage: false,
 			isLoggedIn: true,
-			name: name
+			name: userInfo.user.name,
+			id: userInfo.user.id
 		})
 	}
 
@@ -61,7 +48,6 @@ class App extends Component {
       <main className="App">
         <Header
           loginStatus={this.state.isLoggedIn}
-          showLoginPage={this.showLoginPage}
           logOut={this.logOut}
           name={this.state.name}
         />
@@ -69,12 +55,11 @@ class App extends Component {
         <Route exact path="/" render={() => (
 						<Movies
 							movies={this.state.movies}
-							showMovieDetails={this.showMovieDetails}
 						/>
 					)}
         />
 				<Route exact path="/login" render={() => (
-						<Login hideLoginPage={this.hideLoginPage} />
+						<Login logIn={this.logIn} />
 					)} 
 				/>
 				<Route exact path="/movies/:movieId" render={({ match }) => (

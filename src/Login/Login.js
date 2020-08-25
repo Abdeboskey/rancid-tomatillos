@@ -9,8 +9,6 @@ class Login extends Component {
 	constructor() {
 		super()
 		this.state = {
-			id: '',
-			name: '',
 			username: '',
 			password: '',
 			error: '',
@@ -24,10 +22,8 @@ class Login extends Component {
 		this.setState({ [inputName]: inputValue })
 	}
 
-	setUserInfo(userInfo) {
+	confirmLogin() {
 		this.setState({
-      id: userInfo.user.id,
-      name: userInfo.user.name,
       username: '',
 			password: '',
 			loginOk: true
@@ -46,8 +42,8 @@ class Login extends Component {
 		event.preventDefault()
 		submitLoginCredentials(this.state)
 			.then((userInfo) => {
-				this.setUserInfo(userInfo)
-				this.props.hideLoginPage(this.state.name)
+				this.confirmLogin()
+				this.props.logIn(userInfo)
 			})
 			.catch((error) => this.showErrorMessage())
 	}

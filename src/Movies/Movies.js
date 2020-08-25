@@ -18,7 +18,6 @@ const Movies = ({ movies }) => {
 
 	return (
     <section className="Movies-container">
-      <h2>View All Movies</h2>
       {movies.length === 0 && (
         <h3>There are currently no movies to rate.</h3>
       )}

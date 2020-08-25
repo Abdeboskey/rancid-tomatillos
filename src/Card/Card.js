@@ -1,20 +1,23 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import '../scss/_Card.scss'
 
 const Card = ({ movieId, title, poster, rating, showMovieDetails }) => {
 	return (
     <div className="Card">
-      <img
-        className="Card-poster"
-        src={poster}
-        alt="Movie Poster"
-        onClick={() => showMovieDetails(movieId)}
-      />
+      <Link to={`/movies/${movieId}`}>
+        <img
+          className="Card-poster"
+          src={poster}
+          alt="Movie Poster"
+          onClick={() => showMovieDetails(movieId)}
+        />
+      </Link>
       <h3>{title}</h3>
       <p>{rating}/10</p>
     </div>
-  );
+  )
 }
 
 export default Card

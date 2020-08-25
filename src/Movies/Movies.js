@@ -18,11 +18,14 @@ const Movies = ({ movies, showMovieDetails }) => {
 	})
 
 	return (
-		<section className='Movies-container'>
-			<h2>View All Movies</h2>
-			{moviesList}
-		</section>
-	)
+    <section className="Movies-container">
+      <h2>View All Movies</h2>
+      {movies.length === 0 && (
+        <h3>There are currently no movies to rate.</h3>
+      )}
+      {moviesList}
+    </section>
+  );
 }
 
 export default Movies

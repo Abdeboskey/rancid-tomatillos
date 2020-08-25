@@ -11,6 +11,7 @@ const Videos = ({ videos }) => {
 					videoId={video.id}
 					movieId={video.movie_id}
 					movieKey={video.key}
+					type={video.type}
 				/>
 			</li>
 		)
@@ -18,6 +19,7 @@ const Videos = ({ videos }) => {
 
 	return (
 		<section className='MovieDetails-Videos'>
+			<h2>Videos</h2>
 			<ul>
 				{videosList}
 			</ul>

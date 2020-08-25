@@ -22,7 +22,7 @@ header {
 
 .title img,
 .title h1 {
-	filter: drop-shadow(8px 5px 8px #4444dd);
+	filter: drop-shadow(-8px 5px 8px #4444dd);
 }
 
 .logged-out {
@@ -34,7 +34,7 @@ header {
 .login-button img {
 	height: 120px;
 	position: absolute;
-	filter: drop-shadow(8px 5px 8px #585864);
+	filter: drop-shadow(-8px 5px 8px #585864);
 }
 
 .login-button p {

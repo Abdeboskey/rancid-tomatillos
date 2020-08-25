@@ -5,7 +5,7 @@ import clapboard from '../assets/clapboard.png'
 import tomatillo from '../assets/tomatillo.png'
 import '../scss/_Header.scss'
 
-const Header = ({ loginStatus, showLoginPage, logOut, name }) => {
+const Header = ({ loginStatus, logOut, name }) => {
   return (
     <header>
       <div className="title">

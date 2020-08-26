@@ -14,7 +14,7 @@ const Card = ({ movieId, title, poster, rating }) => {
         />
       </Link>
       <h3>{title}</h3>
-      <p>{rating}/10</p>
+      <p>{rating} / 10</p>
     </div>
   )
 }

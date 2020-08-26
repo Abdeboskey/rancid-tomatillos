@@ -44,5 +44,5 @@ export const postRating = (userId, userRating, movieId) => {
 			rating: userRating
 		})
 	})
-		.then(response => response.json())
+	.then(response => response.json())
 }

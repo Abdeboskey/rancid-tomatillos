@@ -4,18 +4,19 @@ import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
 import MovieDetails from '../Movie-details/MovieDetails'
-import { getMovies } from '../apiCalls'
+import { getMovies, getUserRatings } from '../apiCalls'
 import '../scss/_App.scss'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      movies: [],
-      error: '',
-			isLoggedIn: false,
 			name: '',
-			id: ''
+			id: '',
+			isLoggedIn: false,
+			movies: [],
+			userRatings: [],
+      error: ''
     }
   }
 
@@ -26,6 +27,16 @@ class App extends Component {
 				console.log(error)
 				this.setState({error: 'Ew, something smells RANCID 🥴'})
 			})
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.isLoggedIn !== prevState.isLoggedIn) {
+			getUserRatings(this.state.id)
+				.then(userRatings => {
+					this.setState({ userRatings: userRatings.ratings })
+				})
+				.catch(error => console.log(error))
+		}
 	}
 
 	logIn = (userInfo) => {

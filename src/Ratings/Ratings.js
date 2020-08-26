@@ -10,7 +10,7 @@ const Ratings = ({ title, poster, releaseDate, averageRating, userRating }) => {
         <h2>{title}</h2>
         <p>{releaseDate.slice(-4)}</p>
         <p>Average Rating: {averageRating} / 10</p>
-        {/* <p>{userRating}</p> */}
+				{userRating && <p>Your Rating: {userRating.rating} / 10</p>}
       </article>
     </section>
   ) 
@@ -23,5 +23,4 @@ Ratings.propTypes = {
   poster: PropTypes.string.isRequired,
   releaseDate: PropTypes.string.isRequired,
   averageRating: PropTypes.number.isRequired,
-  // userRating: PropTypes.number.isRequired
 }

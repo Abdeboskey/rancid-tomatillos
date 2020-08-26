@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Card from '../Card/Card'
 import '../scss/_Movies.scss'
 
-const Movies = ({ movies }) => {
+const Movies = ({ movies, formatAverageRating }) => {
 	const moviesList = movies.map(movie => {
 		return (
 			<Card
@@ -11,7 +11,7 @@ const Movies = ({ movies }) => {
 				movieId={movie.id}
 				title={movie.title}
 				poster={movie.poster_path}
-				rating={movie.average_rating}
+				rating={formatAverageRating(movie.average_rating)}
 			/>
 		)
 	})

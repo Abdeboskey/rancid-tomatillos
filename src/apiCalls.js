@@ -1,6 +1,6 @@
 export const getMovies = () => {
   return fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-  .then((response) => response.json())
+  .then(response => response.json())
 }
 
 export const submitLoginCredentials = state => {
@@ -17,17 +17,20 @@ export const submitLoginCredentials = state => {
 
 const getMovieInfo = movieId => {
   return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
-  .then((response) => response.json())
+  .then(response => response.json())
 }
 
 const getMovieVideos = movieId => {
   return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}/videos`)
-  .then((response) => response.json())
+  .then(response => response.json())
 }
 
 export const getMovieDetails = movieId => {
 	return Promise.all([getMovieInfo(movieId), getMovieVideos(movieId)])
-		.then(data => {
-			return data
-		})
+		.then(data => data)
+}
+
+export const getUserRatings = userId => {
+	return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${userId}/ratings`)
+		.then(response => response.json())
 }

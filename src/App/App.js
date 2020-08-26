@@ -73,6 +73,7 @@ class App extends Component {
 						<Movies
 							movies={this.state.movies}
 							formatAverageRating={this.formatAverageRating}
+							userRatings={this.state.userRatings}
 						/>
 					)}
         />

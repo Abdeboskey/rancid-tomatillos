@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Card from '../Card/Card'
 import '../scss/_Movies.scss'
 
-const Movies = ({ movies, showMovieDetails }) => {
+const Movies = ({ movies, formatAverageRating }) => {
 	const moviesList = movies.map(movie => {
 		return (
 			<Card
@@ -11,18 +11,19 @@ const Movies = ({ movies, showMovieDetails }) => {
 				movieId={movie.id}
 				title={movie.title}
 				poster={movie.poster_path}
-				rating={movie.average_rating}
-				showMovieDetails={showMovieDetails}
+				rating={formatAverageRating(movie.average_rating)}
 			/>
 		)
 	})
 
 	return (
-		<section className='Movies-container'>
-			<h2>View All Movies</h2>
-			{moviesList}
-		</section>
-	)
+    <section className="Movies-container">
+      {movies.length === 0 && (
+        <h3>There are currently no movies to rate.</h3>
+      )}
+      {moviesList}
+    </section>
+  );
 }
 
 export default Movies

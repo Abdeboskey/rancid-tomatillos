@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { Route } from 'react-router-dom'
 import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
@@ -12,11 +13,9 @@ class App extends Component {
     this.state = {
       movies: [],
       error: '',
-			displayLoginPage: false,
-			displayMovieDetails: false,
-			currentMovieId: '',
 			isLoggedIn: false,
-			name: ''
+			name: '',
+			id: ''
     }
   }
 
@@ -28,23 +27,12 @@ class App extends Component {
 				this.setState({error: 'Ew, something smells RANCID 🥴'})
 			})
 	}
-	
-	showMovieDetails = (movieId) => {
-		this.setState({
-      displayMovieDetails: true,
-      currentMovieId: movieId,
-    })
-	}
 
-	showLoginPage = () => {
-		this.setState({ displayLoginPage: true })
-	}
-
-	hideLoginPage = (name) => {
+	logIn = (userInfo) => {
 		this.setState({
-			displayLoginPage: false,
 			isLoggedIn: true,
-			name: name
+			name: userInfo.user.name,
+			id: userInfo.user.id
 		})
 	}
 
@@ -55,44 +43,41 @@ class App extends Component {
 		})
 	}
 
+	formatAverageRating(rating) {
+    return rating.toString().split('').includes('.') ? 
+      rating.toFixed(2) : 
+      rating
+  }
+
   render() {
     return (
-      <main className='App'>
-				{!this.state.displayLoginPage && !this.state.displayMovieDetails &&
-					<>
-						<Header
-							loginStatus={this.state.isLoggedIn}
-							showLoginPage={this.showLoginPage}
-							logOut={this.logOut}
-							name={this.state.name}
-						/>
-						{this.state.error && <h2>{this.state.error}</h2>}
-						{this.state.movies.length === 0 &&
-							<h2>There are currently no movies to rate.</h2>}
+      <main className="App">
+        <Header
+          loginStatus={this.state.isLoggedIn}
+          logOut={this.logOut}
+          name={this.state.name}
+        />
+        {this.state.error && <h2>{this.state.error}</h2>}
+        <Route exact path="/" render={() => (
 						<Movies
 							movies={this.state.movies}
-							showMovieDetails={this.showMovieDetails}
+							formatAverageRating={this.formatAverageRating}
 						/>
-					</>
-				}
-        {this.state.displayLoginPage &&
-					<Login
-					hideLoginPage={this.hideLoginPage}
-					/>
-				}
-				{this.state.displayMovieDetails &&
-					<>
-						<Header
-							loginStatus={this.state.isLoggedIn}
-							showLoginPage={this.showLoginPage}
-							logOut={this.logOut}
-							name={this.state.name}
+					)}
+        />
+				<Route exact path="/login" render={() => (
+						<Login logIn={this.logIn} />
+					)} 
+				/>
+				<Route exact path="/movies/:movieId" render={({ match }) => (
+						<MovieDetails 
+							movieId={match.params.movieId} 
+							formatAverageRating={this.formatAverageRating}
 						/>
-						<MovieDetails movieId={this.state.currentMovieId} />
-					</>	
-				}
+					)}
+				/>
       </main>
-    )
+    );
   }
 }
 

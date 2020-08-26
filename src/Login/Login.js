@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link, Redirect } from 'react-router-dom'
 import '../scss/_Login.scss'
 import clapboard from '../assets/clapboard.png'
 import tomatillo from '../assets/tomatillo.png'
@@ -8,11 +9,10 @@ class Login extends Component {
 	constructor() {
 		super()
 		this.state = {
-			id: '',
-			name: '',
 			username: '',
 			password: '',
-			error: ''
+			error: '',
+			loginOk: false
 		}
 	}
 
@@ -22,12 +22,11 @@ class Login extends Component {
 		this.setState({ [inputName]: inputValue })
 	}
 
-	setUserInfo(userInfo) {
+	confirmLogin() {
 		this.setState({
-      id: userInfo.user.id,
-      name: userInfo.user.name,
       username: '',
-      password: '',
+			password: '',
+			loginOk: true
     })
 	}
 
@@ -43,22 +42,25 @@ class Login extends Component {
 		event.preventDefault()
 		submitLoginCredentials(this.state)
 			.then((userInfo) => {
-				this.setUserInfo(userInfo)
-				this.props.hideLoginPage(this.state.name)
+				this.confirmLogin()
+				this.props.logIn(userInfo)
 			})
 			.catch((error) => this.showErrorMessage())
 	}
 
 	render() {
+		if (this.state.loginOk) {
+		return <Redirect to="/" /> 
+		} 
 		return (
       <form
         className="Login-form"
         onSubmit={(event) => this.handleSubmit(event)}
       >
-        <img className='tomatillo' src={tomatillo} alt="Green Tomatillo" />
+        <img className="tomatillo" src={tomatillo} alt="Green Tomatillo" />
         <img src={clapboard} alt="Classic Film-Production Clapboard" />
         <h2>Rancid Tomatillos</h2>
-					{this.state.error && <p>{this.state.error}</p>}
+        {this.state.error && <p>{this.state.error}</p>}
         <div>
           <label htmlFor="username">Username:</label>
           <input

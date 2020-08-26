@@ -46,7 +46,7 @@ class MovieDetails extends Component {
       backdrop: movie.backdrop_path,
       releaseDate: this.formatDate(movie.release_date),
       overview: movie.overview,
-      averageRating: movie.average_rating,
+      averageRating: this.props.formatAverageRating(movie.average_rating),
       genres: this.formatGenres(movie.genres),
       budget: movie.budget,
       revenue: movie.revenue,

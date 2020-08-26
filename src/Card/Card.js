@@ -5,7 +5,7 @@ import '../scss/_Card.scss'
 
 const Card = ({ movieId, title, poster, rating, userRating }) => {
 	return (
-    <div className="Card">
+    <article className="Card">
       <Link to={`/movies/${movieId}`}>
         <img
           className="Card-poster"
@@ -16,7 +16,7 @@ const Card = ({ movieId, title, poster, rating, userRating }) => {
       <h3>{title}</h3>
 			<p><b>Average Rating:</b> {rating} / 10</p>
 			{userRating && <p><b>Your Rating:</b> {userRating.rating} / 10</p>}
-    </div>
+    </article>
   )
 }
 

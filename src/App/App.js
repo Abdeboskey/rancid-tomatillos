@@ -56,7 +56,7 @@ class App extends Component {
 
 	formatAverageRating(rating) {
     return rating.toString().split('').includes('.') ? 
-      rating.toFixed(2) : 
+      parseInt(rating.toFixed(2)) : 
       rating
   }
 
@@ -82,14 +82,16 @@ class App extends Component {
 					)} 
 				/>
 				<Route exact path="/movies/:movieId" render={({ match }) => (
-						<MovieDetails 
-							movieId={match.params.movieId} 
+						<MovieDetails
+							isLoggedIn={this.state.isLoggedIn}
+							movieId={parseInt(match.params.movieId)} 
 							formatAverageRating={this.formatAverageRating}
+							userRatings={this.state.userRatings}
 						/>
 					)}
 				/>
       </main>
-    );
+    )
   }
 }
 

@@ -84,7 +84,7 @@ class App extends Component {
 				<Route exact path="/movies/:movieId" render={({ match }) => (
 						<MovieDetails
 							isLoggedIn={this.state.isLoggedIn}
-							movieId={parseInt(match.params.movieId)} 
+							movieId={+match.params.movieId} 
 							formatAverageRating={this.formatAverageRating}
 							userRatings={this.state.userRatings}
 						/>

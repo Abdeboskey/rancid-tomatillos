@@ -34,3 +34,15 @@ export const getUserRatings = userId => {
 	return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${userId}/ratings`)
 		.then(response => response.json())
 }
+
+export const postRating = (userId, userRating, movieId) => {
+	return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${userId}/ratings`, {
+		method: 'post',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({
+			movie_id: movieId,
+			rating: userRating
+		})
+	})
+		.then(response => response.json())
+}

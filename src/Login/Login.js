@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import '../scss/_Login.scss'
 import clapboard from '../assets/clapboard.png'
 import tomatillo from '../assets/tomatillo.png'

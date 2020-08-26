@@ -16,14 +16,15 @@ class MovieDetails extends Component {
       backdrop: '',
       releaseDate: '',
       overview: '',
-      averageRating: 0,
+			averageRating: 0,
+			userRating: 0,
       genres: [],
       budget: 0,
       revenue: 0,
       runtime: '',
       tagline: '',
-      videos: [],
-      error: '',
+			videos: [],
+      error: ''
     }
   }
 
@@ -46,14 +47,27 @@ class MovieDetails extends Component {
       backdrop: movie.backdrop_path,
       releaseDate: this.formatDate(movie.release_date),
       overview: movie.overview,
-      averageRating: this.props.formatAverageRating(movie.average_rating),
+			averageRating: this.props.formatAverageRating(movie.average_rating),
+			userRating: null,
       genres: this.formatGenres(movie.genres),
       budget: movie.budget,
       revenue: movie.revenue,
       runtime: this.formatRuntime(movie.runtime),
       tagline: movie.tagline,
-    })
-  }
+		})
+		if (this.props.isLoggedIn) {
+			this.setState({
+				userRating: this.findUserRating(this.props)
+			})
+		}
+	}
+
+	findUserRating(props) {
+		const userRating = props.userRatings.find(rating => 
+			rating.movie_id === this.state.movieId
+		)
+		return userRating
+	}
 
   formatGenres(genres) {
     return genres.map(
@@ -88,6 +102,7 @@ class MovieDetails extends Component {
 						poster={this.state.poster}
 						releaseDate={this.state.releaseDate}
 						averageRating={this.state.averageRating}
+						userRating={this.state.userRating}
 						/>
 					<Details
 						releaseDate={this.state.releaseDate}

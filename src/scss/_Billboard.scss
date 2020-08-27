@@ -1,0 +1,16 @@
+@import 'variables';
+
+.MovieDetails-Billboard {
+  img {
+    width: 100%;
+    // position: absolute;
+  }
+
+  h2 {
+    font-family: $login-font;
+    font-size: 5em;
+    text-align: center;
+    // position: relative;
+    color: white;
+  }
+}

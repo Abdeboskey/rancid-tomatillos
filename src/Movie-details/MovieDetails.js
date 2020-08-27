@@ -97,25 +97,27 @@ class MovieDetails extends Component {
 						backdrop={this.state.backdrop}
 						tagline={this.state.tagline}
 						/>
-					<Ratings
-						userId={this.props.userId}
-						movieId={this.state.movieId}
-						title={this.state.title}
-						poster={this.state.poster}
-						releaseDate={this.state.releaseDate}
-						averageRating={this.state.averageRating}
-						userRating={this.state.userRating}
-						submitRating={this.props.submitRating}
-						handleUserRatingInput={this.handleUserRatingInput}
-						/>
-					<Details
-						releaseDate={this.state.releaseDate}
-						overview={this.state.overview}
-						genres={this.state.genres}
-						budget={this.state.budget}
-						revenue={this.state.revenue}
-						runtime={this.state.runtime}
-						/>
+          <section className='MovieDetails'>
+            <Ratings
+              userId={this.props.userId}
+              movieId={this.state.movieId}
+              title={this.state.title}
+              poster={this.state.poster}
+              releaseDate={this.state.releaseDate}
+              averageRating={this.state.averageRating}
+              userRating={this.state.userRating}
+              submitRating={this.props.submitRating}
+              handleUserRatingInput={this.handleUserRatingInput}
+              />
+            <Details
+              releaseDate={this.state.releaseDate}
+              overview={this.state.overview}
+              genres={this.state.genres}
+              budget={this.state.budget}
+              revenue={this.state.revenue}
+              runtime={this.state.runtime}
+              />
+          </section>
 					<Videos videos={this.state.videos} />
       </>
     )

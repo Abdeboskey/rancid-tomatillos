@@ -1,0 +1,17 @@
+.MovieDetails-Ratings {
+  display: flex;
+  color: white;
+  width: 800px;
+  
+  img {
+    height: 400px;
+    margin-left: 30px;
+    border-radius: 10px;
+    box-shadow: -6px 7px 11px 0px rgba(0, 0, 0, 0.562)
+  }
+
+  article {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+}

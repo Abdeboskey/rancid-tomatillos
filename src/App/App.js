@@ -76,7 +76,7 @@ class App extends Component {
 
 	formatAverageRating(rating) {
     return rating.toString().split('').includes('.') ? 
-      parseInt(rating.toFixed(2)) : 
+      +rating.toFixed(2) : 
       rating
   }
 

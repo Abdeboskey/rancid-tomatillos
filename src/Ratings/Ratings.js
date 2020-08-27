@@ -11,9 +11,7 @@ const Ratings = ({ userId, movieId, title, poster, releaseDate, averageRating, u
         <h2>{title}</h2>
         <p>{releaseDate.slice(-4)}</p>
         <p>Average Rating: {averageRating} / 10</p>
-				{typeof userRating === 'object' && 
-					<p>Your Rating: {userRating.rating} / 10</p>}
-				{typeof userRating === 'string' && 
+				{userRating > 0 && 
 					<p>Your Rating: {userRating} / 10</p>}
       </article>
 				<form
@@ -29,17 +27,11 @@ const Ratings = ({ userId, movieId, title, poster, releaseDate, averageRating, u
 						onChange={(event) => handleUserRatingInput(event)}
 					>
 					</input>
-					{typeof userRating === 'object' &&
-						<label htmlFor='rating'>{userRating.rating} / 10 </label>
-					}
-					{typeof userRating === 'number' &&
+					{userRating > 0 &&
 						<label htmlFor='rating'>{userRating} / 10 </label>
 					}
 					<button type='submit'>Submit Rating</button>
 				</form>
-			{/* {userRating &&
-				<button onClick={() => deleteRating}>Rate again!</button>
-			} */}
     </section>
   ) 
 }

@@ -102,6 +102,7 @@ class MovieDetails extends Component {
 						/>
           <section className='MovieDetails'>
             <Ratings
+              isLoggedIn={this.props.isLoggedIn}
               userId={this.props.userId}
               movieId={this.state.movieId}
               title={this.state.title}

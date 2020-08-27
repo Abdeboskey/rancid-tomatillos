@@ -38,7 +38,7 @@ class MovieDetails extends Component {
         console.log(error)
 				this.setState({ error: 'Ew, something smells RANCID 🥴' })
 			})
-  }
+	}
 
   setMovieInfo({ movie }) {
     this.setState({
@@ -48,7 +48,7 @@ class MovieDetails extends Component {
       releaseDate: this.formatDate(movie.release_date),
       overview: movie.overview,
 			averageRating: this.props.formatAverageRating(movie.average_rating),
-			userRating: null,
+			userRating: undefined,
       genres: this.formatGenres(movie.genres),
       budget: movie.budget,
       revenue: movie.revenue,
@@ -69,6 +69,12 @@ class MovieDetails extends Component {
 		return userRating
 	}
 
+	handleUserRatingInput = event => {
+		// event.preventDefault()
+		const inputValue = event.target.value
+		this.setState({ userRating: inputValue })
+	}
+
   formatGenres(genres) {
     return genres.map(
       (genre, i) => !i ? ` ${genre} ` : `/ ${genre} `
@@ -87,8 +93,8 @@ class MovieDetails extends Component {
     if (date[0].charAt(0) === '0') date[0] = date[0].slice(1)
     if (date[1].charAt(0) === '0') date[1] = date[1].slice(1)
     return date.join('/')
-  }
-
+	}
+	
   render() {
     return (
       <>
@@ -98,11 +104,15 @@ class MovieDetails extends Component {
 						tagline={this.state.tagline}
 						/>
 					<Ratings
+						userId={this.props.userId}
+						movieId={this.state.movieId}
 						title={this.state.title}
 						poster={this.state.poster}
 						releaseDate={this.state.releaseDate}
 						averageRating={this.state.averageRating}
 						userRating={this.state.userRating}
+						submitRating={this.props.submitRating}
+						handleUserRatingInput={this.handleUserRatingInput}
 						/>
 					<Details
 						releaseDate={this.state.releaseDate}

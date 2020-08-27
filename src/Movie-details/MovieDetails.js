@@ -48,18 +48,13 @@ class MovieDetails extends Component {
       releaseDate: this.formatDate(movie.release_date),
       overview: movie.overview,
 			averageRating: this.props.formatAverageRating(movie.average_rating),
-			userRating: undefined,
+			userRating: this.findUserRating(this.props),
       genres: this.formatGenres(movie.genres),
       budget: movie.budget,
       revenue: movie.revenue,
       runtime: this.formatRuntime(movie.runtime),
       tagline: movie.tagline,
 		})
-		if (this.props.isLoggedIn) {
-			this.setState({
-				userRating: this.findUserRating(this.props)
-			})
-		}
 	}
 
 	findUserRating(props) {
@@ -70,7 +65,6 @@ class MovieDetails extends Component {
 	}
 
 	handleUserRatingInput = event => {
-		// event.preventDefault()
 		const inputValue = event.target.value
 		this.setState({ userRating: inputValue })
 	}

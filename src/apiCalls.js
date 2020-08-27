@@ -1,11 +1,13 @@
+const baseUrl = 'https://rancid-tomatillos.herokuapp.com/api/v2'
+
 export const getMovies = () => {
-  return fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-  .then((response) => response.json())
+  return fetch(`${baseUrl}/movies`)
+  .then(response => response.json())
 }
 
 export const submitLoginCredentials = state => {
-  return fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
-    method: 'post',
+  return fetch(`${baseUrl}/login`, {
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       email: state.username,
@@ -16,18 +18,46 @@ export const submitLoginCredentials = state => {
 }
 
 const getMovieInfo = movieId => {
-  return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}`)
-  .then((response) => response.json())
+  return fetch(`${baseUrl}/movies/${movieId}`)
+  .then(response => response.json())
 }
 
 const getMovieVideos = movieId => {
-  return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieId}/videos`)
-  .then((response) => response.json())
+  return fetch(`${baseUrl}/movies/${movieId}/videos`)
+  .then(response => response.json())
 }
 
 export const getMovieDetails = movieId => {
 	return Promise.all([getMovieInfo(movieId), getMovieVideos(movieId)])
-		.then(data => {
-			return data
+		.then(data => data)
+}
+
+export const getUserRatings = userId => {
+	return fetch(`${baseUrl}/users/${userId}/ratings`)
+		.then(response => response.json())
+}
+
+export const postRating = (userId, userRating, movieId) => {
+	return fetch(`${baseUrl}/users/${userId}/ratings`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({
+			movie_id: movieId,
+			rating: userRating
 		})
+	})
+	.then(response => response.json())
+}
+
+export const deleteRating = (userId, ratingId) => {
+	return fetch(`${baseUrl}/users/${userId}/ratings/${ratingId}` , {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			ratingId
+		})
+	})
+	.catch(error => console.log(error))
 }

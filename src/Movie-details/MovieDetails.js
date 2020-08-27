@@ -16,14 +16,15 @@ class MovieDetails extends Component {
       backdrop: '',
       releaseDate: '',
       overview: '',
-      averageRating: 0,
+			averageRating: 0,
+			userRating: 0,
       genres: [],
       budget: 0,
       revenue: 0,
       runtime: '',
       tagline: '',
-      videos: [],
-      error: '',
+			videos: [],
+      error: ''
     }
   }
 
@@ -37,7 +38,7 @@ class MovieDetails extends Component {
         console.log(error)
 				this.setState({ error: 'Ew, something smells RANCID 🥴' })
 			})
-  }
+	}
 
   setMovieInfo({ movie }) {
     this.setState({
@@ -46,14 +47,27 @@ class MovieDetails extends Component {
       backdrop: movie.backdrop_path,
       releaseDate: this.formatDate(movie.release_date),
       overview: movie.overview,
-      averageRating: this.props.formatAverageRating(movie.average_rating),
+			averageRating: this.props.formatAverageRating(movie.average_rating),
+			userRating: this.findUserRating(this.props),
       genres: this.formatGenres(movie.genres),
       budget: movie.budget,
       revenue: movie.revenue,
       runtime: this.formatRuntime(movie.runtime),
       tagline: movie.tagline,
-    })
-  }
+		})
+	}
+
+	findUserRating(props) {
+		const userRating = props.userRatings.find(rating => 
+			rating.movie_id === this.state.movieId
+		)
+		return userRating
+	}
+
+	handleUserRatingInput = event => {
+		const inputValue = event.target.value
+		this.setState({ userRating: inputValue })
+	}
 
   formatGenres(genres) {
     return genres.map(
@@ -73,8 +87,8 @@ class MovieDetails extends Component {
     if (date[0].charAt(0) === '0') date[0] = date[0].slice(1)
     if (date[1].charAt(0) === '0') date[1] = date[1].slice(1)
     return date.join('/')
-  }
-
+	}
+	
   render() {
     return (
       <>
@@ -84,10 +98,15 @@ class MovieDetails extends Component {
 						tagline={this.state.tagline}
 						/>
 					<Ratings
+						userId={this.props.userId}
+						movieId={this.state.movieId}
 						title={this.state.title}
 						poster={this.state.poster}
 						releaseDate={this.state.releaseDate}
 						averageRating={this.state.averageRating}
+						userRating={this.state.userRating}
+						submitRating={this.props.submitRating}
+						handleUserRatingInput={this.handleUserRatingInput}
 						/>
 					<Details
 						releaseDate={this.state.releaseDate}

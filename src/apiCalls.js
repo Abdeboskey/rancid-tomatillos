@@ -59,5 +59,4 @@ export const deleteRating = (userId, ratingId) => {
 			ratingId
 		})
 	})
-	.catch(error => console.log(error))
 }

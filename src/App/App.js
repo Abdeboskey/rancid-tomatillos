@@ -43,13 +43,16 @@ class App extends Component {
   // focus on error handling here
 	async submitRating(userId, userRating, movieId, event) {
 		event.preventDefault()
-		if (this.findRating()) {
+		if (this.findRating(movieId)) {
 			await deleteRating(userId, this.findRatingId(movieId))
+				.catch(error => this.setState({ error: error }))
 		}
 		userRating = +userRating
 		postRating(userId, userRating, movieId)
 			.then(rating => {
-				this.setState({ userRatings: [...this.state.userRatings, rating.rating] })
+				this.setState({
+					userRatings: [...this.state.userRatings, rating.rating]
+				})
 			})
 			.catch(error => console.log(error))
 	}

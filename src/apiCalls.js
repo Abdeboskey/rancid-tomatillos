@@ -7,7 +7,7 @@ export const getMovies = () => {
 
 export const submitLoginCredentials = state => {
   return fetch(`${baseUrl}/login`, {
-    method: 'post',
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       email: state.username,
@@ -39,7 +39,7 @@ export const getUserRatings = userId => {
 
 export const postRating = (userId, userRating, movieId) => {
 	return fetch(`${baseUrl}/users/${userId}/ratings`, {
-		method: 'post',
+		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({
 			movie_id: movieId,
@@ -47,4 +47,17 @@ export const postRating = (userId, userRating, movieId) => {
 		})
 	})
 	.then(response => response.json())
+}
+
+export const deleteRating = (userId, ratingId) => {
+	return fetch(`${baseUrl}/users/${userId}/ratings/${ratingId}` , {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			ratingId
+		})
+	})
+	.catch(error => console.log(error))
 }

@@ -40,13 +40,10 @@ class App extends Component {
 				.catch(error => console.log(error))
 		}
 	}
-
+  // focus on error handling here
 	async submitRating(userId, userRating, movieId, event) {
 		event.preventDefault()
-		const foundRating = this.state.userRatings.find(rating => {
-			return rating.movie_id === movieId
-		})
-		if (foundRating) {
+		if (this.findRating()) {
 			await deleteRating(userId, this.findRatingId(movieId))
 		}
 		userRating = +userRating
@@ -57,14 +54,20 @@ class App extends Component {
 			.catch(error => console.log(error))
 	}
 
-	findRatingId = (movieId) => {
+	findRating = movieId => {
+		return this.state.userRatings.find((rating) => {
+      return rating.movie_id === movieId
+    })
+	}
+
+	findRatingId = movieId => {
 		const ratingMatch = this.state.userRatings.find(
 			rating => rating.movie_id === movieId
 		)
 		return ratingMatch.id
 	}
 
-	logIn = (userInfo) => {
+	logIn = userInfo => {
 		this.setState({
 			isLoggedIn: true,
 			name: userInfo.user.name,

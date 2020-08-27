@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import '../scss/_Ratings.scss'
 
-const Ratings = (props) => {
+const Ratings = ( props ) => {
 
   return (
     <section className="MovieDetails-Ratings">

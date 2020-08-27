@@ -4,7 +4,7 @@ import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
 import MovieDetails from '../Movie-details/MovieDetails'
-import { getMovies, getUserRatings } from '../apiCalls'
+import { getMovies, getUserRatings, postRating } from '../apiCalls'
 import '../scss/_App.scss'
 
 class App extends Component {
@@ -37,6 +37,15 @@ class App extends Component {
 				})
 				.catch(error => console.log(error))
 		}
+	}
+
+
+	submitRating(userId, userRating, movieId) {
+		postRating(userId, userRating, movieId)
+			.then(rating => {
+				this.setState({ userRatings: [...this.state.userRatings, rating.rating] })
+			})
+			.catch(error => console.log(error))
 	}
 
 	logIn = (userInfo) => {
@@ -83,10 +92,12 @@ class App extends Component {
 				/>
 				<Route exact path="/movies/:movieId" render={({ match }) => (
 						<MovieDetails
+							userId={this.state.id}
 							isLoggedIn={this.state.isLoggedIn}
 							movieId={+match.params.movieId} 
 							formatAverageRating={this.formatAverageRating}
 							userRatings={this.state.userRatings}
+							submitRating={this.submitRating}
 						/>
 					)}
 				/>

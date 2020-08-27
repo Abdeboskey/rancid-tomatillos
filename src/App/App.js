@@ -9,7 +9,8 @@ import '../scss/_App.scss'
 
 class App extends Component {
   constructor() {
-    super()
+		super()
+		this.submitRating = this.submitRating.bind(this)
     this.state = {
 			name: '',
 			id: '',
@@ -40,13 +41,13 @@ class App extends Component {
 		}
 	}
 
-	submitRating = (userId, userRating, movieId, event) => {
+	async submitRating(userId, userRating, movieId, event) {
 		event.preventDefault()
 		const foundRating = this.state.userRatings.find(rating => {
 			return rating.movie_id === movieId
 		})
 		if (foundRating) {
-			deleteRating(userId, this.findRatingId(movieId))
+			await deleteRating(userId, this.findRatingId(movieId))
 		}
 		userRating = +userRating
 		postRating(userId, userRating, movieId)

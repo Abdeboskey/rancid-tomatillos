@@ -2,38 +2,40 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import '../scss/_Ratings.scss'
 
-const Ratings = ({ userId, movieId, title, poster, releaseDate, averageRating, userRating, submitRating, handleUserRatingInput }) => {
+const Ratings = (props) => {
 
   return (
-    <section className='MovieDetails-Ratings'>
-      <img src={poster} alt='Movie Poster' />
+    <section className="MovieDetails-Ratings">
+      <img src={props.poster} alt="Movie Poster" />
       <article>
-        <h2>{title}</h2>
-        <p>{releaseDate.slice(-4)}</p>
-        <p>Average Rating: {averageRating} / 10</p>
-				{userRating > 0 && 
-					<p>Your Rating: {userRating} / 10</p>}
+        <h2>{props.title}</h2>
+        <p>{props.releaseDate.slice(-4)}</p>
+        <p>Average Rating: {props.averageRating} / 10</p>
+        {props.userRating > 0 && <p>Your Rating: {props.userRating} / 10</p>}
       </article>
-				<form
-					className='MovieDetails-NewRating'
-					onSubmit={(event) => submitRating(userId, userRating, movieId, event)}
-				>
-					<input
-						id='rating'
-						type='range'
-						min='0'
-						max='10'
-						value={userRating}
-						onChange={(event) => handleUserRatingInput(event)}
-					>
-					</input>
-					{userRating > 0 &&
-						<label htmlFor='rating'>{userRating} / 10 </label>
-					}
-					<button type='submit'>Submit Rating</button>
-				</form>
+      <form
+        className="MovieDetails-NewRating"
+        onSubmit={(event) =>
+          props.submitRating(
+            props.userId,
+            props.userRating,
+            props.movieId,
+            event
+          )
+        }
+      >
+        <input // hide this unless logged in
+          id="rating"
+          type="range"
+          min="0"
+          max="10"
+          value={props.userRating}
+          onChange={(event) => props.handleUserRatingInput(event)}
+        ></input>
+        <button type="submit">Submit Rating</button>
+      </form>
     </section>
-  ) 
+  ); 
 }
 
 export default Ratings

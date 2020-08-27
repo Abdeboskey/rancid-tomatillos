@@ -60,8 +60,11 @@ class MovieDetails extends Component {
 	findUserRating(props) {
 		const userRating = props.userRatings.find(rating => 
 			rating.movie_id === this.state.movieId
-		)
-		return userRating
+    )
+    if (!userRating) {
+      return -1
+    }
+		return userRating.rating
 	}
 
 	handleUserRatingInput = event => {

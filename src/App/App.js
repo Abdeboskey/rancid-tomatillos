@@ -4,18 +4,19 @@ import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
 import MovieDetails from '../Movie-details/MovieDetails'
-import { getMovies } from '../apiCalls'
+import { getMovies, getUserRatings, postRating, deleteRating } from '../apiCalls'
 import '../scss/_App.scss'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      movies: [],
-      error: '',
-			isLoggedIn: false,
 			name: '',
-			id: ''
+			id: '',
+			isLoggedIn: false,
+			movies: [],
+			userRatings: [],
+      error: ''
     }
   }
 
@@ -26,6 +27,36 @@ class App extends Component {
 				console.log(error)
 				this.setState({error: 'Ew, something smells RANCID 🥴'})
 			})
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.isLoggedIn !== prevState.isLoggedIn) {
+			getUserRatings(this.state.id)
+				.then(userRatings => {
+					this.setState({ userRatings: userRatings.ratings })
+				})
+				.catch(error => console.log(error))
+		}
+	}
+
+	submitRating = (userId, userRating, movieId, event) => {
+		if (userRating) {
+			deleteRating(userId, this.findRatingId(movieId))
+		}
+		userRating = +userRating
+		event.preventDefault()
+		postRating(userId, userRating, movieId)
+			.then(rating => {
+				this.setState({ userRatings: [...this.state.userRatings, rating.rating] })
+			})
+			.catch(error => console.log(error))
+	}
+
+	findRatingId = (movieId) => {
+		const ratingMatch = this.state.userRatings.find(
+			rating => rating.movie_id === movieId
+		)
+		return ratingMatch.id
 	}
 
 	logIn = (userInfo) => {
@@ -62,6 +93,7 @@ class App extends Component {
 						<Movies
 							movies={this.state.movies}
 							formatAverageRating={this.formatAverageRating}
+							userRatings={this.state.userRatings}
 						/>
 					)}
         />
@@ -70,14 +102,18 @@ class App extends Component {
 					)} 
 				/>
 				<Route exact path="/movies/:movieId" render={({ match }) => (
-						<MovieDetails 
-							movieId={match.params.movieId} 
+						<MovieDetails
+							userId={this.state.id}
+							isLoggedIn={this.state.isLoggedIn}
+							movieId={+match.params.movieId} 
 							formatAverageRating={this.formatAverageRating}
+							userRatings={this.state.userRatings}
+							submitRating={this.submitRating}
 						/>
 					)}
 				/>
       </main>
-    );
+    )
   }
 }
 

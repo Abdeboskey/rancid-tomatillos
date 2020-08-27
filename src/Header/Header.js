@@ -43,7 +43,6 @@ export default Header
 
 Header.propTypes = {
 	loginStatus: PropTypes.bool.isRequired,
-	showLoginPage: PropTypes.func.isRequired,
 	logOut: PropTypes.func.isRequired,
 	name: PropTypes.string.isRequired
 }

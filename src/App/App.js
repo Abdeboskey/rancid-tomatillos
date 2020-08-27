@@ -4,7 +4,7 @@ import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
 import MovieDetails from '../Movie-details/MovieDetails'
-import { getMovies, getUserRatings, postRating } from '../apiCalls'
+import { getMovies, getUserRatings, postRating, deleteRating } from '../apiCalls'
 import '../scss/_App.scss'
 
 class App extends Component {
@@ -39,8 +39,10 @@ class App extends Component {
 		}
 	}
 
-
 	submitRating = (userId, userRating, movieId, event) => {
+		if (userRating) {
+			deleteRating(userId, this.findRatingId(movieId))
+		}
 		userRating = +userRating
 		event.preventDefault()
 		postRating(userId, userRating, movieId)
@@ -48,6 +50,13 @@ class App extends Component {
 				this.setState({ userRatings: [...this.state.userRatings, rating.rating] })
 			})
 			.catch(error => console.log(error))
+	}
+
+	findRatingId = (movieId) => {
+		const ratingMatch = this.state.userRatings.find(
+			rating => rating.movie_id === movieId
+		)
+		return ratingMatch.id
 	}
 
 	logIn = (userInfo) => {

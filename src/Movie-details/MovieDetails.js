@@ -83,20 +83,22 @@ class MovieDetails extends Component {
 						backdrop={this.state.backdrop}
 						tagline={this.state.tagline}
 						/>
-					<Ratings
-						title={this.state.title}
-						poster={this.state.poster}
-						releaseDate={this.state.releaseDate}
-						averageRating={this.state.averageRating}
-						/>
-					<Details
-						releaseDate={this.state.releaseDate}
-						overview={this.state.overview}
-						genres={this.state.genres}
-						budget={this.state.budget}
-						revenue={this.state.revenue}
-						runtime={this.state.runtime}
-						/>
+          <section className='MovieDetails'>
+            <Ratings
+              title={this.state.title}
+              poster={this.state.poster}
+              releaseDate={this.state.releaseDate}
+              averageRating={this.state.averageRating}
+            />
+            <Details
+              releaseDate={this.state.releaseDate}
+              overview={this.state.overview}
+              genres={this.state.genres}
+              budget={this.state.budget}
+              revenue={this.state.revenue}
+              runtime={this.state.runtime}
+            />
+          </section>
 					<Videos videos={this.state.videos} />
       </>
     )

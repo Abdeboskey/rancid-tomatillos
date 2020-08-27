@@ -50,38 +50,38 @@ class Login extends Component {
 
 	render() {
 		if (this.state.loginOk) {
-		return <Redirect to="/" /> 
+		return <Redirect to='/' /> 
 		} 
 		return (
       <form
-        className="Login-form"
+        className='Login-form'
         onSubmit={(event) => this.handleSubmit(event)}
       >
-        <img className="tomatillo" src={tomatillo} alt="Green Tomatillo" />
-        <img src={clapboard} alt="Classic Film-Production Clapboard" />
+        <img className='tomatillo' src={tomatillo} alt='Green Tomatillo' />
+        <img src={clapboard} alt='Classic Film-Production Clapboard' />
         <h2>Rancid Tomatillos</h2>
         {this.state.error && <p>{this.state.error}</p>}
         <div>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor='username'>Username:</label>
           <input
-            className="username-input"
-            type="text"
-            id="username"
+            className='username-input'
+            type='text'
+            id='username'
             value={this.state.username}
             onChange={(event) => this.handleInput(event)}
           />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          <label htmlFor='password'>Password:</label>
           <input
-            className="password-input"
-            type="password"
-            id="password"
+            className='password-input'
+            type='password'
+            id='password'
             value={this.state.password}
             onChange={(event) => this.handleInput(event)}
           />
         </div>
-        <button type="Submit">ACTION!</button>
+        <button type='submit'>ACTION!</button>
       </form>
     );
 	}

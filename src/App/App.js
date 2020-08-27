@@ -30,7 +30,8 @@ class App extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.isLoggedIn !== prevState.isLoggedIn) {
+		if (this.state.isLoggedIn !== prevState.isLoggedIn ||
+			this.state.userRatings !== prevState.userRatings) {
 			getUserRatings(this.state.id)
 				.then(userRatings => {
 					this.setState({ userRatings: userRatings.ratings })
@@ -40,11 +41,14 @@ class App extends Component {
 	}
 
 	submitRating = (userId, userRating, movieId, event) => {
-		if (userRating) {
+		event.preventDefault()
+		const foundRating = this.state.userRatings.find(rating => {
+			return rating.movie_id === movieId
+		})
+		if (foundRating) {
 			deleteRating(userId, this.findRatingId(movieId))
 		}
 		userRating = +userRating
-		event.preventDefault()
 		postRating(userId, userRating, movieId)
 			.then(rating => {
 				this.setState({ userRatings: [...this.state.userRatings, rating.rating] })

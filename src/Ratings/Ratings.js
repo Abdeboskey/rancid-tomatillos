@@ -13,6 +13,7 @@ const Ratings = (props) => {
         <p>Average Rating: {props.averageRating} / 10</p>
         {props.userRating > 0 && <p>Your Rating: {props.userRating} / 10</p>}
       </article>
+      {props.isLoggedIn && 
       <form
         className="MovieDetails-NewRating"
         onSubmit={(event) =>
@@ -24,7 +25,7 @@ const Ratings = (props) => {
           )
         }
       >
-        <input // hide this unless logged in
+        <input
           id="rating"
           type="range"
           min="0"
@@ -34,6 +35,7 @@ const Ratings = (props) => {
         ></input>
         <button type="submit">Submit Rating</button>
       </form>
+      }
     </section>
   ); 
 }

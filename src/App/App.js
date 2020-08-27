@@ -40,7 +40,9 @@ class App extends Component {
 	}
 
 
-	submitRating(userId, userRating, movieId) {
+	submitRating = (userId, userRating, movieId, event) => {
+		userRating = +userRating
+		event.preventDefault()
 		postRating(userId, userRating, movieId)
 			.then(rating => {
 				this.setState({ userRatings: [...this.state.userRatings, rating.rating] })

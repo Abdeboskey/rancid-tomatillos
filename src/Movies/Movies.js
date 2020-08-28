@@ -20,7 +20,7 @@ const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn }) => {
 	})
 
 	return (
-    <section className="Movies-container">
+    <section className='Movies-container'>
       {movies.length === 0 && (
         <h3>There are currently no movies to rate.</h3>
       )}
@@ -32,5 +32,8 @@ const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn }) => {
 export default Movies
 
 Movies.propTypes = {
-	movies: PropTypes.array.isRequired
+	movies: PropTypes.array.isRequired,
+	formatAverageRating: PropTypes.func.isRequired,
+	userRatings: PropTypes.array.isRequired,
+	isLoggedIn: PropTypes.bool.isRequired
 }

@@ -17,7 +17,8 @@ class App extends Component {
 			isLoggedIn: false,
 			movies: [],
 			userRatings: [],
-      error: ''
+			error: '',
+			success: false
     }
   }
 
@@ -52,8 +53,12 @@ class App extends Component {
 		postRating(userId, userRating, movieId)
       .then((rating) => {
         this.setState({
-          userRatings: [...this.state.userRatings, rating.rating],
-        });
+					userRatings: [...this.state.userRatings, rating.rating],
+					success: true
+				})
+				setTimeout(() => {
+					this.setState({ success: false })
+				}, 3240)
       })
       .catch((error) => this.setState({
 				error: `I'm sorry, we could not post your rating 😔 Error Status: ${error.status}`
@@ -123,6 +128,7 @@ class App extends Component {
 							formatAverageRating={this.formatAverageRating}
 							userRatings={this.state.userRatings}
 							submitRating={this.submitRating}
+							success={this.state.success}
 						/>
 					)}
 				/>

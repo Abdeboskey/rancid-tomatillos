@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import '../scss/_Card.scss'
 
-const Card = ({ movieId, title, poster, rating, userRating }) => {
+const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn }) => {
 	return (
     <article className="Card">
       <Link to={`/movies/${movieId}`}>
@@ -15,7 +15,8 @@ const Card = ({ movieId, title, poster, rating, userRating }) => {
       </Link>
       <h3>{title}</h3>
 			<p><b>Average Rating:</b> {rating} / 10</p>
-			{userRating && <p><b>Your Rating:</b> {userRating.rating} / 10</p>}
+			{userRating && isLoggedIn && 
+      <p><b>Your Rating:</b> {userRating.rating} / 10</p>}
     </article>
   )
 }

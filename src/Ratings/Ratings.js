@@ -11,7 +11,8 @@ const Ratings = ( props ) => {
         <h2>{props.title}</h2>
         <p>{props.releaseDate.slice(-4)}</p>
         <p>Average Rating: {props.averageRating} / 10</p>
-        {props.userRating > 0 && <p>Your Rating: {props.userRating} / 10</p>}
+        {props.userRating > 0 && props.isLoggedIn &&
+        <p>Your Rating: {props.userRating} / 10</p>}
       </article>
       {props.isLoggedIn && 
       <form
@@ -34,11 +35,11 @@ const Ratings = ( props ) => {
           onChange={(event) => props.handleUserRatingInput(event)}
         ></input>
         <button type="submit">Submit Rating</button>
-        {props.success && <p>🥳 BIG SUCCESS! GOOD RATING! 🥳</p>}
+        {props.success && <p>✨ Thanks for Rating! 🎬</p>}
       </form>
       }
     </section>
-  ); 
+  )
 }
 
 export default Ratings

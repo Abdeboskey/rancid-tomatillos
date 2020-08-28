@@ -113,6 +113,7 @@ class App extends Component {
 							movies={this.state.movies}
 							formatAverageRating={this.formatAverageRating}
 							userRatings={this.state.userRatings}
+							isLoggedIn={this.state.isLoggedIn}
 						/>
 					)}
         />

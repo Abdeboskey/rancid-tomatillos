@@ -83,7 +83,7 @@ class Login extends Component {
         </div>
         <button type='submit'>ACTION!</button>
       </form>
-    );
+    )
 	}
 }
 

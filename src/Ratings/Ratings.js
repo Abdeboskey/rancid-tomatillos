@@ -34,6 +34,7 @@ const Ratings = ( props ) => {
           onChange={(event) => props.handleUserRatingInput(event)}
         ></input>
         <button type="submit">Submit Rating</button>
+        {props.success && <p>🥳 BIG SUCCESS! GOOD RATING! 🥳</p>}
       </form>
       }
     </section>

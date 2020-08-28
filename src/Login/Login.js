@@ -50,7 +50,7 @@ class Login extends Component {
 
 	render() {
 		if (this.state.loginOk) {
-		return <Redirect to='/' /> 
+			return <Redirect to='/' /> 
 		} 
 		return (
       <form

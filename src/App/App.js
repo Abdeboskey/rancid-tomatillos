@@ -25,7 +25,6 @@ class App extends Component {
 		getMovies()
 			.then(data => this.setState({ movies: data.movies }))
 			.catch(error => {
-				console.log(error)
 				this.setState({error: 'Ew, something smells RANCID 🥴'})
 			})
 	}
@@ -37,10 +36,12 @@ class App extends Component {
 				.then(userRatings => {
 					this.setState({ userRatings: userRatings.ratings })
 				})
-				.catch(error => console.log(error))
+				.catch(error => this.setState({
+				error: `I'm sorry, we could not retrieve your ratings 😰 Error Status: ${error.status}`
+			}))
 		}
 	}
-  // focus on error handling here
+  
 	async submitRating(userId, userRating, movieId, event) {
 		event.preventDefault()
 		if (this.findRating(movieId)) {
@@ -49,12 +50,14 @@ class App extends Component {
 		}
 		userRating = +userRating
 		postRating(userId, userRating, movieId)
-			.then(rating => {
-				this.setState({
-					userRatings: [...this.state.userRatings, rating.rating]
-				})
-			})
-			.catch(error => console.log(error))
+      .then((rating) => {
+        this.setState({
+          userRatings: [...this.state.userRatings, rating.rating],
+        });
+      })
+      .catch((error) => this.setState({
+				error: `I'm sorry, we could not post your rating 😔 Error Status: ${error.status}`
+			}))
 	}
 
 	findRating = movieId => {

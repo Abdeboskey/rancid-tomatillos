@@ -24,9 +24,9 @@ class App extends Component {
   componentDidMount() {
 		getMovies()
 			.then(data => this.setState({ movies: data.movies }))
-			.catch(error => {
-				this.setState({error: 'Ew, something smells RANCID 🥴'})
-			})
+			.catch(error => this.setState({
+				error: `I'm sorry, we could not retrieve any movies 🥴 Error Status: ${error.status}`
+			}))
 	}
 
 	componentDidUpdate(prevProps, prevState) {

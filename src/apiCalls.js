@@ -31,12 +31,24 @@ export const submitLoginCredentials = state => {
 
 const getMovieInfo = movieId => {
   return fetch(`${baseUrl}/movies/${movieId}`)
-		.then(response => response.json())
+		.then(response => {
+			if (response.ok) {
+				return response.json()
+			} else {
+				throw response
+			}
+		})
 }
 
 const getMovieVideos = movieId => {
   return fetch(`${baseUrl}/movies/${movieId}/videos`)
-		.then(response => response.json())
+		.then(response => {
+			if (response.ok) {
+				return response.json()
+			} else {
+				throw response
+			}
+		})
 }
 
 export const getMovieDetails = movieId => {

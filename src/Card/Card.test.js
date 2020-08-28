@@ -30,8 +30,23 @@ describe('Card Component', () => {
 		expect(poster).toBeInTheDocument()
 	})
 
-	it('should show movie details when poster is clicked', () => {
+	it('should show the correct content when rendered logged in', () => {
+		render(
+			<BrowserRouter>
+				<Card
+					movieId={4}
+					title='Im a title'
+					poster='www.posterpath.com/poster'
+					rating={10}
+					userRating={{rating: 8}}
+					isLoggedIn={true}
+				/>
+			</BrowserRouter>
+		)
 
+		const userRating = screen.getByText(/8/i)
+
+		expect(userRating).toBeInTheDocument()
 	})
 
 })

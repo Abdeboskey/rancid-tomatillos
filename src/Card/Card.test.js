@@ -49,4 +49,23 @@ describe('Card Component', () => {
 		expect(userRating).toBeInTheDocument()
 	})
 
+	it('should route to correct path when poster is clicked', () => {
+		render(
+			<BrowserRouter>
+				<Card
+					movieId={4}
+					title='Im a title'
+					poster='www.posterpath.com/poster'
+					rating={10}
+					userRating={{ rating: 8 }}
+					isLoggedIn={true}
+				/>
+			</BrowserRouter>
+		)
+
+		const routePath = screen.getByRole('link', { href: /movies\/4/i })
+
+		expect(routePath).toBeInTheDocument()
+	})
+
 })

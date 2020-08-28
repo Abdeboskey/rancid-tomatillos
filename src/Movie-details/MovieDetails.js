@@ -34,10 +34,9 @@ class MovieDetails extends Component {
 				this.setMovieInfo(data[0])
 				this.setState({ videos: data[1].videos })
 			})
-      .catch(error => {
-        console.log(error)
-				this.setState({ error: 'Ew, something smells RANCID 🥴' })
-			})
+      .catch(error => this.setState({
+				error: `I'm sorry, we could not retrieve the details of this movie 🥺 Error Status: ${error.status}`
+			}))
 	}
 
   setMovieInfo({ movie }) {
@@ -60,8 +59,11 @@ class MovieDetails extends Component {
 	findUserRating(props) {
 		const userRating = props.userRatings.find(rating => 
 			rating.movie_id === this.state.movieId
-		)
-		return userRating
+    )
+    if (!userRating) {
+      return -1
+    }
+		return userRating.rating
 	}
 
 	handleUserRatingInput = event => {
@@ -93,32 +95,34 @@ class MovieDetails extends Component {
     return (
       <>
 				{this.state.error && <h2>{this.state.error}</h2>}
-					<Billboard
-						backdrop={this.state.backdrop}
-						tagline={this.state.tagline}
-						/>
-          <section className='MovieDetails'>
-            <Ratings
-              userId={this.props.userId}
-              movieId={this.state.movieId}
-              title={this.state.title}
-              poster={this.state.poster}
-              releaseDate={this.state.releaseDate}
-              averageRating={this.state.averageRating}
-              userRating={this.state.userRating}
-              submitRating={this.props.submitRating}
-              handleUserRatingInput={this.handleUserRatingInput}
-              />
-            <Details
-              releaseDate={this.state.releaseDate}
-              overview={this.state.overview}
-              genres={this.state.genres}
-              budget={this.state.budget}
-              revenue={this.state.revenue}
-              runtime={this.state.runtime}
-              />
-          </section>
-					<Videos videos={this.state.videos} />
+        <Billboard
+          backdrop={this.state.backdrop}
+          tagline={this.state.tagline}
+          />
+        <section className='MovieDetails'>
+          <Ratings
+            isLoggedIn={this.props.isLoggedIn}
+            userId={this.props.userId}
+            movieId={this.state.movieId}
+            title={this.state.title}
+            poster={this.state.poster}
+            releaseDate={this.state.releaseDate}
+            averageRating={this.state.averageRating}
+            userRating={this.state.userRating}
+            submitRating={this.props.submitRating}
+            handleUserRatingInput={this.handleUserRatingInput}
+            success={this.props.success}
+            />
+          <Details
+            releaseDate={this.state.releaseDate}
+            overview={this.state.overview}
+            genres={this.state.genres}
+            budget={this.state.budget}
+            revenue={this.state.revenue}
+            runtime={this.state.runtime}
+            />
+        </section>
+        <Videos videos={this.state.videos} />
       </>
     )
   }

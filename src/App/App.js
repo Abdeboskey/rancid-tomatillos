@@ -9,57 +9,76 @@ import '../scss/_App.scss'
 
 class App extends Component {
   constructor() {
-    super()
+		super()
+		this.submitRating = this.submitRating.bind(this)
     this.state = {
 			name: '',
 			id: '',
 			isLoggedIn: false,
 			movies: [],
 			userRatings: [],
-      error: ''
+			error: '',
+			success: false
     }
   }
 
   componentDidMount() {
 		getMovies()
 			.then(data => this.setState({ movies: data.movies }))
-			.catch(error => {
-				console.log(error)
-				this.setState({error: 'Ew, something smells RANCID 🥴'})
-			})
+			.catch(error => this.setState({
+				error: `I'm sorry, we could not retrieve any movies 🥴 Error Status: ${error.status}`
+			}))
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.isLoggedIn !== prevState.isLoggedIn) {
+		if (this.state.isLoggedIn !== prevState.isLoggedIn ||
+			this.state.userRatings !== prevState.userRatings) {
 			getUserRatings(this.state.id)
 				.then(userRatings => {
 					this.setState({ userRatings: userRatings.ratings })
 				})
-				.catch(error => console.log(error))
+				.catch(error => this.setState({
+				error: `I'm sorry, we could not retrieve your ratings 😰 Error Status: ${error.status}`
+			}))
 		}
 	}
-
-	submitRating = (userId, userRating, movieId, event) => {
-		if (userRating) {
-			deleteRating(userId, this.findRatingId(movieId))
+  
+	async submitRating(userId, userRating, movieId, event) {
+		event.preventDefault()
+		if (this.findRating(movieId)) {
+			await deleteRating(userId, this.findRatingId(movieId))
+				.catch(error => this.setState({ error: error }))
 		}
 		userRating = +userRating
-		event.preventDefault()
 		postRating(userId, userRating, movieId)
-			.then(rating => {
-				this.setState({ userRatings: [...this.state.userRatings, rating.rating] })
-			})
-			.catch(error => console.log(error))
+      .then((rating) => {
+        this.setState({
+					userRatings: [...this.state.userRatings, rating.rating],
+					success: true
+				})
+				setTimeout(() => {
+					this.setState({ success: false })
+				}, 3240)
+      })
+      .catch((error) => this.setState({
+				error: `I'm sorry, we could not post your rating 😔 Error Status: ${error.status}`
+			}))
 	}
 
-	findRatingId = (movieId) => {
+	findRating = movieId => {
+		return this.state.userRatings.find((rating) => {
+      return rating.movie_id === movieId
+    })
+	}
+
+	findRatingId = movieId => {
 		const ratingMatch = this.state.userRatings.find(
 			rating => rating.movie_id === movieId
 		)
 		return ratingMatch.id
 	}
 
-	logIn = (userInfo) => {
+	logIn = userInfo => {
 		this.setState({
 			isLoggedIn: true,
 			name: userInfo.user.name,
@@ -94,6 +113,7 @@ class App extends Component {
 							movies={this.state.movies}
 							formatAverageRating={this.formatAverageRating}
 							userRatings={this.state.userRatings}
+							isLoggedIn={this.state.isLoggedIn}
 						/>
 					)}
         />
@@ -109,6 +129,7 @@ class App extends Component {
 							formatAverageRating={this.formatAverageRating}
 							userRatings={this.state.userRatings}
 							submitRating={this.submitRating}
+							success={this.state.success}
 						/>
 					)}
 				/>

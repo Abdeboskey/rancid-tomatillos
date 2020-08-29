@@ -27,5 +27,7 @@ Card.propTypes = {
 	movieId: PropTypes.number.isRequired,
 	title: PropTypes.string.isRequired,
 	poster: PropTypes.string.isRequired,
-	rating: PropTypes.number.isRequired
+	rating: PropTypes.number.isRequired,
+	userRating: PropTypes.object,
+	isLoggedIn: PropTypes.bool.isRequired
 }

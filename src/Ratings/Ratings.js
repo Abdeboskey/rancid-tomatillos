@@ -35,7 +35,13 @@ const Ratings = ( props ) => {
           onChange={(event) => props.handleUserRatingInput(event)}
         ></input>
         <button type="submit">Submit Rating</button>
-        {props.success && <p>✨ Thanks for Rating! 🎬</p>}
+				{props.success &&
+				<p>
+					<span role='img' aria-label='sparkle emoji'>✨</span>
+						Thanks for Rating!
+					<span role='img' aria-label='clapboard emoji'>🎬</span>
+				</p>
+				}
       </form>
       }
     </section>

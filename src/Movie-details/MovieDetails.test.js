@@ -37,7 +37,7 @@ describe('MovieDetails Component', () => {
 
 		const backdrop = await findByAltText(/movie backdrop/i)
 		const poster = await findByAltText(/movie poster/i)
-		const synopsis = await findByText(/synopsis/i)
+		const synopsis = await findByText(/synop\w+/i)
 		
 
 		expect(backdrop).toBeInTheDocument()
@@ -46,10 +46,10 @@ describe('MovieDetails Component', () => {
 	})
 
 	it('should notify user of a server error', async () => {
-		getMovieDetails.mockRejectedValueOnce()
+		getMovieDetails.mockRejectedValueOnce({ status: 666 })
 		const { findByText } = render(<MovieDetails />)
 
-		const errorMessage = await findByText(/ew, something smells rancid 🥴/i)
+		const errorMessage = await findByText(/error status: 666/i)
 
 		expect(errorMessage).toBeInTheDocument()
 	})

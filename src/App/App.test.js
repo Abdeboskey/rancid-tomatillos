@@ -75,7 +75,11 @@ describe('App Component', () => {
 
 	it('should notify user if there are no movies', async () => {
 		getMovies.mockResolvedValueOnce({ movies: [] })
-		const { findByText } = render(<App />)
+		const { findByText } = render(
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		)
 
 		const noMoviesMessage = await findByText(/there are currently no movies to rate./i)
 

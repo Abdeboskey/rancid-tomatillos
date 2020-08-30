@@ -81,6 +81,7 @@ a {
 
 .logout-button {
 	margin-left: 20px;
+	cursor: pointer;
 }
 
 .logout-button img {
@@ -95,7 +96,8 @@ a {
 	color: white;
 	margin-top: 70px;
 	margin-left: 10px;
-
+	cursor: pointer;
+	
 	&:hover {
 		color: $rancid-green;
 	}

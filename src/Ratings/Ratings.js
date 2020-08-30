@@ -9,43 +9,53 @@ const Ratings = ( props ) => {
       <img src={props.poster} alt="Movie Poster" />
       <article>
         <h2>{props.title}</h2>
-        <p>{props.releaseDate.slice(-4)}</p>
-        <p>Average Rating: {props.averageRating} / 10</p>
-        {props.userRating > 0 && props.isLoggedIn &&
-        <p>Your Rating: {props.userRating} / 10</p>}
+        <p className="release-date">{props.releaseDate.slice(-4)}</p>
+        <p className="rating">
+          <b>Average Rating:</b><br/> {props.averageRating} / 10
+        </p>
+        {props.userRating > 0 && props.isLoggedIn && (
+          <p className="rating">
+            <b>Your Rating:</b><br/> {props.userRating} / 10
+          </p>
+        )}
       </article>
-      {props.isLoggedIn && 
-      <form
-        className="MovieDetails-NewRating"
-        onSubmit={(event) =>
-          props.submitRating(
-            props.userId,
-            props.userRating,
-            props.movieId,
-            event
-          )
-        }
-      >
-        <input
-          id="rating"
-          type="range"
-          min="0"
-          max="10"
-          value={props.userRating}
-          onChange={(event) => props.handleUserRatingInput(event)}
-        ></input>
-        <button type="submit">Submit Rating</button>
-				{props.success &&
-				<p>
-					<span role='img' aria-label='sparkle emoji'>✨</span>
-						Thanks for Rating!
-					<span role='img' aria-label='clapboard emoji'>🎬</span>
-				</p>
-				}
-      </form>
-      }
+      {props.isLoggedIn && (
+        <form
+          className="MovieDetails-NewRating"
+          onSubmit={(event) =>
+            props.submitRating(
+              props.userId,
+              props.userRating,
+              props.movieId,
+              event
+            )
+          }
+        >
+          <input
+            id="rating"
+            type="range"
+            orient="vertical"
+            min="1"
+            max="10"
+            value={props.userRating}
+            onChange={(event) => props.handleUserRatingInput(event)}
+          ></input>
+          <button type="submit">Submit Rating</button>
+          {props.success && (
+            <p>
+              <span role="img" aria-label="sparkle emoji">
+                ✨
+              </span>
+              Thank You!
+              <span role="img" aria-label="clapboard emoji">
+                🎬
+              </span>
+            </p>
+          )}
+        </form>
+      )}
     </section>
-  )
+  );
 }
 
 export default Ratings

@@ -1,4 +1,11 @@
+@import 'variables';
+
 .MovieDetails {
   display: flex;
   box-sizing: border-box;
+  background: transparentize($color: #000000, $amount: 0);
+  border: solid 3px $rancid-green;
+  border-radius: 10px;
+  padding: 40px;
+  margin-right: 30px;
 }

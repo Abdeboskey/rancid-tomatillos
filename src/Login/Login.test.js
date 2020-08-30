@@ -2,6 +2,7 @@ import React from 'react'
 import Login from './Login'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 import { submitLoginCredentials } from '../apiCalls'
 jest.mock('../apiCalls.js')
@@ -22,34 +23,40 @@ describe('Login Component', () => {
 			}
 		)
 
-		const hideLoginPage = jest.fn()
+		const logIn = jest.fn()
 		const { getByRole } = render(
-			<Login
-				hideLoginPage={hideLoginPage}
-			/>
+			<BrowserRouter>
+				<Login
+					logIn={logIn}
+				/>
+			</BrowserRouter>
 		)
 
 		const button = getByRole('button')
 		fireEvent.click(button)
 		
 		await waitFor(() => {
-			expect(hideLoginPage).toBeCalledTimes(1)
-			expect(hideLoginPage).toBeCalledWith('Twillie')
+			expect(logIn).toBeCalledTimes(1)
+			expect(logIn).toBeCalledWith({
+        user: { email: "twillie@manillie.vanillie", id: 36, name: "Twillie" },
+      });
 		})
 	})
 
 	it('should notify the user if login credentials are invalid', async () => {
-		submitLoginCredentials.mockResolvedValueOnce(
-			{ "error": "Username or password is incorrect" }
-		)
+		submitLoginCredentials.mockResolvedValueOnce({ 
+			error: "Username or password is incorrect" 
+		})
 
-		const { getByRole, findByText } = render(<Login />)
+		const { getByRole, findByText } = render(
+			<BrowserRouter>
+				<Login />
+			</BrowserRouter>
+		)
 
 		const button = getByRole('button')
 		fireEvent.click(button)
-		const errorMessage = await findByText(
-			/invalid login information, please try again./i
-		)
+		const errorMessage = await findByText(/invalid login information/i);
 
 		expect(errorMessage).toBeInTheDocument()
 	})

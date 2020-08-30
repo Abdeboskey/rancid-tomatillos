@@ -3,14 +3,17 @@
 .MovieDetails-Billboard {
   img {
     width: 100%;
-    // position: absolute;
+    opacity: 0.5;
+    position: fixed;
+    // z-index: 0;
+    margin-top: -180px;
   }
 
   h2 {
     font-family: $login-font;
     font-size: 5em;
     text-align: center;
-    // position: relative;
+    position: relative;
     color: white;
   }
 }

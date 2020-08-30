@@ -5,7 +5,7 @@
     width: 100%;
     opacity: 0.5;
     position: fixed;
-    // z-index: 0;
+    z-index: 0;
     margin-top: -180px;
   }
 
@@ -15,5 +15,8 @@
     text-align: center;
     position: relative;
     color: white;
+    z-index: 1;
+    margin: 24px;
+    text-shadow: -6px 7px 11px $rancid-green;
   }
 }

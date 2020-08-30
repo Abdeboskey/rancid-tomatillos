@@ -10,6 +10,7 @@ header {
 	font-size: 1.75em;
 	color: $rancid-green;
 	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.562);
+	z-index: 1;
 }
 
 .logo {
@@ -38,7 +39,6 @@ a {
 
 .logged-out {
 	display: flex;
-	// cursor: pointer;
 	margin: 20px 50px 15px 0;
 	filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.924));
 	transition: all .5s ease-in-out;

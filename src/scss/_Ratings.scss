@@ -35,7 +35,6 @@
   input {
     -webkit-appearance: slider-vertical;
     height: 60%;
-    // background: $rancid-green;
     // cursor: pointer;
     margin-bottom: 15px;
   }
@@ -46,12 +45,13 @@
     border: 0.2px solid $rancid-green;
     background: $rancid-green;
   }
-
+  
   input::-moz-range-track {
-    width: 300%;
+    width: 100%;
     cursor: pointer;
     border-radius: 1em;
     border: 0.2px solid $rancid-green;
+    background: $rancid-green;
   }
 
   .MovieDetails-NewRating {

@@ -35,8 +35,8 @@
   input {
     -webkit-appearance: slider-vertical;
     height: 60%;
-    background: $rancid-green;
-    cursor: pointer;
+    // background: $rancid-green;
+    // cursor: pointer;
     margin-bottom: 15px;
   }
   
@@ -45,7 +45,6 @@
     border-radius: 1em;
     border: 0.2px solid $rancid-green;
     background: $rancid-green;
-    color: blanchedalmond
   }
 
   input::-moz-range-track {
@@ -59,5 +58,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  button {
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: white;
   }
 }

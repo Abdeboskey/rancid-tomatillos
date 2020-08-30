@@ -1,18 +1,63 @@
+@import 'variables';
+
 .MovieDetails-Ratings {
   display: flex;
   color: white;
-  width: 800px;
+  width: 50%;
   position: relative;
+  z-index: 1;
   
   img {
     height: 400px;
     margin-left: 30px;
     border-radius: 10px;
-    box-shadow: -6px 7px 11px 0px rgba(0, 0, 0, 0.562)
+    box-shadow: -6px 7px 11px 0px $rancid-green;
   }
 
   article {
     margin-left: 30px;
     margin-right: 30px;
+  }
+
+  article h2 {
+    font-size: 2.5em;
+    margin: 0;
+  }
+  
+  .release-date {
+    font-size: 1.5em;
+  } 
+
+  .rating {
+    font-size: 1.2em;
+  }
+
+  input {
+    -webkit-appearance: slider-vertical;
+    height: 60%;
+    background: $rancid-green;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+  
+  input::-webkit-slider-runnable-track {
+    cursor: pointer;
+    border-radius: 1em;
+    border: 0.2px solid $rancid-green;
+    background: $rancid-green;
+    color: blanchedalmond
+  }
+
+  input::-moz-range-track {
+    width: 300%;
+    cursor: pointer;
+    border-radius: 1em;
+    border: 0.2px solid $rancid-green;
+  }
+
+  .MovieDetails-NewRating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

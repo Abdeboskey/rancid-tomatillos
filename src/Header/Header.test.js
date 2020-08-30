@@ -13,7 +13,6 @@ describe('Header Component', () =>  {
           name='Georgina'
           loginStatus={true}
         />
-
       </BrowserRouter>
     ) 
     
@@ -35,7 +34,7 @@ describe('Header Component', () =>  {
     const loginLink = screen.getByRole("link", {
       name: "Movie-Production Clapboard Log In",
     });
-    
+
     expect(loginLink).toBeInTheDocument()
   })
   

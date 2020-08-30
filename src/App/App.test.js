@@ -2,6 +2,7 @@ import React from 'react'
 import App from './App'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { getMovies } from '../apiCalls'
 jest.mock('../apiCalls.js')
 
@@ -40,20 +41,34 @@ describe('App Component', () => {
 			]
 		})
 
-		const { getByText, findByText } = render(<App />)
+		const { getByText, findByText } = render(
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		) 
 
-		const moviesContainer = getByText(/view all movies/i)
-		const movie = await findByText(/hack3r5/i)
+		// const moviesContainer = getByText(/view all movies/i)
+		const movieOne = await findByText(/brave/i)
+		const movieTwo = await findByText(/hack3r5/i)
+		const movieThree = await findByText(/perks/i)
 
-		expect(moviesContainer).toBeInTheDocument()
-		expect(movie).toBeInTheDocument()
+		// expect(moviesContainer).toBeInTheDocument()
+		expect(movieOne).toBeInTheDocument()
+		expect(movieTwo).toBeInTheDocument()
+		expect(movieThree).toBeInTheDocument()
 	})
 
 	it('should notify user of a server error', async () => {
-		getMovies.mockRejectedValueOnce()
-		const { findByText } = render(<App />)
+		getMovies.mockRejectedValueOnce({
+			status: 420
+		})
+		const { findByText } = render(
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		)
 
-		const errorMessage = await findByText(/ew, something smells rancid 🥴/i)
+		const errorMessage = await findByText(/error status: 420/i);
 
 		expect(errorMessage).toBeInTheDocument()
 	})

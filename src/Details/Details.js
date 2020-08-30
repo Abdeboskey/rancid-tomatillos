@@ -5,12 +5,12 @@ import '../scss/_Details.scss'
 const Details = ({ releaseDate, overview, genres, budget, revenue, runtime }) => {
 	return (
 		<section className='MovieDetails-Details'>
-			<p><b>Synopsis:</b> {overview}</p>
-			<p><b>Runtime:</b> {runtime}</p>
-			<p><b>Genres:</b> {genres}</p>
-			<p><b>Release Date:</b> {releaseDate}</p>
-			<p><b>Budget:</b> ${budget.toLocaleString()}.00</p>
-			<p><b>Revenue:</b> ${revenue.toLocaleString()}.00</p>
+			<p><b>Synopsis:</b><br/> {overview}</p>
+			<p><b>Runtime:</b><br/> {runtime}</p>
+			<p><b>Genres:</b><br/> {genres}</p>
+			<p><b>Release Date:</b><br/> {releaseDate}</p>
+			<p><b>Budget:</b><br/> ${budget.toLocaleString()}.00</p>
+			<p><b>Revenue:</b><br/> ${revenue.toLocaleString()}.00</p>
 		</section>
 	)
 }

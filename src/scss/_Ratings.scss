@@ -9,7 +9,6 @@
   
   img {
     height: 400px;
-    margin-left: 30px;
     border-radius: 10px;
     box-shadow: -6px 7px 11px 0px $rancid-green;
   }
@@ -35,8 +34,7 @@
   input {
     -webkit-appearance: slider-vertical;
     height: 60%;
-    // cursor: pointer;
-    margin-bottom: 15px;
+    margin: 15px 0 15px 0;
   }
   
   input::-webkit-slider-runnable-track {

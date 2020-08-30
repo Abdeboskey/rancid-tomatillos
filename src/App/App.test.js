@@ -49,7 +49,7 @@ describe('App Component', () => {
 
 		// const moviesContainer = getByText(/view all movies/i)
 		const movieOne = await findByText(/brave/i)
-		const movieTwo = await findByText(/hack3r5/i)
+		const movieTwo = await findByText(/hack\w+/i)
 		const movieThree = await findByText(/perks/i)
 
 		// expect(moviesContainer).toBeInTheDocument()

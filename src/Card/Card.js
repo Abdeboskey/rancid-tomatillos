@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import '../scss/_Card.scss'
 import star from '../assets/star.png'
 
-const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn }) => {
+const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn, addFavorite }) => {
 	return (
     <article className="Card">
       <Link to={`/movies/${movieId}`}>
@@ -20,6 +20,7 @@ const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn }) => {
 					alt='Star Icon'
 					src={star}
 					className='favorite'
+					onClick={() => addFavorite(movieId)}
 				></input>
 				<h3>{title}</h3>
 			</div>

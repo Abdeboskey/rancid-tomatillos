@@ -101,11 +101,10 @@ class App extends Component {
 	}
 	
 	addFavorite = (movieId) => {
-		postFavorite()
-			.then(postMessage => {
-				console.log(postMessage)
+		postFavorite(movieId)
+			.then(data => {
 				this.setState({
-					favoriteMoviesIds: [...this.state.favoriteMovieIds, movieId]
+					favoriteMovieIds: [...this.state.favoriteMovieIds, movieId]
 				})
 			})
 	}

@@ -44,7 +44,7 @@ describe('Login Component', () => {
 	})
 
 	it('should notify the user if login credentials are invalid', async () => {
-		submitLoginCredentials.mockResolvedValueOnce({ 
+		submitLoginCredentials.mockRejectedValueOnce({ 
 			error: "Username or password is incorrect" 
 		})
 

@@ -95,6 +95,17 @@ export const deleteRating = (userId, ratingId) => {
 	})
 }
 
+export const getFavoriteMovies = () => {
+	return fetch('http://localhost:3001/api/v1/favorites')
+		.then(response => {
+			if (response.ok) {
+				return response.json()
+			} else {
+				throw response
+			}
+		})
+}
+
 export const postFavorite = movieId => {
 	return fetch('http://localhost:3001/api/v1/favorites', {
 		method: 'POST',

@@ -3,7 +3,7 @@ import Movies from './Movies'
 import { screen, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import { BrowserRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 
 describe('Movies Component', () => {
   
@@ -47,14 +47,14 @@ describe('Movies Component', () => {
 		]
 		
 		render(
-			<BrowserRouter>
+			<MemoryRouter>
 				<Movies
 					movies={movies}
 					formatAverageRating={mockFormatAverageRating}
 					userRatings={userRatings}
 					isLoggedIn={true}
 				/>
-			</BrowserRouter>
+			</MemoryRouter>
 		)
 
 		const title1 = screen.getByRole('heading', { name: 'Brave Little Toasty' })

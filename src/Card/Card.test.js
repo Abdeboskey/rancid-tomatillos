@@ -3,13 +3,13 @@ import Card from './Card'
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import { BrowserRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 
 describe('Card Component', () => {
 
 	it('should show the correct content when rendered logged out', () => {
 		render(
-			<BrowserRouter>
+			<MemoryRouter>
 				<Card
 					movieId={4}
 					title='Im a title'
@@ -18,7 +18,7 @@ describe('Card Component', () => {
 					userRating={undefined}
 					isLoggedIn={false}
 				/>
-			</BrowserRouter>
+			</MemoryRouter>
 		)
 
 		const title = screen.getByText(/im a title/i)
@@ -32,7 +32,7 @@ describe('Card Component', () => {
 
 	it('should show the correct content when rendered logged in', () => {
 		render(
-			<BrowserRouter>
+			<MemoryRouter>
 				<Card
 					movieId={4}
 					title='Im a title'
@@ -41,7 +41,7 @@ describe('Card Component', () => {
 					userRating={{rating: 8}}
 					isLoggedIn={true}
 				/>
-			</BrowserRouter>
+			</MemoryRouter>
 		)
 
 		const userRating = screen.getByText(/8/i)
@@ -51,7 +51,7 @@ describe('Card Component', () => {
 
 	it('should route to correct path when poster is clicked', () => {
 		render(
-			<BrowserRouter>
+			<MemoryRouter>
 				<Card
 					movieId={4}
 					title='Im a title'
@@ -60,7 +60,7 @@ describe('Card Component', () => {
 					userRating={{ rating: 8 }}
 					isLoggedIn={true}
 				/>
-			</BrowserRouter>
+			</MemoryRouter>
 		)
 
 		const routePath = screen.getByRole('link', { href: /movies\/4/i })

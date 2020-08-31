@@ -104,7 +104,6 @@ export const postFavorite = movieId => {
 		body: JSON.stringify({ id: movieId })
 	})
 	.then(response => {
-		console.log(response)
 		if (response.ok) {
 			return response.json()
 		} else {

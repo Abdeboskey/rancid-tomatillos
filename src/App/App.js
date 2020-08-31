@@ -4,7 +4,7 @@ import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
 import MovieDetails from '../Movie-details/MovieDetails'
-import { getMovies, getUserRatings, postRating, deleteRating } from '../apiCalls'
+import { getMovies, getUserRatings, postRating, deleteRating, postFavorite } from '../apiCalls'
 import '../scss/_App.scss'
 
 class App extends Component {
@@ -18,7 +18,8 @@ class App extends Component {
 			movies: [],
 			userRatings: [],
 			error: '',
-			success: false
+			success: false,
+			favoriteMovieIds: []
     }
   }
 
@@ -97,7 +98,17 @@ class App extends Component {
     return rating.toString().split('').includes('.') ? 
       +rating.toFixed(2) : 
       rating
-  }
+	}
+	
+	addFavorite = (movieId) => {
+		postFavorite()
+			.then(postMessage => {
+				console.log(postMessage)
+				this.setState({
+					favoriteMoviesIds: [...this.state.favoriteMovieIds, movieId]
+				})
+			})
+	}
 
   render() {
     return (
@@ -114,6 +125,7 @@ class App extends Component {
 							formatAverageRating={this.formatAverageRating}
 							userRatings={this.state.userRatings}
 							isLoggedIn={this.state.isLoggedIn}
+							addFavorite={this.addFavorite}
 						/>
 					)}
         />

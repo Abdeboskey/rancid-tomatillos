@@ -109,7 +109,7 @@ class App extends Component {
 			})
 	}
 	
-	addFavorite = (movieId, event) => {
+	changeFavoriteStatus = (movieId, event) => {
 		this.changeFavoriteIcon(event)
 		this.updateFavoriteMovies()
 		postFavorite(movieId)
@@ -148,7 +148,7 @@ class App extends Component {
 							formatAverageRating={this.formatAverageRating}
 							userRatings={this.state.userRatings}
 							isLoggedIn={this.state.isLoggedIn}
-							addFavorite={this.addFavorite}
+							changeFavoriteStatus={this.changeFavoriteStatus}
 						/>
 					)}
         />
@@ -165,6 +165,7 @@ class App extends Component {
 							userRatings={this.state.userRatings}
 							submitRating={this.submitRating}
 							success={this.state.success}
+							changeFavoriteStatus={this.changeFavoriteStatus}
 						/>
 					)}
 				/>

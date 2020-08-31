@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Card from '../Card/Card'
 import '../scss/_Movies.scss'
 
-const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn, addFavorite }) => {
+const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn, changeFavoriteStatus }) => {
 	const moviesList = movies.map(movie => {
 		const userRating = userRatings.find(rating => rating.movie_id === movie.id)
 		return (
@@ -15,7 +15,7 @@ const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn, addFavor
 				rating={formatAverageRating(movie.average_rating)}
 				userRating={userRating}
 				isLoggedIn={isLoggedIn}
-				addFavorite={addFavorite}
+				changeFavoriteStatus={changeFavoriteStatus}
 			/>
 		)
 	})
@@ -37,5 +37,5 @@ Movies.propTypes = {
 	formatAverageRating: PropTypes.func.isRequired,
 	userRatings: PropTypes.array.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
-	addFavorite: PropTypes.func.isRequired
+	changeFavoriteStatus: PropTypes.func.isRequired
 }

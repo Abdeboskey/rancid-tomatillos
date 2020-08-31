@@ -2,7 +2,7 @@ import React from 'react'
 import App from './App'
 import { screen, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import { getMovies, getUserRatings } from '../apiCalls'
 jest.mock('../apiCalls.js')
 
@@ -46,9 +46,9 @@ describe('App Component', () => {
 		getMovies.mockResolvedValueOnce(getMoviesResolved)
 
 		const { findByText } = render(
-			<BrowserRouter>
+			<MemoryRouter>
 				<App />
-			</BrowserRouter>
+			</MemoryRouter>
 		) 
 
 		const movieOne = await findByText(/brave/i)
@@ -65,9 +65,9 @@ describe('App Component', () => {
 			status: 420
 		})
 		const { findByText } = render(
-			<BrowserRouter>
+			<MemoryRouter>
 				<App />
-			</BrowserRouter>
+			</MemoryRouter>
 		)
 
 		const errorMessage = await findByText(/error status: 420/i);
@@ -78,9 +78,9 @@ describe('App Component', () => {
 	it('should notify user if there are no movies', async () => {
 		getMovies.mockResolvedValueOnce({ movies: [] })
 		const { findByText } = render(
-			<BrowserRouter>
+			<MemoryRouter>
 				<App />
-			</BrowserRouter>
+			</MemoryRouter>
 		)
 
 		const noMoviesMessage = await findByText(/there are currently no movies to rate./i)
@@ -90,25 +90,40 @@ describe('App Component', () => {
 
 	it('should get user ratings when user successfully logs in or changes a rating', async () => {
 		getMovies.mockResolvedValueOnce(getMoviesResolved)
-		getUserRatings.mockResolvedValueOnce({ ratings:
-			[
-				{ id: 1, user_id: 1, movie_id: 1, rating: 6, created_at: 'yesterday', updated_at: 'today' },
-				{ id: 2, user_id: 2, movie_id: 2, rating: 10, created_at: 'days ago', updated_at: 'never' },
-				{ id: 3, user_id: 3, movie_id: 3, rating: 3, created_at: 'now', updated_at: 'then' },
-			]
+		getUserRatings.mockResolvedValueOnce({
+			ratings:
+				[
+					{ id: 1, user_id: 1, movie_id: 1, rating: 6, created_at: 'yesterday', updated_at: 'today' },
+					{ id: 2, user_id: 2, movie_id: 2, rating: 10, created_at: 'days ago', updated_at: 'never' },
+					{ id: 3, user_id: 3, movie_id: 3, rating: 3, created_at: 'now', updated_at: 'then' },
+				]
 		})
 
 		const { findByText } = await render(
-			<BrowserRouter>
+			<MemoryRouter>
 				<App />
-			</BrowserRouter>
+			</MemoryRouter>
 		)
 
 		// execution
 		// look for the correct user ratings on the page
-		
+
 		// assertion
 		// expect them to be in the document
+	})
+
+	it('should allow a user to post a rating', () => {
+		// set up
+		// fire event on the button click
+		// check that submit rating was fired with the right arguments
+		// mock resolved value of postRating 
+	})
+
+	it('should delete a rating when a user tries to post a new rating', () => {
+		// set up
+		// fire event on the button click
+		// check that delete rating was fired with the right arguments
+		// mock resolved value of deleteRating 
 	})
 	
 })

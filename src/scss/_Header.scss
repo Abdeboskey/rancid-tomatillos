@@ -1,8 +1,7 @@
 @import 'variables';
 
-
 header {
-  display: flex;
+	display: flex;
   justify-content: space-between;
   align-items: center;
 	background: linear-gradient(135deg, $tomatillo-red 60%, black); 
@@ -10,6 +9,7 @@ header {
 	font-size: 1.75em;
 	color: $rancid-green;
 	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.562);
+	z-index: 1;
 }
 
 .logo {
@@ -23,12 +23,21 @@ header {
 
 .title img,
 .title h1 {
-	filter: drop-shadow(-8px 5px 5px black);
+	filter: drop-shadow(-8px 5px 5px rgb(0, 0, 0));
+}
+
+a {
+	color: $rancid-green;
+	text-decoration: none;
+	transition: all .5s ease-in-out;
+
+	&:hover {
+		filter: drop-shadow(0px 0px 20px $rancid-green);
+	}
 }
 
 .logged-out {
 	display: flex;
-	cursor: pointer;
 	margin: 20px 50px 15px 0;
 	filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.924));
 	transition: all .5s ease-in-out;
@@ -72,6 +81,7 @@ header {
 
 .logout-button {
 	margin-left: 20px;
+	cursor: pointer;
 }
 
 .logout-button img {
@@ -86,7 +96,8 @@ header {
 	color: white;
 	margin-top: 70px;
 	margin-left: 10px;
-
+	cursor: pointer;
+	
 	&:hover {
 		color: $rancid-green;
 	}

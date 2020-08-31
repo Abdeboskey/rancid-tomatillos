@@ -4,7 +4,7 @@ import '../scss/_Videos.scss'
 
 const Video = ({ videoId, movieKey, type }) => {
 	return (
-		<>
+		<article className='Video'>
 			<h3>{type}</h3>
 			<iframe
 				title={videoId}
@@ -16,12 +16,14 @@ const Video = ({ videoId, movieKey, type }) => {
 				allowFullScreen
 				>
 			</iframe>
-		</>
+		</article>
 	)
 }
 
 export default Video
 
 Video.propTypes = {
-	movieKey: PropTypes.string.isRequired
+	videoId: PropTypes.number.isRequired,
+	movieKey: PropTypes.string.isRequired,
+	type: PropTypes.string.isRequired,
 }

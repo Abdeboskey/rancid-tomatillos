@@ -1,0 +1,18 @@
+@import 'MovieDetails';
+
+.MovieDetails-Videos {
+  @extend .MovieDetails;
+  overflow: scroll;
+  padding: 20px;
+  margin: 30px;
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.video-list {
+  margin-top: 0;
+  display: flex;
+  text-align: center;
+  list-style-type: none;
+}

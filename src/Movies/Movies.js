@@ -36,5 +36,6 @@ Movies.propTypes = {
 	movies: PropTypes.array.isRequired,
 	formatAverageRating: PropTypes.func.isRequired,
 	userRatings: PropTypes.array.isRequired,
-	isLoggedIn: PropTypes.bool.isRequired
+	isLoggedIn: PropTypes.bool.isRequired,
+	addFavorite: PropTypes.func.isRequired
 }

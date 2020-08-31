@@ -112,6 +112,7 @@ class MovieDetails extends Component {
             submitRating={this.props.submitRating}
             handleUserRatingInput={this.handleUserRatingInput}
             success={this.props.success}
+            changeFavoriteStatus={this.props.changeFavoriteStatus}
             />
           <Details
             releaseDate={this.state.releaseDate}

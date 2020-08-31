@@ -20,7 +20,7 @@ const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn, addFavor
 					alt='Star Icon'
 					src={star}
 					className='favorite'
-					onClick={() => addFavorite(movieId)}
+					onClick={(event) => addFavorite(movieId, event)}
 				></input>
 				<h3>{title}</h3>
 			</div>

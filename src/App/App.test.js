@@ -3,7 +3,7 @@ import App from './App'
 import { screen, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { MemoryRouter } from 'react-router-dom'
-import { getMovies, getUserRatings } from '../apiCalls'
+import { getMovies, getUserRatings, submitLoginCredentials } from '../apiCalls'
 jest.mock('../apiCalls.js')
 
 import MutationObserver from '@sheerun/mutationobserver-shim'
@@ -93,13 +93,13 @@ describe('App Component', () => {
 		getUserRatings.mockResolvedValueOnce({
 			ratings:
 				[
-					{ id: 1, user_id: 1, movie_id: 1, rating: 6, created_at: 'yesterday', updated_at: 'today' },
-					{ id: 2, user_id: 2, movie_id: 2, rating: 10, created_at: 'days ago', updated_at: 'never' },
-					{ id: 3, user_id: 3, movie_id: 3, rating: 3, created_at: 'now', updated_at: 'then' },
+					{ id: 1, user_id: 1, movie_id: 1, rating: 66, created_at: 'yesterday', updated_at: 'today' },
+					{ id: 2, user_id: 2, movie_id: 2, rating: 99, created_at: 'days ago', updated_at: 'never' },
+					{ id: 3, user_id: 3, movie_id: 3, rating: 33, created_at: 'now', updated_at: 'then' }
 				]
 		})
 
-		const { findByText } = await render(
+		const { findByText } = render(
 			<MemoryRouter>
 				<App />
 			</MemoryRouter>
@@ -107,8 +107,14 @@ describe('App Component', () => {
 
 		// execution
 		// look for the correct user ratings on the page
+		const userRating1 = await findByText(/66/)
+		const userRating2 = await findByText(/99/)
+		const userRating3 = await findByText(/33/)
 
 		// assertion
+		expect(userRating1).toBeInTheDocument()
+		expect(userRating2).toBeInTheDocument()
+		expect(userRating3).toBeInTheDocument()
 		// expect them to be in the document
 	})
 

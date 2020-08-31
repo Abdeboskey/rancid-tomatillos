@@ -27,8 +27,11 @@ describe('Ratings Component', () => {
 		expect(averageRating).toBeInTheDocument()
 	})
 
-	it('should fire the correct method for user rating', () => {
-
+	it('should allow a user to post a rating', () => {
+		// set up
+		// fire event on the button click
+		// check that submit rating was fired with the right arguments
+		// mock resolved value of postRating 
 	})
 
 })

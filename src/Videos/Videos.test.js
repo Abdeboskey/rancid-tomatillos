@@ -20,11 +20,14 @@ describe('Videos Component', () => {
 				'type': 'bloopers',
 			}
 		]
+		
 		render(<Videos videos={videos} />)
 
-		const videoHeading = screen.getByRole('heading', {name: /videos/i})
+		const videoOneType = screen.getByRole('heading', {name: /trailer/i})
+		const videoTwoType = screen.getByRole('heading', {name: /bloopers/i})
 
-		expect(videoHeading).toBeInTheDocument()
+		expect(videoOneType).toBeInTheDocument()
+		expect(videoTwoType).toBeInTheDocument()
 	})
 
 })

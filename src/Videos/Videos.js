@@ -19,8 +19,7 @@ const Videos = ({ videos }) => {
 
 	return (
 		<section className='MovieDetails-Videos'>
-			<h2>Videos</h2>
-			<ul>
+			<ul className='video-list'>
 				{videosList}
 			</ul>
 		</section>

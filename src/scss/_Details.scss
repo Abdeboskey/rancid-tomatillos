@@ -1,9 +1,13 @@
 @import 'variables';
 
 .MovieDetails-Details {
-  border: solid 3px $rancid-green;
-  border-radius: 10px;
-  padding: 40px;
   color: white;
-  margin-right: 30px;
+  position: relative;
+  z-index: 1;
+  width: 50%;
+  margin-left: 30px;
+}
+
+p {
+  line-height: 1.25em;
 }

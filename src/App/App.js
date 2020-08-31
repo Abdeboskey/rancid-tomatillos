@@ -4,7 +4,7 @@ import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
 import MovieDetails from '../Movie-details/MovieDetails'
-import { getMovies, getUserRatings, postRating, deleteRating, postFavorite } from '../apiCalls'
+import { getMovies, getUserRatings, postRating, deleteRating, postFavorite, getFavoriteMovies } from '../apiCalls'
 import '../scss/_App.scss'
 
 class App extends Component {
@@ -99,9 +99,20 @@ class App extends Component {
       +rating.toFixed(2) : 
       rating
 	}
+
+	updateFavoriteMovies = () => {
+		getFavoriteMovies()
+			.then(data => {
+				console.log(data)
+				this.setState({
+					favoriteMovieIds: [data]
+				})
+			})
+	}
 	
 	addFavorite = (movieId, event) => {
 		this.changeFavoriteIcon(event)
+		this.updateFavoriteMovies()
 		postFavorite(movieId)
 			.then(data => {
 				this.setState({
@@ -116,7 +127,11 @@ class App extends Component {
 	changeFavoriteIcon(event) {
 		event.preventDefault()
 		const favoriteIcon = event.target
-		favoriteIcon.className = 'favorited'
+		if (favoriteIcon.className === 'favorite') {
+			favoriteIcon.className = 'favorited'
+		} else {
+			favoriteIcon.className = 'favorite'
+		}
 	}
 
   render() {

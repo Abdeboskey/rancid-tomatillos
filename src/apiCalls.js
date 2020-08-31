@@ -94,3 +94,13 @@ export const deleteRating = (userId, ratingId) => {
 		body: JSON.stringify({ ratingId })
 	})
 }
+
+export const postFavorite = movieId => {
+	return fetch('http://localhost:3001/api/v1/favorites', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ movieId })
+	})
+}

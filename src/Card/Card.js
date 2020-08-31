@@ -21,8 +21,8 @@ const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn, changeFa
 					alt='Star Icon'
 					src={star}
 					className='favorite'
-					onClick={(event) => changeFavoriteStatus(movieId, event)}
-				></input>}
+					onClick={(event) => changeFavoriteStatus(movieId, event)}>
+				</input>}
 				<h3>{title}</h3>
 			</div>
 			<p><b>Average Rating:</b> {rating} / 10</p>

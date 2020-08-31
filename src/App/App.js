@@ -100,7 +100,8 @@ class App extends Component {
       rating
 	}
 	
-	addFavorite = (movieId) => {
+	addFavorite = (movieId, event) => {
+		this.changeFavoriteIcon(event)
 		postFavorite(movieId)
 			.then(data => {
 				this.setState({
@@ -110,6 +111,12 @@ class App extends Component {
 			.catch((error) => this.setState({
 				error: 'I\'m sorry, we could not favorite this movie at this time 🤕'
 			}))
+	}
+
+	changeFavoriteIcon(event) {
+		event.preventDefault()
+		const favoriteIcon = event.target
+		favoriteIcon.className = 'favorited'
 	}
 
   render() {

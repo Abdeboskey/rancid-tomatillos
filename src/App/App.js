@@ -107,6 +107,9 @@ class App extends Component {
 					favoriteMovieIds: [...this.state.favoriteMovieIds, movieId]
 				})
 			})
+			.catch((error) => this.setState({
+				error: `I'm sorry, we could not favorite this movie at this time 🤕 Error Status: ${error.status}`
+			}))
 	}
 
   render() {

@@ -15,13 +15,14 @@ const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn, addFavor
         />
       </Link>
 			<div>
+				{isLoggedIn &&
 				<input
 					type='image'
 					alt='Star Icon'
 					src={star}
 					className='favorite'
 					onClick={(event) => addFavorite(movieId, event)}
-				></input>
+				></input>}
 				<h3>{title}</h3>
 			</div>
 			<p><b>Average Rating:</b> {rating} / 10</p>

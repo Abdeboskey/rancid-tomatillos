@@ -30,7 +30,7 @@ const Header = ({ loginStatus, logOut, name }) => {
         <div className="login-button">
           <Link to="/login">
             <img src={clapboard} alt="Movie-Production Clapboard" />
-            <p >Log In</p>
+            <p>Log In</p>
           </Link>
         </div>
       </div>
@@ -43,6 +43,6 @@ export default Header
 
 Header.propTypes = {
 	loginStatus: PropTypes.bool.isRequired,
-	logOut: PropTypes.func.isRequired,
+	logOut: PropTypes.func,
 	name: PropTypes.string.isRequired
 }

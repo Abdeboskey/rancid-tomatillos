@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import '../scss/_Card.scss'
+import star from '../assets/star.png'
 
 const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn }) => {
 	return (
@@ -13,7 +14,15 @@ const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn }) => {
           alt="Movie Poster"
         />
       </Link>
-      <h3>{title}</h3>
+			<div>
+				<input
+					type='image'
+					alt='Star Icon'
+					src={star}
+					className='favorite'
+				></input>
+				<h3>{title}</h3>
+			</div>
 			<p><b>Average Rating:</b> {rating} / 10</p>
 			{userRating && isLoggedIn && 
       <p><b>Your Rating:</b> {userRating.rating} / 10</p>}

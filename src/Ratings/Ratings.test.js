@@ -34,4 +34,11 @@ describe('Ratings Component', () => {
 		// mock resolved value of postRating 
 	})
 
+	it('should delete a rating when a user tries to post a new rating', () => {
+		// set up
+		// fire event on the button click
+		// check that delete rating was fired with the right arguments
+		// mock resolved value of deleteRating 
+	})
+
 })

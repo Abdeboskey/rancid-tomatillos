@@ -103,7 +103,6 @@ class App extends Component {
 	updateFavoriteMovies = () => {
 		getFavoriteMovies()
 			.then(data => {
-				console.log(data)
 				this.setState({
 					favoriteMovieIds: [...data]
 				})

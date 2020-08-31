@@ -105,7 +105,7 @@ class App extends Component {
 			.then(data => {
 				console.log(data)
 				this.setState({
-					favoriteMovieIds: [data]
+					favoriteMovieIds: [...data]
 				})
 			})
 	}

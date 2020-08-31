@@ -1,18 +1,19 @@
 import React from 'react'
 import App from './App'
-import { render } from '@testing-library/react'
+import { screen, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { BrowserRouter } from 'react-router-dom'
-import { getMovies } from '../apiCalls'
+import { getMovies, getUserRatings } from '../apiCalls'
 jest.mock('../apiCalls.js')
 
 import MutationObserver from '@sheerun/mutationobserver-shim'
 window.MutationObserver = MutationObserver
 
 describe('App Component', () => {
+	let getMoviesResolved;
 
-	it('should display all the movies when the app loads', async () => {
-		getMovies.mockResolvedValueOnce({
+	beforeEach(() => {
+		getMoviesResolved = {
 			movies: [
 				{
 					'id': 1,
@@ -39,20 +40,21 @@ describe('App Component', () => {
 					'release_date': '1994-03-24'
 				}
 			]
-		})
+		}
+	})
+	it('should display all the movies when the app loads', async () => {
+		getMovies.mockResolvedValueOnce(getMoviesResolved)
 
-		const { getByText, findByText } = render(
+		const { findByText } = render(
 			<BrowserRouter>
 				<App />
 			</BrowserRouter>
 		) 
 
-		// const moviesContainer = getByText(/view all movies/i)
 		const movieOne = await findByText(/brave/i)
 		const movieTwo = await findByText(/hack\w+/i)
 		const movieThree = await findByText(/perks/i)
 
-		// expect(moviesContainer).toBeInTheDocument()
 		expect(movieOne).toBeInTheDocument()
 		expect(movieTwo).toBeInTheDocument()
 		expect(movieThree).toBeInTheDocument()
@@ -84,6 +86,29 @@ describe('App Component', () => {
 		const noMoviesMessage = await findByText(/there are currently no movies to rate./i)
 
 		expect(noMoviesMessage).toBeInTheDocument()
+	})
+
+	it('should get user ratings when user successfully logs in or changes a rating', async () => {
+		getMovies.mockResolvedValueOnce(getMoviesResolved)
+		getUserRatings.mockResolvedValueOnce({ ratings:
+			[
+				{ id: 1, user_id: 1, movie_id: 1, rating: 6, created_at: 'yesterday', updated_at: 'today' },
+				{ id: 2, user_id: 2, movie_id: 2, rating: 10, created_at: 'days ago', updated_at: 'never' },
+				{ id: 3, user_id: 3, movie_id: 3, rating: 3, created_at: 'now', updated_at: 'then' },
+			]
+		})
+
+		const { findByText } = await render(
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		)
+
+		// execution
+		// look for the correct user ratings on the page
+		
+		// assertion
+		// expect them to be in the document
 	})
 	
 })

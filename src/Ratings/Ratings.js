@@ -9,14 +9,6 @@ const Ratings = ( props ) => {
       <img src={props.poster} alt='Movie Poster' />
       <article>
         <h2>{props.title}</h2>
-				{props.isLoggedIn &&
-					<input
-						type='image'
-						alt='Star Icon'
-						src={star}
-						className='favorite'
-						onClick={(event) => props.changeFavoriteStatus(props.movieId, event)}
-					></input>}
         <p className='release-date'>{props.releaseDate.slice(-4)}</p>
         <p className='rating'>
           <b>Average Rating:</b><br/> {props.averageRating} / 10

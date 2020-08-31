@@ -108,7 +108,7 @@ class App extends Component {
 				})
 			})
 			.catch((error) => this.setState({
-				error: `I'm sorry, we could not favorite this movie at this time 🤕 Error Status: ${error.status}`
+				error: 'I\'m sorry, we could not favorite this movie at this time 🤕'
 			}))
 	}
 

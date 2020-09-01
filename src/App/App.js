@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
 import MovieDetails from '../Movie-details/MovieDetails'
-import { getMovies, getUserRatings, postRating, deleteRating } from '../apiCalls'
+import { getMovies, getUserRatings, postRating, deleteRating, postFavorite, getFavoriteMovieIds } from '../apiCalls'
 import '../scss/_App.scss'
 
 class App extends Component {
@@ -18,7 +18,8 @@ class App extends Component {
 			movies: [],
 			userRatings: [],
 			error: '',
-			success: false
+			success: false,
+			favoriteMovieIds: []
     }
   }
 
@@ -33,14 +34,31 @@ class App extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		if (this.state.isLoggedIn !== prevState.isLoggedIn ||
 			this.state.userRatings !== prevState.userRatings) {
-			getUserRatings(this.state.id)
-				.then(userRatings => {
-					this.setState({ userRatings: userRatings.ratings })
-				})
-				.catch(error => this.setState({
+				this.updateUserRatings()
+		}
+		if (this.state.isLoggedIn !== prevState.isLoggedIn) {
+			this.updateFavoriteMovieIds()
+		}
+	}
+
+	updateUserRatings = () => {
+		getUserRatings(this.state.id)
+			.then(userRatings => {
+				this.setState({ userRatings: userRatings.ratings })
+			})
+			.catch(error => this.setState({
 				error: `I'm sorry, we could not retrieve your ratings 😰 Error Status: ${error.status}`
 			}))
-		}
+	}
+
+	updateFavoriteMovieIds = () => {
+		getFavoriteMovieIds()
+			.then(data => {
+				this.setState({ favoriteMovieIds: [...data] })
+			})
+			.catch(error => this.setState({
+				error: `I'm sorry, we could not retrieve your favorite movies 😬 Error Status: ${error.status}`
+			}))
 	}
   
 	async submitRating(userId, userRating, movieId, event) {
@@ -97,7 +115,23 @@ class App extends Component {
     return rating.toString().split('').includes('.') ? 
       +rating.toFixed(2) : 
       rating
-  }
+	}
+
+	getFavoriteMovies = () => {
+		return this.state.movies.filter(movie => {
+			return this.state.favoriteMovieIds.find(movieId => movieId === movie.id)
+		})
+	}
+	
+	changeFavoriteStatus = (movieId, event) => {
+		postFavorite(movieId)
+			.then(data => {
+				this.updateFavoriteMovieIds()
+			})
+			.catch((error) => this.setState({
+				error: 'I\'m sorry, we could not (un)favorite this movie at this time 🤕'
+			}))
+	}
 
   render() {
     return (
@@ -108,15 +142,32 @@ class App extends Component {
           name={this.state.name}
         />
         {this.state.error && <h2>{this.state.error}</h2>}
+				{this.state.isLoggedIn &&
+				<Link
+					to="/favorites" className='view-favorite-button'
+				>View Favorite Movies</Link>}
         <Route exact path="/" render={() => (
 						<Movies
 							movies={this.state.movies}
 							formatAverageRating={this.formatAverageRating}
 							userRatings={this.state.userRatings}
 							isLoggedIn={this.state.isLoggedIn}
+							changeFavoriteStatus={this.changeFavoriteStatus}
+							favoriteMovies={this.getFavoriteMovies()}
 						/>
 					)}
         />
+				<Route exact path="/favorites" render={() => (
+						<Movies
+							movies={this.getFavoriteMovies()}
+							formatAverageRating={this.formatAverageRating}
+							userRatings={this.state.userRatings}
+							isLoggedIn={this.state.isLoggedIn}
+							changeFavoriteStatus={this.changeFavoriteStatus}
+							favoriteMovies={this.getFavoriteMovies()}
+						/>
+					)}
+				/>
 				<Route exact path="/login" render={() => (
 						<Login logIn={this.logIn} />
 					)} 
@@ -126,11 +177,13 @@ class App extends Component {
 						  username={this.state.name}
 							userId={this.state.id}
 							isLoggedIn={this.state.isLoggedIn}
-							movieId={+match.params.movieId} 
+							movieId={+match.params.movieId}
 							formatAverageRating={this.formatAverageRating}
 							userRatings={this.state.userRatings}
 							submitRating={this.submitRating}
 							success={this.state.success}
+							changeFavoriteStatus={this.changeFavoriteStatus}
+							favoriteMovies={this.getFavoriteMovies()}
 						/>
 					)}
 				/>

@@ -96,6 +96,17 @@ export const deleteRating = (userId, ratingId) => {
 	})
 }
 
+export const getFavoriteMovieIds = () => {
+	return fetch('http://localhost:3001/api/v1/favorites')
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw response
+      }
+    })
+}
+  
 export const getComments = movieId => {
 	return fetch(`${commentsUrl}/${movieId}/comments`)
 		.then(response => {
@@ -107,10 +118,25 @@ export const getComments = movieId => {
 		})
 }
 
+export const postFavorite = movieId => {
+	return fetch('http://localhost:3001/api/v1/favorites', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ id: movieId })
+	})
+	.then(response => {
+		if (response.ok) {
+			return response.json()
+		} else {
+			throw response
+		}
+	})
+}
+ 
 export const postComment = (movieId, comment, author) => {
 	return fetch(`${commentsUrl}/${movieId}/comments`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
 			comment: comment,
       author: author,

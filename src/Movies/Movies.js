@@ -3,9 +3,13 @@ import PropTypes from 'prop-types'
 import Card from '../Card/Card'
 import '../scss/_Movies.scss'
 
-const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn }) => {
+const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn, favoriteMovies, changeFavoriteStatus }) => {
+	let isFavorite
 	const moviesList = movies.map(movie => {
 		const userRating = userRatings.find(rating => rating.movie_id === movie.id)
+		if (favoriteMovies) {
+			isFavorite = favoriteMovies.find(favoriteMovie => favoriteMovie.id === movie.id)
+		}
 		return (
 			<Card
 				key={movie.id}
@@ -15,6 +19,8 @@ const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn }) => {
 				rating={formatAverageRating(movie.average_rating)}
 				userRating={userRating}
 				isLoggedIn={isLoggedIn}
+				isFavorite={isFavorite}
+				changeFavoriteStatus={changeFavoriteStatus}
 			/>
 		)
 	})
@@ -22,7 +28,7 @@ const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn }) => {
 	return (
     <section className='Movies-container'>
       {movies.length === 0 && (
-        <h3>There are currently no movies to rate.</h3>
+        <h3>There are currently no movies to view.</h3>
       )}
       {moviesList}
     </section>
@@ -35,5 +41,7 @@ Movies.propTypes = {
 	movies: PropTypes.array.isRequired,
 	formatAverageRating: PropTypes.func.isRequired,
 	userRatings: PropTypes.array.isRequired,
-	isLoggedIn: PropTypes.bool.isRequired
+	isLoggedIn: PropTypes.bool.isRequired,
+	favoriteMovies: PropTypes.array,
+	changeFavoriteStatus: PropTypes.func.isRequired,
 }

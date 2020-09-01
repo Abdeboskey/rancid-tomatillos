@@ -80,9 +80,9 @@ class MovieDetails extends Component {
     })
   }
 
-  findUserRating(props) {
-    const userRating = props.userRatings.find(
-      (rating) => rating.movie_id === this.props.movieId
+	findUserRating(props) {
+		const userRating = props.userRatings.find(rating => 
+			rating.movie_id === this.props.movieId
     )
     if (!userRating) {
       return -1
@@ -111,8 +111,12 @@ class MovieDetails extends Component {
     if (date[0].charAt(0) === '0') date[0] = date[0].slice(1)
     if (date[1].charAt(0) === '0') date[1] = date[1].slice(1)
     return date.join('/')
-  }
+	}
 
+	determineIfFavorite() {
+		return this.props.favoriteMovies.find(favoriteMovie => favoriteMovie.id === this.props.movieId)
+	}
+	
   render() {
     return (
       <>
@@ -134,6 +138,8 @@ class MovieDetails extends Component {
             submitRating={this.props.submitRating}
             handleUserRatingInput={this.handleUserRatingInput}
             success={this.props.success}
+            changeFavoriteStatus={this.props.changeFavoriteStatus}
+            isFavorite={this.determineIfFavorite()}
           />
           <Details
             releaseDate={this.state.releaseDate}

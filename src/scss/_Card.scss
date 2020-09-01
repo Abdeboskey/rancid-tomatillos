@@ -15,3 +15,21 @@
 		transform: scale(1.05);
 	}
 }
+
+.Card div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.favorite {
+	margin-right: 10px;
+	width: 25px;
+	height: 25px;
+	align-items: center;
+
+	&:hover {
+		width: 30px;
+		height: 30px;
+	}
+}

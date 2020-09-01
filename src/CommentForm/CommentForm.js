@@ -10,6 +10,7 @@ const CommentForm = ({ comment, handleCommentInput, addComment }) => {
       <input 
         className='Comment-input'
         type='text'
+        placeholder='Add Comment Here'
         value={comment}
         onChange={event => handleCommentInput(event)}
       />

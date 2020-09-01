@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import '../scss/_Card.scss'
 import whiteStar from '../assets/white-star.png'
 
-const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn, changeFavoriteStatus }) => {
+const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn, changeFavoriteStatus, favoriteMovieView }) => {
 	return (
     <article className="Card">
       <Link to={`/movies/${movieId}`}>
@@ -15,7 +15,7 @@ const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn, changeFa
         />
       </Link>
 			<div>
-				{isLoggedIn &&
+				{isLoggedIn && !favoriteMovieView &&
 				<input
 					type='image'
 					alt='Star Icon'
@@ -41,5 +41,7 @@ Card.propTypes = {
 	poster: PropTypes.string.isRequired,
 	rating: PropTypes.number.isRequired,
 	userRating: PropTypes.object,
-	isLoggedIn: PropTypes.bool.isRequired
+	isLoggedIn: PropTypes.bool.isRequired,
+	changeFavoriteStatus: PropTypes.func,
+	favoriteMovieView: PropTypes.bool
 }

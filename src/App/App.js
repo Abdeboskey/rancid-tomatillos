@@ -120,6 +120,7 @@ class App extends Component {
 		this.updateFavoriteMovieIds()
 		postFavorite(movieId)
 			.then(data => {
+				console.log(data.message)
 				this.setState({
 					favoriteMovieIds: [...this.state.favoriteMovieIds, movieId]
 				})
@@ -149,7 +150,9 @@ class App extends Component {
         />
         {this.state.error && <h2>{this.state.error}</h2>}
 				{this.state.isLoggedIn && this.state.favoriteMovieIds.length > 0 &&
-				<Link to="/favorites">View Favorite Movies</Link>}
+				<Link
+					to="/favorites" className='view-favorite-button'
+				>View Favorite Movies</Link>}
         <Route exact path="/" render={() => (
 						<Movies
 							movies={this.state.movies}

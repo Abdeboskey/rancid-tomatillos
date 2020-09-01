@@ -92,5 +92,7 @@ Ratings.propTypes = {
   submitRating: PropTypes.func.isRequired,
   success: PropTypes.bool.isRequired,
   userId: PropTypes.number.isRequired,
-  userRating: PropTypes.number
+	userRating: PropTypes.number,
+	changeFavoriteStatus: PropTypes.func.isRequired,
+	isFavorite: PropTypes.object
 }

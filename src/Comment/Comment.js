@@ -1,11 +1,11 @@
-import React from 'react '
+import React from 'react'
 import PropTypes from 'prop-types'
 
 const Comment = ({ comment, author }) => {
   return (
     <article className='Comment'>
+      <p>{author} said:</p>
       <p>{comment}</p>
-      <p>{author}</p>
     </article>
   )
 } 

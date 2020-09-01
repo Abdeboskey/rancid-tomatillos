@@ -23,7 +23,7 @@ const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn, changeFa
 	return (
     <section className='Movies-container'>
       {movies.length === 0 && (
-        <h3>There are currently no movies to rate.</h3>
+        <h3>There are currently no movies to view.</h3>
       )}
       {moviesList}
     </section>

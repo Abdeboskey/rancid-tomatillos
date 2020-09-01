@@ -116,7 +116,7 @@ export const postComment = (movieId, comment, author) => {
       author: author,
     })
 	})
-	.then((response) => {
+	.then(response => {
     if (response.ok) {
       return response.json();
     } else {

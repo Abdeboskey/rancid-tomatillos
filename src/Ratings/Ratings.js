@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import '../scss/_Ratings.scss'
-import star from '../assets/star.png'
+import whiteStar from '../assets/white-star.png'
+import yellowStar from '../assets/yellow-star.png'
 
 const Ratings = ( props ) => {
   return (
@@ -10,14 +11,24 @@ const Ratings = ( props ) => {
 			<article>
 				<div>
 					<h2>{props.title}</h2>
-					{props.isLoggedIn &&
-					<input
-						type='image'
-						alt='Star Icon'
-						src={star}
-						className='favorite'
-						onClick={(event) => props.changeFavoriteStatus(props.movieId, event)}>
-					</input>}
+					{props.isLoggedIn && !props.isFavorite &&
+						<input
+							type='image'
+							alt='Star Icon'
+							src={whiteStar}
+							className='favorite'
+							onClick={(event) => props.changeFavoriteStatus(props.movieId, event)}>
+						</input>
+					}
+					{props.isLoggedIn && props.isFavorite &&
+						<input
+							type='image'
+							alt='Star Icon'
+							src={yellowStar}
+							className='favorite'
+							onClick={(event) => props.changeFavoriteStatus(props.movieId, event)}>
+						</input>
+					}
 				</div>
         <p className='release-date'>{props.releaseDate.slice(-4)}</p>
         <p className='rating'>

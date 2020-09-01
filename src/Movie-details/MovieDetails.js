@@ -5,7 +5,7 @@ import Details from '../Details/Details'
 import Videos from '../Videos/Videos'
 import Comments from '../Comments/Comments'
 import CommentForm from '../CommentForm/CommentForm'
-import { getMovieDetails } from '../apiCalls'
+import { getMovieDetails, getComments, postComment } from '../apiCalls'
 import '../scss/_MovieDetails.scss'
 
 class MovieDetails extends Component {
@@ -49,7 +49,14 @@ class MovieDetails extends Component {
 			})
       .catch(error => this.setState({
 				error: `I'm sorry, we could not retrieve the details of this movie 🥺 Error Status: ${error.status}`
-			}))
+      }))
+    getComments(this.state.movieId)
+      .then(comments => this.setState({
+        comments: [...this.state.comments, ...comments.comments]
+      }))
+      .catch(error => this.setState({
+        error: `I'm sorry, we could not retrieve the comments 😢 Error Status: ${error.status}`
+      }))
 	}
 
   setMovieInfo({ movie }) {

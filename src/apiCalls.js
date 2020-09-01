@@ -108,5 +108,19 @@ export const getComments = movieId => {
 }
 
 export const postComment = (movieId, comment, author) => {
-
+	return fetch(`${commentsUrl}/${movieId}/comments`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+			comment: comment,
+      author: author,
+    })
+	})
+	.then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw response;
+    }
+  })
 }

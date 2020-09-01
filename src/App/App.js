@@ -36,14 +36,35 @@ class App extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		if (this.state.isLoggedIn !== prevState.isLoggedIn ||
 			this.state.userRatings !== prevState.userRatings) {
-			getUserRatings(this.state.id)
-				.then(userRatings => {
-					this.setState({ userRatings: userRatings.ratings })
-				})
-				.catch(error => this.setState({
+				this.updateUserRatings()
+		}
+		if (this.state.isLoggedIn !== prevState.isLoggedIn ||
+			this.state.favoriteMovieIds !== prevState.favoriteMovieIds) {
+				this.updateFavoriteMovieIds()
+			}
+	}
+
+	updateUserRatings = () => {
+		getUserRatings(this.state.id)
+			.then(userRatings => {
+				this.setState({ userRatings: userRatings.ratings })
+			})
+			.catch(error => this.setState({
 				error: `I'm sorry, we could not retrieve your ratings 😰 Error Status: ${error.status}`
 			}))
-		}
+	}
+
+	updateFavoriteMovieIds = () => {
+		getFavoriteMovieIds()
+			.then(data => {
+				console.log(data)
+				this.setState({
+					favoriteMovieIds: [...data]
+				})
+			})
+			.catch(error => this.setState({
+				error: `I'm sorry, we could not retrieve your favorite movies 😬 Error Status: ${error.status}`
+			}))
 	}
   
 	async submitRating(userId, userRating, movieId, event) {
@@ -102,15 +123,6 @@ class App extends Component {
       rating
 	}
 
-	updateFavoriteMovieIds = () => {
-		getFavoriteMovieIds()
-			.then(data => {
-				this.setState({
-					favoriteMovieIds: [...data]
-				})
-			})
-	}
-
 	getFavoriteMovies = () => {
 		return this.state.movies.filter(movie => {
 			return this.state.favoriteMovieIds.find(movieId => movieId === movie.id)
@@ -128,7 +140,7 @@ class App extends Component {
 				})
 			})
 			.catch((error) => this.setState({
-				error: 'I\'m sorry, we could not favorite this movie at this time 🤕'
+				error: 'I\'m sorry, we could not (un)favorite this movie at this time 🤕'
 			}))
 	}
 

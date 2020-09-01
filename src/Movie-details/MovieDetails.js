@@ -27,7 +27,7 @@ class MovieDetails extends Component {
       videos: [],
       comments: [],
       error: '',
-    };
+    }
   }
 
   componentDidMount() {
@@ -145,10 +145,12 @@ class MovieDetails extends Component {
           />
         </section>
         <Videos videos={this.state.videos} />
+        <h2 className='comments-heading'>Comments</h2>
         {this.props.isLoggedIn && (
-          <CommentForm
-            addComment={this.addComment}
-          />
+          <CommentForm addComment={this.addComment} />
+        )}
+        {!this.props.isLoggedIn && (
+          <p className='loginReminder'>Please log in to add a comment!</p>
         )}
         <Comments comments={this.state.comments} />
       </>

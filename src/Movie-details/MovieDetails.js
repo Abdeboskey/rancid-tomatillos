@@ -26,7 +26,6 @@ class MovieDetails extends Component {
       tagline: '',
       videos: [],
       comments: [],
-      comment: '',
       error: '',
     };
   }
@@ -52,22 +51,16 @@ class MovieDetails extends Component {
       )
   }
 
-  addComment = (event) => {
+  addComment = (event, comment) => {
     event.preventDefault()
-    postComment(this.props.movieId, this.state.comment, this.props.username)
+    postComment(this.props.movieId, comment, this.props.username)
       .then(response => this.setState({ 
         comments: [...this.state.comments, response.newComment],
-        comment: '' 
       }))
       .catch(error => this.setState({
           error: `I'm sorry, we could not post your comment at this time 😵 Error Status: ${error.status}`,
         })
       )
-  }
-
-  handleCommentInput = (event) => {
-    const inputValue = event.target.value
-    this.setState({ comment: inputValue })
   }
 
   setMovieInfo({ movie }) {
@@ -123,7 +116,7 @@ class MovieDetails extends Component {
   render() {
     return (
       <>
-        {this.state.error && <h2>{this.state.error}</h2>}
+        {this.state.error && <h2 className='error'>{this.state.error}</h2>}
         <Billboard
           backdrop={this.state.backdrop}
           tagline={this.state.tagline}
@@ -154,8 +147,6 @@ class MovieDetails extends Component {
         <Videos videos={this.state.videos} />
         {this.props.isLoggedIn && (
           <CommentForm
-            comment={this.state.comment}
-            handleCommentInput={this.handleCommentInput}
             addComment={this.addComment}
           />
         )}

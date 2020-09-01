@@ -1,4 +1,5 @@
 import React from 'react '
+import PropTypes from 'prop-types'
 
 const Comment = ({ comment, author }) => {
   return (
@@ -10,3 +11,8 @@ const Comment = ({ comment, author }) => {
 } 
 
 export default Comment
+
+Comment.propTypes = {
+  comment: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired
+}

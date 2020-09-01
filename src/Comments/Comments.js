@@ -16,7 +16,7 @@ const Comments = ({ comments }) => {
 
   return (
     <section className='Comments-Container'>
-      {commentsList}
+      {commentsList.reverse()}
     </section>
   )
 }

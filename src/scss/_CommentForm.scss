@@ -1,3 +1,23 @@
 .CommentForm {
+  margin: 30px auto 30px auto;
   z-index: 1;
+}
+
+.Comment-input {
+  margin-right: 20px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  height: 2em;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.comment-button {
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  height: 2em;
+  width: 120px;
+  font-size: 1.2em;
 }

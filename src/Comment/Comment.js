@@ -6,7 +6,7 @@ const Comment = ({ comment, author }) => {
   return (
     <article className='Comment'>
       <p>{author} said:</p>
-      <p>{comment}</p>
+      <p>"{comment}"</p>
     </article>
   )
 } 

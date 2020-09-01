@@ -128,7 +128,6 @@ class App extends Component {
 	changeFavoriteStatus = (movieId, event) => {
 		postFavorite(movieId)
 			.then(data => {
-				console.log(data.message)
 				this.updateFavoriteMovieIds()
 			})
 			.catch((error) => this.setState({

@@ -90,6 +90,10 @@ class MovieDetails extends Component {
     if (date[1].charAt(0) === '0') date[1] = date[1].slice(1)
     return date.join('/')
 	}
+
+	determineIfFavorite() {
+		return this.props.favoriteMovies.find(favoriteMovie => favoriteMovie.id === this.state.movieId)
+	}
 	
   render() {
     return (
@@ -113,6 +117,7 @@ class MovieDetails extends Component {
             handleUserRatingInput={this.handleUserRatingInput}
             success={this.props.success}
             changeFavoriteStatus={this.props.changeFavoriteStatus}
+            isFavorite={this.determineIfFavorite()}
             />
           <Details
             releaseDate={this.state.releaseDate}

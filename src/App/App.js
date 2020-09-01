@@ -126,7 +126,6 @@ class App extends Component {
 	}
 	
 	changeFavoriteStatus = (movieId, event) => {
-		this.changeFavoriteIcon(event)
 		postFavorite(movieId)
 			.then(data => {
 				console.log(data.message)
@@ -135,18 +134,6 @@ class App extends Component {
 			.catch((error) => this.setState({
 				error: 'I\'m sorry, we could not (un)favorite this movie at this time 🤕'
 			}))
-	}
-
-	changeFavoriteIcon(event) {
-		event.preventDefault()
-		const favoriteIcon = event.target
-		if (favoriteIcon.className === 'favorite') {
-			favoriteIcon.className = 'favorited'
-			favoriteIcon.src = yellowStar
-		} else {
-			favoriteIcon.className = 'favorite'
-			favoriteIcon.src = whiteStar
-		}
 	}
 
   render() {

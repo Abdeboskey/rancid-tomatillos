@@ -31,8 +31,10 @@ class App extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.isLoggedIn !== prevState.isLoggedIn ||
-			this.state.userRatings !== prevState.userRatings) {
+		if (this.state.isLoggedIn !== prevState.isLoggedIn)
+			// ||
+			// this.state.userRatings !== prevState.userRatings) 
+			{
 			getUserRatings(this.state.id)
 				.then(userRatings => {
 					this.setState({ userRatings: userRatings.ratings })

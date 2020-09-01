@@ -1,6 +1,6 @@
 import React from 'react'
 import App from './App'
-import { screen, render } from '@testing-library/react'
+import { screen, render, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { MemoryRouter } from 'react-router-dom'
 import { getMovies, getUserRatings, submitLoginCredentials } from '../apiCalls'
@@ -90,6 +90,27 @@ describe('App Component', () => {
 
 	it('should get user ratings when user successfully logs in or changes a rating', async () => {
 		getMovies.mockResolvedValueOnce(getMoviesResolved)
+		const { getByRole, findByText, findByRole } = render(
+			<MemoryRouter>
+				<App />
+			</MemoryRouter>
+		)
+
+		const logInButton = getByRole('link', {name: /log in/i})
+		fireEvent.click(logInButton)
+
+		const username = await findByText(/username/i)
+		expect(username).toBeInTheDocument()
+		
+		submitLoginCredentials.mockResolvedValueOnce(
+			{
+				"user": {
+					"id": 36,
+					"name": "Twillie",
+					"email": "twillie@manillie.vanillie"
+				}
+			}
+		)
 		getUserRatings.mockResolvedValueOnce({
 			ratings:
 				[
@@ -99,17 +120,19 @@ describe('App Component', () => {
 				]
 		})
 
-		const { findByText } = render(
-			<MemoryRouter>
-				<App />
-			</MemoryRouter>
-		)
+		const button = await findByRole('button')
+		fireEvent.click(button)
+		
 
+		const greeting = await findByText(/hello, twillie/i)
+		expect(greeting).toBeInTheDocument()
+
+		
 		// execution
 		// look for the correct user ratings on the page
-		const userRating1 = await findByText(/66/)
-		const userRating2 = await findByText(/99/)
-		const userRating3 = await findByText(/33/)
+		const userRating1 = await findByText(/33/)
+		const userRating2 = await findByText(/66/)
+		const userRating3 = await findByText(/99/)
 
 		// assertion
 		expect(userRating1).toBeInTheDocument()

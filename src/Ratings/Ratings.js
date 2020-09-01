@@ -1,14 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import '../scss/_Ratings.scss'
+import whiteStar from '../assets/white-star.png'
+import yellowStar from '../assets/yellow-star.png'
 
 const Ratings = ( props ) => {
-	
   return (
     <section className='MovieDetails-Ratings'>
       <img src={props.poster} alt='Movie Poster' />
-      <article>
-        <h2>{props.title}</h2>
+			<article>
+				<div>
+					<h2>{props.title}</h2>
+					{props.isLoggedIn && !props.isFavorite &&
+						<input
+							type='image'
+							alt='Star Icon'
+							src={whiteStar}
+							className='favorite'
+							onClick={(event) => props.changeFavoriteStatus(props.movieId, event)}>
+						</input>
+					}
+					{props.isLoggedIn && props.isFavorite &&
+						<input
+							type='image'
+							alt='Star Icon'
+							src={yellowStar}
+							className='favorite'
+							onClick={(event) => props.changeFavoriteStatus(props.movieId, event)}>
+						</input>
+					}
+				</div>
         <p className='release-date'>{props.releaseDate.slice(-4)}</p>
         <p className='rating'>
           <b>Average Rating:</b><br/> {props.averageRating} / 10
@@ -71,5 +92,7 @@ Ratings.propTypes = {
   submitRating: PropTypes.func.isRequired,
   success: PropTypes.bool.isRequired,
   userId: PropTypes.number.isRequired,
-  userRating: PropTypes.number
+	userRating: PropTypes.number,
+	changeFavoriteStatus: PropTypes.func.isRequired,
+	isFavorite: PropTypes.object
 }

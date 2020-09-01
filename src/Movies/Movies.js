@@ -3,9 +3,13 @@ import PropTypes from 'prop-types'
 import Card from '../Card/Card'
 import '../scss/_Movies.scss'
 
-const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn, changeFavoriteStatus, favoriteMovieView }) => {
+const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn, favoriteMovies, changeFavoriteStatus }) => {
+	let isFavorite
 	const moviesList = movies.map(movie => {
 		const userRating = userRatings.find(rating => rating.movie_id === movie.id)
+		if (favoriteMovies) {
+			isFavorite = favoriteMovies.find(favoriteMovie => favoriteMovie.id === movie.id)
+		}
 		return (
 			<Card
 				key={movie.id}
@@ -15,8 +19,8 @@ const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn, changeFa
 				rating={formatAverageRating(movie.average_rating)}
 				userRating={userRating}
 				isLoggedIn={isLoggedIn}
+				isFavorite={isFavorite}
 				changeFavoriteStatus={changeFavoriteStatus}
-				favoriteMovieView={favoriteMovieView}
 			/>
 		)
 	})

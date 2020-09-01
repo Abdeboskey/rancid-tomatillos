@@ -34,7 +34,7 @@ class CommentForm extends Component {
           value={this.state.comment}
           onChange={event => this.handleCommentInput(event)}
         />
-        <button type='submit'>Comment!</button>
+        <button className='comment-button' type='submit'>Comment!</button>
       </form>
     )
   }

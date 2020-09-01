@@ -56,7 +56,6 @@ class App extends Component {
 	updateFavoriteMovieIds = () => {
 		getFavoriteMovieIds()
 			.then(data => {
-				console.log(data)
 				this.setState({ favoriteMovieIds: [...data] })
 			})
 			.catch(error => this.setState({

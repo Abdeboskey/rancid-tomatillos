@@ -4,7 +4,8 @@ import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
 import MovieDetails from '../Movie-details/MovieDetails'
-import { getMovies, getUserRatings, postRating, deleteRating, postFavorite, getFavoriteMovies } from '../apiCalls'
+import FavoriteMovies from '../FavoriteMovies/FavoriteMovies'
+import { getMovies, getUserRatings, postRating, deleteRating, postFavorite, getFavoriteMovieIds } from '../apiCalls'
 import '../scss/_App.scss'
 
 class App extends Component {
@@ -100,8 +101,8 @@ class App extends Component {
       rating
 	}
 
-	updateFavoriteMovies = () => {
-		getFavoriteMovies()
+	updateFavoriteMovieIds = () => {
+		getFavoriteMovieIds()
 			.then(data => {
 				this.setState({
 					favoriteMovieIds: [...data]
@@ -111,7 +112,7 @@ class App extends Component {
 	
 	changeFavoriteStatus = (movieId, event) => {
 		this.changeFavoriteIcon(event)
-		this.updateFavoriteMovies()
+		this.updateFavoriteMovieIds()
 		postFavorite(movieId)
 			.then(data => {
 				this.setState({
@@ -152,6 +153,12 @@ class App extends Component {
 						/>
 					)}
         />
+				<Route exact path="/favorites" render={() => (
+						<FavoriteMovies
+							favoriteMovies={this.favoriteMovies}
+						/>
+					)}
+				/>
 				<Route exact path="/login" render={() => (
 						<Login logIn={this.logIn} />
 					)} 

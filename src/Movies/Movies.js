@@ -42,6 +42,6 @@ Movies.propTypes = {
 	formatAverageRating: PropTypes.func.isRequired,
 	userRatings: PropTypes.array.isRequired,
 	isLoggedIn: PropTypes.bool.isRequired,
-	changeFavoriteStatus: PropTypes.func,
-	favoriteMovieView: PropTypes.bool
+	favoriteMovies: PropTypes.array,
+	changeFavoriteStatus: PropTypes.func.isRequired,
 }

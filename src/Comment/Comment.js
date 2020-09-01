@@ -5,8 +5,8 @@ import '../scss/_Comment.scss'
 const Comment = ({ comment, author }) => {
   return (
     <article className='Comment'>
-      <p>{author} said:</p>
-      <p>"{comment}"</p>
+      <p className='author'>{author} said:</p>
+      <p className='comment'>"{comment}"</p>
     </article>
   )
 } 

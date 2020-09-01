@@ -10,7 +10,7 @@ import '../scss/_MovieDetails.scss'
 
 class MovieDetails extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       title: '',
       poster: '',
@@ -34,7 +34,7 @@ class MovieDetails extends Component {
   componentDidMount() {
     getMovieDetails(this.props.movieId)
       .then(data => {
-        this.setMovieInfo(data[0]);
+        this.setMovieInfo(data[0])
         this.setState({ videos: data[1].videos })
       })
       .catch(error => this.setState({
@@ -92,7 +92,7 @@ class MovieDetails extends Component {
       (rating) => rating.movie_id === this.props.movieId
     )
     if (!userRating) {
-      return -1;
+      return -1
     }
     return userRating.rating;
   }
@@ -161,7 +161,7 @@ class MovieDetails extends Component {
         )}
         <Comments comments={this.state.comments} />
       </>
-    );
+    )
   }
 }
 

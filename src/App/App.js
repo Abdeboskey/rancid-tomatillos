@@ -193,12 +193,13 @@ class App extends Component {
 						<MovieDetails
 							userId={this.state.id}
 							isLoggedIn={this.state.isLoggedIn}
-							movieId={+match.params.movieId} 
+							movieId={+match.params.movieId}
 							formatAverageRating={this.formatAverageRating}
 							userRatings={this.state.userRatings}
 							submitRating={this.submitRating}
 							success={this.state.success}
 							changeFavoriteStatus={this.changeFavoriteStatus}
+							favoriteMovies={this.getFavoriteMovies()}
 						/>
 					)}
 				/>

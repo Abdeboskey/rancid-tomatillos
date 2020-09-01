@@ -10,7 +10,6 @@ class MovieDetails extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      movieId: this.props.movieId,
       title: '',
       poster: '',
       backdrop: '',
@@ -29,7 +28,7 @@ class MovieDetails extends Component {
   }
 
   componentDidMount() {
-    getMovieDetails(this.state.movieId)
+    getMovieDetails(this.props.movieId)
       .then(data => {
 				this.setMovieInfo(data[0])
 				this.setState({ videos: data[1].videos })
@@ -58,7 +57,7 @@ class MovieDetails extends Component {
 
 	findUserRating(props) {
 		const userRating = props.userRatings.find(rating => 
-			rating.movie_id === this.state.movieId
+			rating.movie_id === this.props.movieId
     )
     if (!userRating) {
       return -1
@@ -92,7 +91,7 @@ class MovieDetails extends Component {
 	}
 
 	determineIfFavorite() {
-		return this.props.favoriteMovies.find(favoriteMovie => favoriteMovie.id === this.state.movieId)
+		return this.props.favoriteMovies.find(favoriteMovie => favoriteMovie.id === this.props.movieId)
 	}
 	
   render() {
@@ -107,7 +106,7 @@ class MovieDetails extends Component {
           <Ratings
             isLoggedIn={this.props.isLoggedIn}
             userId={+this.props.userId}
-            movieId={this.state.movieId}
+            movieId={this.props.movieId}
             title={this.state.title}
             poster={this.state.poster}
             releaseDate={this.state.releaseDate}

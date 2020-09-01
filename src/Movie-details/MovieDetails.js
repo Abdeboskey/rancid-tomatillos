@@ -3,6 +3,8 @@ import Billboard from '../Billboard/Billboard'
 import Ratings from '../Ratings/Ratings'
 import Details from '../Details/Details'
 import Videos from '../Videos/Videos'
+import Comments from '../Comments/Comments'
+import CommentForm from '../CommentForm/CommentForm'
 import { getMovieDetails } from '../apiCalls'
 import '../scss/_MovieDetails.scss'
 
@@ -11,22 +13,33 @@ class MovieDetails extends Component {
     super(props)
     this.state = {
       movieId: this.props.movieId,
-      title: '',
-      poster: '',
-      backdrop: '',
-      releaseDate: '',
-      overview: '',
-			averageRating: 0,
-			userRating: 0,
+      title: "",
+      poster: "",
+      backdrop: "",
+      releaseDate: "",
+      overview: "",
+      averageRating: 0,
+      userRating: 0,
       genres: [],
       budget: 0,
       revenue: 0,
-      runtime: '',
-      tagline: '',
-			videos: [],
-      error: ''
-    }
+      runtime: "",
+      tagline: "",
+      videos: [],
+      comments: [],
+      comment: "",
+      error: "",
+    };
   }
+
+  // need to add: 
+  // receive userName as props?
+  // handleCommentInput()
+  // getComments(movieId) in componentDidMount() and componentDidUpdate()
+  // addComment() { 
+    // postComment(comment, username) imported from apiCalls
+    // .then()...
+  // } 
 
   componentDidMount() {
     getMovieDetails(this.state.movieId)
@@ -123,6 +136,14 @@ class MovieDetails extends Component {
             />
         </section>
         <Videos videos={this.state.videos} />
+        {this.props.isLoggedIn && 
+        <CommentForm 
+          comment={this.state.comment}
+          handleCommentInput={this.handleCommentInput}
+          addComment={this.addComment}
+        />
+        }
+        <Comments comments={this.state.comments} />
       </>
     )
   }

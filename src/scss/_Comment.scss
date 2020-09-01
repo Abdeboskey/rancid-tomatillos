@@ -1,0 +1,28 @@
+@import 'variables';
+
+.Comment {
+  width: 500px;
+  z-index: 1;
+  color:white;
+  background: transparentize($color: #000000, $amount: .5);
+  border: solid 3px $rancid-green;
+  border-radius: 10px;
+  margin: 0 auto 30px auto;
+}
+
+.author {
+  width: 180px;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: solid 3px $rancid-green;
+  border-top: none;
+  border-radius: 10px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.comment {
+  font-size: 1.1em;
+  margin: 20px;
+}

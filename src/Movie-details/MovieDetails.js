@@ -3,7 +3,9 @@ import Billboard from '../Billboard/Billboard'
 import Ratings from '../Ratings/Ratings'
 import Details from '../Details/Details'
 import Videos from '../Videos/Videos'
-import { getMovieDetails } from '../apiCalls'
+import Comments from '../Comments/Comments'
+import CommentForm from '../CommentForm/CommentForm'
+import { getMovieDetails, getComments, postComment } from '../apiCalls'
 import '../scss/_MovieDetails.scss'
 
 class MovieDetails extends Component {
@@ -15,28 +17,51 @@ class MovieDetails extends Component {
       backdrop: '',
       releaseDate: '',
       overview: '',
-			averageRating: 0,
-			userRating: 0,
+      averageRating: 0,
+      userRating: 0,
       genres: [],
       budget: 0,
       revenue: 0,
       runtime: '',
       tagline: '',
-			videos: [],
-      error: ''
+      videos: [],
+      comments: [],
+      error: '',
     }
   }
 
   componentDidMount() {
     getMovieDetails(this.props.movieId)
       .then(data => {
-				this.setMovieInfo(data[0])
-				this.setState({ videos: data[1].videos })
-			})
+        this.setMovieInfo(data[0])
+        this.setState({ videos: data[1].videos })
+      })
       .catch(error => this.setState({
-				error: `I'm sorry, we could not retrieve the details of this movie 🥺 Error Status: ${error.status}`
-			}))
-	}
+          error: `I'm sorry, we could not retrieve the details of this movie 🥺 Error Status: ${error.status}`,
+        })
+      )
+    getComments(this.props.movieId)
+      .then(comments => this.setState({
+          comments: comments.comments
+        })
+      )
+      .catch(error => this.setState({
+          error: `I'm sorry, we could not retrieve the comments 😢 Error Status: ${error.status}`,
+        })
+      )
+  }
+
+  addComment = (event, comment) => {
+    event.preventDefault()
+    postComment(this.props.movieId, comment, this.props.username)
+      .then(response => this.setState({ 
+        comments: [...this.state.comments, response.newComment],
+      }))
+      .catch(error => this.setState({
+          error: `I'm sorry, we could not post your comment at this time 😵 Error Status: ${error.status}`,
+        })
+      )
+  }
 
   setMovieInfo({ movie }) {
     this.setState({
@@ -45,15 +70,15 @@ class MovieDetails extends Component {
       backdrop: movie.backdrop_path,
       releaseDate: this.formatDate(movie.release_date),
       overview: movie.overview,
-			averageRating: this.props.formatAverageRating(movie.average_rating),
-			userRating: this.findUserRating(this.props),
+      averageRating: this.props.formatAverageRating(movie.average_rating),
+      userRating: this.findUserRating(this.props),
       genres: this.formatGenres(movie.genres),
       budget: movie.budget,
       revenue: movie.revenue,
       runtime: this.formatRuntime(movie.runtime),
       tagline: movie.tagline,
-		})
-	}
+    })
+  }
 
 	findUserRating(props) {
 		const userRating = props.userRatings.find(rating => 
@@ -62,24 +87,22 @@ class MovieDetails extends Component {
     if (!userRating) {
       return -1
     }
-		return userRating.rating
-	}
+    return userRating.rating;
+  }
 
-	handleUserRatingInput = event => {
-		const inputValue = event.target.value
-		this.setState({ userRating: inputValue })
-	}
+  handleUserRatingInput = (event) => {
+    const inputValue = event.target.value
+    this.setState({ userRating: inputValue })
+  }
 
   formatGenres(genres) {
-    return genres.map(
-      (genre, i) => !i ? ` ${genre} ` : `/ ${genre} `
-    )
+    return genres.map((genre, i) => (!i ? ` ${genre} ` : `/ ${genre} `))
   }
 
   formatRuntime(totalMin) {
     const hours = (totalMin / 60).toFixed(0)
     const minutes = totalMin % 60
-    return `${hours}hr ${minutes}min`;
+    return `${hours}hr ${minutes}min`
   }
 
   formatDate(date) {
@@ -97,11 +120,11 @@ class MovieDetails extends Component {
   render() {
     return (
       <>
-				{this.state.error && <h2>{this.state.error}</h2>}
+        {this.state.error && <h2 className='error'>{this.state.error}</h2>}
         <Billboard
           backdrop={this.state.backdrop}
           tagline={this.state.tagline}
-          />
+        />
         <section className='MovieDetails'>
           <Ratings
             isLoggedIn={this.props.isLoggedIn}
@@ -117,7 +140,7 @@ class MovieDetails extends Component {
             success={this.props.success}
             changeFavoriteStatus={this.props.changeFavoriteStatus}
             isFavorite={this.determineIfFavorite()}
-            />
+          />
           <Details
             releaseDate={this.state.releaseDate}
             overview={this.state.overview}
@@ -125,9 +148,17 @@ class MovieDetails extends Component {
             budget={this.state.budget}
             revenue={this.state.revenue}
             runtime={this.state.runtime}
-            />
+          />
         </section>
         <Videos videos={this.state.videos} />
+        <h2 className='comments-heading'>Comments</h2>
+        {this.props.isLoggedIn && (
+          <CommentForm addComment={this.addComment} />
+        )}
+        {!this.props.isLoggedIn && (
+          <p className='loginReminder'>Please log in to add a comment!</p>
+        )}
+        <Comments comments={this.state.comments} />
       </>
     )
   }

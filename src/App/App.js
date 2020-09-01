@@ -174,6 +174,7 @@ class App extends Component {
 				/>
 				<Route exact path="/movies/:movieId" render={({ match }) => (
 						<MovieDetails
+						  username={this.state.name}
 							userId={this.state.id}
 							isLoggedIn={this.state.isLoggedIn}
 							movieId={+match.params.movieId}

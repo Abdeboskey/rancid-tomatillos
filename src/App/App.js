@@ -1,10 +1,9 @@
 import React, {Component} from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import Header from '../Header/Header'
 import Movies from '../Movies/Movies'
 import Login from '../Login/Login'
 import MovieDetails from '../Movie-details/MovieDetails'
-import FavoriteMovies from '../FavoriteMovies/FavoriteMovies'
 import { getMovies, getUserRatings, postRating, deleteRating, postFavorite, getFavoriteMovieIds } from '../apiCalls'
 import '../scss/_App.scss'
 
@@ -109,6 +108,12 @@ class App extends Component {
 				})
 			})
 	}
+
+	getFavoriteMovies = () => {
+		return this.state.movies.filter(movie => {
+			return this.state.favoriteMovieIds.find(movieId => movieId === movie.id)
+		})
+	}
 	
 	changeFavoriteStatus = (movieId, event) => {
 		this.changeFavoriteIcon(event)
@@ -143,6 +148,8 @@ class App extends Component {
           name={this.state.name}
         />
         {this.state.error && <h2>{this.state.error}</h2>}
+				{this.state.isLoggedIn && this.state.favoriteMovieIds.length > 0 &&
+				<Link to="/favorites">View Favorite Movies</Link>}
         <Route exact path="/" render={() => (
 						<Movies
 							movies={this.state.movies}
@@ -154,8 +161,12 @@ class App extends Component {
 					)}
         />
 				<Route exact path="/favorites" render={() => (
-						<FavoriteMovies
-							favoriteMovies={this.favoriteMovies}
+						<Movies
+							movies={this.getFavoriteMovies()}
+							formatAverageRating={this.formatAverageRating}
+							userRatings={this.state.userRatings}
+							isLoggedIn={this.state.isLoggedIn}
+							changeFavoriteStatus={this.changeFavoriteStatus}
 						/>
 					)}
 				/>

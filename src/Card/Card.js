@@ -53,6 +53,6 @@ Card.propTypes = {
 	rating: PropTypes.number.isRequired,
 	userRating: PropTypes.object,
 	isLoggedIn: PropTypes.bool.isRequired,
-	changeFavoriteStatus: PropTypes.func,
-	favoriteMovieView: PropTypes.bool
+	isFavorite: PropTypes.object,
+	changeFavoriteStatus: PropTypes.func.isRequired
 }

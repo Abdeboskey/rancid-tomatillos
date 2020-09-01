@@ -1,4 +1,5 @@
 import React from 'react'
+import '../scss/_CommentForm.scss'
 
 // will need to update state in MovieDetails with the values of the fields. 
 //// use handleCommentInput() passed as props from movie details. 

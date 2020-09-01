@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import '../scss/_Comment.scss'
 
 const Comment = ({ comment, author }) => {
   return (

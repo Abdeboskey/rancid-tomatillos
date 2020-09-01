@@ -173,7 +173,7 @@ class App extends Component {
 							formatAverageRating={this.formatAverageRating}
 							userRatings={this.state.userRatings}
 							isLoggedIn={this.state.isLoggedIn}
-							changeFavoriteStatus={this.changeFavoriteStatus}
+							favoriteMovieView={true}
 						/>
 					)}
 				/>

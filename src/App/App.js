@@ -6,8 +6,6 @@ import Login from '../Login/Login'
 import MovieDetails from '../Movie-details/MovieDetails'
 import { getMovies, getUserRatings, postRating, deleteRating, postFavorite, getFavoriteMovieIds } from '../apiCalls'
 import '../scss/_App.scss'
-import whiteStar from '../assets/white-star.png'
-import yellowStar from '../assets/yellow-star.png'
 
 class App extends Component {
   constructor() {

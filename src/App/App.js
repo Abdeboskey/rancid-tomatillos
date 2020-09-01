@@ -38,10 +38,9 @@ class App extends Component {
 			this.state.userRatings !== prevState.userRatings) {
 				this.updateUserRatings()
 		}
-		if (this.state.isLoggedIn !== prevState.isLoggedIn ||
-			this.state.favoriteMovieIds !== prevState.favoriteMovieIds) {
-				this.updateFavoriteMovieIds()
-			}
+		if (this.state.isLoggedIn !== prevState.isLoggedIn) {
+			this.updateFavoriteMovieIds()
+		}
 	}
 
 	updateUserRatings = () => {
@@ -58,9 +57,7 @@ class App extends Component {
 		getFavoriteMovieIds()
 			.then(data => {
 				console.log(data)
-				this.setState({
-					favoriteMovieIds: [...data]
-				})
+				this.setState({ favoriteMovieIds: [...data] })
 			})
 			.catch(error => this.setState({
 				error: `I'm sorry, we could not retrieve your favorite movies 😬 Error Status: ${error.status}`
@@ -131,13 +128,10 @@ class App extends Component {
 	
 	changeFavoriteStatus = (movieId, event) => {
 		this.changeFavoriteIcon(event)
-		this.updateFavoriteMovieIds()
 		postFavorite(movieId)
 			.then(data => {
 				console.log(data.message)
-				this.setState({
-					favoriteMovieIds: [...this.state.favoriteMovieIds, movieId]
-				})
+				this.updateFavoriteMovieIds()
 			})
 			.catch((error) => this.setState({
 				error: 'I\'m sorry, we could not (un)favorite this movie at this time 🤕'
@@ -165,7 +159,7 @@ class App extends Component {
           name={this.state.name}
         />
         {this.state.error && <h2>{this.state.error}</h2>}
-				{this.state.isLoggedIn && this.state.favoriteMovieIds.length > 0 &&
+				{this.state.isLoggedIn &&
 				<Link
 					to="/favorites" className='view-favorite-button'
 				>View Favorite Movies</Link>}
@@ -176,6 +170,7 @@ class App extends Component {
 							userRatings={this.state.userRatings}
 							isLoggedIn={this.state.isLoggedIn}
 							changeFavoriteStatus={this.changeFavoriteStatus}
+							favoriteMovies={this.getFavoriteMovies()}
 						/>
 					)}
         />
@@ -185,7 +180,8 @@ class App extends Component {
 							formatAverageRating={this.formatAverageRating}
 							userRatings={this.state.userRatings}
 							isLoggedIn={this.state.isLoggedIn}
-							favoriteMovieView={true}
+							changeFavoriteStatus={this.changeFavoriteStatus}
+							favoriteMovies={this.getFavoriteMovies()}
 						/>
 					)}
 				/>

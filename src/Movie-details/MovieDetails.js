@@ -10,9 +10,8 @@ import '../scss/_MovieDetails.scss'
 
 class MovieDetails extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      movieId: this.props.movieId,
       title: "",
       poster: "",
       backdrop: "",
@@ -32,32 +31,70 @@ class MovieDetails extends Component {
     };
   }
 
-  // need to add: 
+  // need to add:
   // receive userName as props?
   // handleCommentInput()
   // getComments(movieId) in componentDidMount() and componentDidUpdate()
-  // addComment() { 
-    // postComment(comment, username) imported from apiCalls
-    // .then()...
-  // } 
+  // addComment() {
+  // postComment(comment, username) imported from apiCalls
+  // .then()...
+  // }
 
   componentDidMount() {
-    getMovieDetails(this.state.movieId)
-      .then(data => {
-				this.setMovieInfo(data[0])
-				this.setState({ videos: data[1].videos })
-			})
+    getMovieDetails(this.props.movieId)
+      .then((data) => {
+        this.setMovieInfo(data[0]);
+        this.setState({ videos: data[1].videos })
+      })
+      .catch((error) =>
+        this.setState({
+          error: `I'm sorry, we could not retrieve the details of this movie 🥺 Error Status: ${error.status}`,
+        })
+      )
+    getComments(this.props.movieId)
+      .then((comments) =>
+        this.setState({
+          comments: comments.comments
+        })
+      )
+      .catch((error) =>
+        this.setState({
+          error: `I'm sorry, we could not retrieve the comments 😢 Error Status: ${error.status}`,
+        })
+      )
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.comments !== prevState.comments) {
+    //   console.log('OK!')
+    //   getComments(this.props.movieId)
+    //     .then((comments) =>
+    //       this.setState({
+    //         comments: [...comments.comments],
+    //       })
+    //     )
+    //     .catch((error) =>
+    //       this.setState({
+    //         error: `I'm sorry, we could not retrieve the comments 😢 Error Status: ${error.status}`,
+    //       })
+    //     )
+    }
+  }
+
+  addComment = (event) => {
+    event.preventDefault()
+    postComment(this.props.movieId, this.state.comment, this.props.username)
+      .then(response => this.setState({ comment: '' }))
       .catch(error => this.setState({
-				error: `I'm sorry, we could not retrieve the details of this movie 🥺 Error Status: ${error.status}`
-      }))
-    getComments(this.state.movieId)
-      .then(comments => this.setState({
-        comments: [...this.state.comments, ...comments.comments]
-      }))
-      .catch(error => this.setState({
-        error: `I'm sorry, we could not retrieve the comments 😢 Error Status: ${error.status}`
-      }))
-	}
+          error: `I'm sorry, we could not post your comment at this time 😵 Error Status: ${error.status}`,
+        })
+    )
+  }
+
+  handleCommentInput = (event) => {
+    const inputValue = event.target.value
+    this.setState({ comment: inputValue })
+  }
 
   setMovieInfo({ movie }) {
     this.setState({
@@ -66,64 +103,62 @@ class MovieDetails extends Component {
       backdrop: movie.backdrop_path,
       releaseDate: this.formatDate(movie.release_date),
       overview: movie.overview,
-			averageRating: this.props.formatAverageRating(movie.average_rating),
-			userRating: this.findUserRating(this.props),
+      averageRating: this.props.formatAverageRating(movie.average_rating),
+      userRating: this.findUserRating(this.props),
       genres: this.formatGenres(movie.genres),
       budget: movie.budget,
       revenue: movie.revenue,
       runtime: this.formatRuntime(movie.runtime),
       tagline: movie.tagline,
-		})
-	}
+    })
+  }
 
-	findUserRating(props) {
-		const userRating = props.userRatings.find(rating => 
-			rating.movie_id === this.state.movieId
+  findUserRating(props) {
+    const userRating = props.userRatings.find(
+      (rating) => rating.movie_id === this.props.movieId
     )
     if (!userRating) {
-      return -1
+      return -1;
     }
-		return userRating.rating
-	}
+    return userRating.rating;
+  }
 
-	handleUserRatingInput = event => {
-		const inputValue = event.target.value
-		this.setState({ userRating: inputValue })
-	}
+  handleUserRatingInput = (event) => {
+    const inputValue = event.target.value
+    this.setState({ userRating: inputValue })
+  }
 
   formatGenres(genres) {
-    return genres.map(
-      (genre, i) => !i ? ` ${genre} ` : `/ ${genre} `
-    )
+    return genres.map((genre, i) => (!i ? ` ${genre} ` : `/ ${genre} `))
   }
 
   formatRuntime(totalMin) {
     const hours = (totalMin / 60).toFixed(0)
     const minutes = totalMin % 60
-    return `${hours}hr ${minutes}min`;
+    return `${hours}hr ${minutes}min`
   }
 
   formatDate(date) {
-    date = date.split('-')
+    date = date.split("-")
     date.push(date.shift())
-    if (date[0].charAt(0) === '0') date[0] = date[0].slice(1)
-    if (date[1].charAt(0) === '0') date[1] = date[1].slice(1)
-    return date.join('/')
-	}
-	
+    if (date[0].charAt(0) === "0") date[0] = date[0].slice(1)
+    if (date[1].charAt(0) === "0") date[1] = date[1].slice(1)
+    return date.join("/")
+  }
+
   render() {
     return (
       <>
-				{this.state.error && <h2>{this.state.error}</h2>}
+        {this.state.error && <h2>{this.state.error}</h2>}
         <Billboard
           backdrop={this.state.backdrop}
           tagline={this.state.tagline}
-          />
-        <section className='MovieDetails'>
+        />
+        <section className="MovieDetails">
           <Ratings
             isLoggedIn={this.props.isLoggedIn}
             userId={+this.props.userId}
-            movieId={this.state.movieId}
+            movieId={this.props.movieId}
             title={this.state.title}
             poster={this.state.poster}
             releaseDate={this.state.releaseDate}
@@ -132,7 +167,7 @@ class MovieDetails extends Component {
             submitRating={this.props.submitRating}
             handleUserRatingInput={this.handleUserRatingInput}
             success={this.props.success}
-            />
+          />
           <Details
             releaseDate={this.state.releaseDate}
             overview={this.state.overview}
@@ -140,19 +175,19 @@ class MovieDetails extends Component {
             budget={this.state.budget}
             revenue={this.state.revenue}
             runtime={this.state.runtime}
-            />
+          />
         </section>
         <Videos videos={this.state.videos} />
-        {this.props.isLoggedIn && 
-        <CommentForm 
-          comment={this.state.comment}
-          handleCommentInput={this.handleCommentInput}
-          addComment={this.addComment}
-        />
-        }
+        {this.props.isLoggedIn && (
+          <CommentForm
+            comment={this.state.comment}
+            handleCommentInput={this.handleCommentInput}
+            addComment={this.addComment}
+          />
+        )}
         <Comments comments={this.state.comments} />
       </>
-    )
+    );
   }
 }
 

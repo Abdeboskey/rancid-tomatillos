@@ -1,16 +1,16 @@
 import React from 'react'
 import App from './App'
-import { screen, render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { MemoryRouter } from 'react-router-dom'
-import { getMovies, getUserRatings, submitLoginCredentials } from '../apiCalls'
+import { getMovies, getUserRatings, submitLoginCredentials, getFavoriteMovieIds } from '../apiCalls'
 jest.mock('../apiCalls.js')
 
 import MutationObserver from '@sheerun/mutationobserver-shim'
 window.MutationObserver = MutationObserver
 
 describe('App Component', () => {
-	let getMoviesResolved;
+	let getMoviesResolved, getUserRatingsResolved, submitLoginCredentialsResolved, getFavoriteMovieIdsResolved
 
 	beforeEach(() => {
 		getMoviesResolved = {
@@ -41,7 +41,24 @@ describe('App Component', () => {
 				}
 			]
 		}
+		getUserRatingsResolved = {
+			ratings:
+				[
+					{ id: 1, user_id: 1, movie_id: 1, rating: 66, created_at: 'yesterday', updated_at: 'today' },
+					{ id: 2, user_id: 2, movie_id: 2, rating: 99, created_at: 'days ago', updated_at: 'never' },
+					{ id: 3, user_id: 3, movie_id: 3, rating: 33, created_at: 'now', updated_at: 'then' }
+				]
+		}
+		submitLoginCredentialsResolved = {
+			"user": {
+				"id": 36,
+				"name": "Twillie",
+				"email": "twillie@manillie.vanillie"
+			}
+		}
+		getFavoriteMovieIdsResolved = [420]
 	})
+	
 	it('should display all the movies when the app loads', async () => {
 		getMovies.mockResolvedValueOnce(getMoviesResolved)
 
@@ -83,7 +100,7 @@ describe('App Component', () => {
 			</MemoryRouter>
 		)
 
-		const noMoviesMessage = await findByText(/there are currently no movies to rate./i)
+		const noMoviesMessage = await findByText(/there are currently no movies to view./i)
 
 		expect(noMoviesMessage).toBeInTheDocument()
 	})
@@ -102,43 +119,23 @@ describe('App Component', () => {
 		const username = await findByText(/username/i)
 		expect(username).toBeInTheDocument()
 		
-		submitLoginCredentials.mockResolvedValueOnce(
-			{
-				"user": {
-					"id": 36,
-					"name": "Twillie",
-					"email": "twillie@manillie.vanillie"
-				}
-			}
-		)
-		getUserRatings.mockResolvedValueOnce({
-			ratings:
-				[
-					{ id: 1, user_id: 1, movie_id: 1, rating: 66, created_at: 'yesterday', updated_at: 'today' },
-					{ id: 2, user_id: 2, movie_id: 2, rating: 99, created_at: 'days ago', updated_at: 'never' },
-					{ id: 3, user_id: 3, movie_id: 3, rating: 33, created_at: 'now', updated_at: 'then' }
-				]
-		})
+		submitLoginCredentials.mockResolvedValueOnce(submitLoginCredentialsResolved)
+		getUserRatings.mockResolvedValueOnce(getUserRatingsResolved)
+		getFavoriteMovieIds.mockResolvedValueOnce(getFavoriteMovieIdsResolved)
 
 		const button = await findByRole('button')
 		fireEvent.click(button)
 		
-
 		const greeting = await findByText(/hello, twillie/i)
 		expect(greeting).toBeInTheDocument()
 
-		
-		// execution
-		// look for the correct user ratings on the page
 		const userRating1 = await findByText(/33/)
 		const userRating2 = await findByText(/66/)
 		const userRating3 = await findByText(/99/)
 
-		// assertion
 		expect(userRating1).toBeInTheDocument()
 		expect(userRating2).toBeInTheDocument()
 		expect(userRating3).toBeInTheDocument()
-		// expect them to be in the document
 	})
 
 	it('should allow a user to post a rating', () => {

@@ -1,9 +1,9 @@
-import React from 'react';
-import Comments from './Comments';
-import { screen, render } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import React from 'react'
+import Comments from './Comments'
+import { screen, render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom'
 
 describe('Comments Component', () => {
 
@@ -24,7 +24,7 @@ describe('Comments Component', () => {
         comment: "I'm literally in tears right now. SO FUNNY. SO SAD.",
         author: "RoboCop",
       },
-    ];
+    ]
 
     render(
       <MemoryRouter>
@@ -41,7 +41,6 @@ describe('Comments Component', () => {
     expect(comment1).toBeInTheDocument()
     expect(comment2).toBeInTheDocument()
     expect(comment3).toBeInTheDocument()
-
   })
-  
+
 })

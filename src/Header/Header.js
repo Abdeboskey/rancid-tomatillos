@@ -8,28 +8,30 @@ import '../scss/_Header.scss'
 const Header = ({ loginStatus, logOut, name }) => {
   return (
     <header>
-      <div className="title">
-        <img className="logo" src={tomatillo} alt="Website Icon" />
-        <Link to="/"><h1>Rancid Tomatillos</h1></Link>
+      <div className='title'>
+        <img className='logo' src={tomatillo} alt='Website Icon' />
+        <Link to='/'><h1>Rancid Tomatillos</h1></Link>
       </div>
       {loginStatus && (
-      <div className="logged-in">
-        <h2 className="username">Hello, {name}</h2>
-        <div className="logout-button">
-          <img
-            src={clapboard}
-            onClick={logOut}
-            alt="Movie-Production Clapboard"
-          />
-          <p onClick={logOut}>Log Out</p>
+      <div className='logged-in'>
+        <h2 className='username'>Hello, {name}</h2>
+        <div className='logout-button'>
+					<Link to='/'>
+						<img
+							src={clapboard}
+							onClick={logOut}
+							alt='Movie-Production Clapboard'
+						/>
+						<p onClick={logOut}>Log Out</p>
+					</Link>
         </div>
       </div>
       )}
       {!loginStatus && (
-      <div className="logged-out">
-        <div className="login-button">
-          <Link to="/login">
-            <img src={clapboard} alt="Movie-Production Clapboard" />
+      <div className='logged-out'>
+        <div className='login-button'>
+          <Link to='/login'>
+            <img src={clapboard} alt='Movie-Production Clapboard' />
             <p>Log In</p>
           </Link>
         </div>

@@ -58,7 +58,7 @@ describe('App Component', () => {
 		}
 		getFavoriteMovieIdsResolved = [420]
 	})
-	
+
 	it('should display all the movies when the app loads', async () => {
 		getMovies.mockResolvedValueOnce(getMoviesResolved)
 
@@ -123,8 +123,8 @@ describe('App Component', () => {
 		getUserRatings.mockResolvedValueOnce(getUserRatingsResolved)
 		getFavoriteMovieIds.mockResolvedValueOnce(getFavoriteMovieIdsResolved)
 
-		const button = await findByRole('button')
-		fireEvent.click(button)
+		const actionButton = await findByRole('button', {name: /action!/i})
+		fireEvent.click(actionButton)
 		
 		const greeting = await findByText(/hello, twillie/i)
 		expect(greeting).toBeInTheDocument()

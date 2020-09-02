@@ -32,9 +32,8 @@ class App extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.isLoggedIn !== prevState.isLoggedIn ||
-			this.state.userRatings !== prevState.userRatings) {
-				this.updateUserRatings()
+		if (this.state.isLoggedIn !== prevState.isLoggedIn) {
+			this.updateUserRatings()
 		}
 		if (this.state.isLoggedIn !== prevState.isLoggedIn) {
 			this.updateFavoriteMovieIds()
@@ -70,13 +69,11 @@ class App extends Component {
 		userRating = +userRating
 		postRating(userId, userRating, movieId)
       .then((rating) => {
-        this.setState({
-					userRatings: [...this.state.userRatings, rating.rating],
-					success: true
-				})
+        this.setState({ success: true })
 				setTimeout(() => {
 					this.setState({ success: false })
 				}, 3240)
+				this.updateUserRatings()
       })
       .catch((error) => this.setState({
 				error: `I'm sorry, we could not post your rating 😔 Error Status: ${error.status}`

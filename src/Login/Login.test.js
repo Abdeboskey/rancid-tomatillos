@@ -2,7 +2,7 @@ import React from 'react'
 import Login from './Login'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 
 import { submitLoginCredentials } from '../apiCalls'
 jest.mock('../apiCalls.js')
@@ -25,11 +25,11 @@ describe('Login Component', () => {
 
 		const logIn = jest.fn()
 		const { getByRole } = render(
-			<BrowserRouter>
+			<MemoryRouter>
 				<Login
 					logIn={logIn}
 				/>
-			</BrowserRouter>
+			</MemoryRouter>
 		)
 
 		const button = getByRole('button')
@@ -49,9 +49,9 @@ describe('Login Component', () => {
 		})
 
 		const { getByRole, findByText } = render(
-			<BrowserRouter>
+			<MemoryRouter>
 				<Login />
-			</BrowserRouter>
+			</MemoryRouter>
 		)
 
 		const button = getByRole('button')

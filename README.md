@@ -29,7 +29,7 @@ This was a Mod 3 project in Turing School of Software and Design's Front End Eng
 <img src="http://g.recordit.co/k5WGoMTEeW.gif" alt="User viewing comments on a movie" height=auto width=75%/>
 
 #### While logged in, a user can add a comment to a movie
-<img src="http://g.recordit.co/QBhMGCSn7g.gif" alt="User adding a comment to a movie" height=auto width=75%/>
+<img src="http://g.recordit.co/aKJLQ2oMnT.gif" alt="User adding a comment to a movie" height=auto width=75%/>
 
 #### When a user clicks the 'Log Out' button, they are directed to the Home Page
 <img src="http://g.recordit.co/3SakAdTqc0.gif" alt="User logging out" height=auto width=75%/>

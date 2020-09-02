@@ -135,7 +135,7 @@ export const postFavorite = movieId => {
  
 export const postComment = (movieId, comment, author) => {
 	return fetch(`${commentsUrl}/${movieId}/comments`, {
-    method: "POST",
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
 			comment: comment,

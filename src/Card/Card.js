@@ -8,12 +8,12 @@ import yellowStar from '../assets/yellow-star.png'
 const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn, isFavorite, changeFavoriteStatus }) => {
 	
 	return (
-    <article className="Card">
+    <article className='Card'>
       <Link to={`/movies/${movieId}`}>
         <img
-          className="Card-poster"
+          className='Card-poster'
           src={poster}
-          alt="Movie Poster"
+          alt='Movie Poster'
         />
       </Link>
 			<div>

@@ -15,10 +15,10 @@ describe('Login Component', () => {
 	it('should log a user in if the login credentials are valid', async () => {
 		submitLoginCredentials.mockResolvedValueOnce(
 			{
-				"user": {
-					"id": 36,
-					"name": "Twillie",
-					"email": "twillie@manillie.vanillie"
+				'user': {
+					'id': 36,
+					'name': 'Twillie',
+					'email': 'twillie@manillie.vanillie'
 				}
 			}
 		)
@@ -38,14 +38,14 @@ describe('Login Component', () => {
 		await waitFor(() => {
 			expect(logIn).toBeCalledTimes(1)
 			expect(logIn).toBeCalledWith({
-        user: { email: "twillie@manillie.vanillie", id: 36, name: "Twillie" },
+        user: { email: 'twillie@manillie.vanillie', id: 36, name: 'Twillie' },
       });
 		})
 	})
 
 	it('should notify the user if login credentials are invalid', async () => {
 		submitLoginCredentials.mockRejectedValueOnce({ 
-			error: "Username or password is incorrect" 
+			error: 'Username or password is incorrect' 
 		})
 
 		const { getByRole, findByText } = render(
@@ -64,10 +64,10 @@ describe('Login Component', () => {
 	it('should clear the input fields upon clicking submit', () => {
 		submitLoginCredentials.mockResolvedValueOnce(
 			{
-				"user": {
-					"id": 36,
-					"name": "Twillie",
-					"email": "twillie@manillie.vanillie"
+				'user': {
+					'id': 36,
+					'name': 'Twillie',
+					'email': 'twillie@manillie.vanillie'
 				}
 			}
 		)

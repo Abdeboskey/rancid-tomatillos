@@ -132,7 +132,7 @@ class App extends Component {
 
   render() {
     return (
-      <main className="App">
+      <main className='App'>
         <Header
           loginStatus={this.state.isLoggedIn}
           logOut={this.logOut}
@@ -141,9 +141,9 @@ class App extends Component {
         {this.state.error && <h2>{this.state.error}</h2>}
 				{this.state.isLoggedIn &&
 				<Link
-					to="/favorites" className='view-favorite-button'
+					to='/favorites' className='view-favorite-button'
 				>View Favorite Movies</Link>}
-        <Route exact path="/" render={() => (
+        <Route exact path='/' render={() => (
 						<Movies
 							movies={this.state.movies}
 							formatAverageRating={this.formatAverageRating}
@@ -154,7 +154,7 @@ class App extends Component {
 						/>
 					)}
         />
-				<Route exact path="/favorites" render={() => (
+				<Route exact path='/favorites' render={() => (
 						<Movies
 							movies={this.getFavoriteMovies()}
 							formatAverageRating={this.formatAverageRating}
@@ -165,11 +165,11 @@ class App extends Component {
 						/>
 					)}
 				/>
-				<Route exact path="/login" render={() => (
+				<Route exact path='/login' render={() => (
 						<Login logIn={this.logIn} />
 					)} 
 				/>
-				<Route exact path="/movies/:movieId" render={({ match }) => (
+				<Route exact path='/movies/:movieId' render={({ match }) => (
 						<MovieDetails
 						  username={this.state.name}
 							userId={this.state.id}

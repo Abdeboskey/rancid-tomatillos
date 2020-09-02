@@ -32,7 +32,7 @@ const Movies = ({ movies, formatAverageRating, userRatings, isLoggedIn, favorite
       )}
       {moviesList}
     </section>
-  );
+  )
 }
 
 export default Movies

@@ -50,10 +50,10 @@ describe('App Component', () => {
 				]
 		}
 		submitLoginCredentialsResolved = {
-			"user": {
-				"id": 36,
-				"name": "Twillie",
-				"email": "twillie@manillie.vanillie"
+			'user': {
+				'id': 36,
+				'name': 'Twillie',
+				'email': 'twillie@manillie.vanillie'
 			}
 		}
 		getFavoriteMovieIdsResolved = [420]

@@ -31,8 +31,8 @@ describe('Header Component', () =>  {
       </MemoryRouter>
     )
     
-    const loginLink = screen.getByRole("link", {
-      name: "Movie-Production Clapboard Log In",
+    const loginLink = screen.getByRole('link', {
+      name: 'Movie-Production Clapboard Log In',
     });
 
     expect(loginLink).toBeInTheDocument()

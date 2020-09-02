@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "../scss/_Billboard.scss";
+import React from 'react';
+import PropTypes from 'prop-types';
+import '../scss/_Billboard.scss';
 
 const Billboard = ({ backdrop, tagline }) => {
   return (

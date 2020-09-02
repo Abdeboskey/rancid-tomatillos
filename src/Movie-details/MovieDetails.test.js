@@ -13,23 +13,23 @@ describe('MovieDetails Component', () => {
 	it('should display all movie details', async () => {
 		getMovieDetails.mockResolvedValueOnce({
 			movie: {
-				"id": 1234,
-				"title": "Die Hard Again",
-				"poster_path": "www.posterpath.com/poster1",
-				"backdrop_path": "www.posterpath.com/backdrop1",
-				"release_date": "3001-01-01",
-				"overview": "He doesn't die hard, again",
-				"genres": [
-					"Action",
-					"Crime",
-					"Drama",
-					"Thriller"
+				'id': 1234,
+				'title': 'Die Hard Again',
+				'poster_path': 'www.posterpath.com/poster1',
+				'backdrop_path': 'www.posterpath.com/backdrop1',
+				'release_date': '3001-01-01',
+				'overview': 'He doesn't die hard, again',
+				'genres': [
+					'Action',
+					'Crime',
+					'Drama',
+					'Thriller'
 				],
-				"budget": 3685532,
-				"revenue": 2047575,
-				"runtime": 95,
-				"tagline": "HERE COMES ANOTHA ONE",
-				"average_rating": 10
+				'budget': 3685532,
+				'revenue': 2047575,
+				'runtime': 95,
+				'tagline': 'HERE COMES ANOTHA ONE',
+				'average_rating': 10
 			}
 		})
 
@@ -55,7 +55,7 @@ describe('MovieDetails Component', () => {
 	})
 
 	it('should notify user if there are no movie details', async () => {
-		// for this, we will need to add in a p tag "There are currently no details for this movie. Please try another one!" if the movie key is assigned to an empty object
+		// for this, we will need to add in a p tag 'There are currently no details for this movie. Please try another one!' if the movie key is assigned to an empty object
 		// add conditional rendering so that if movie details obj is empty, it shows p tag with message
 		// to test:
 		// set up

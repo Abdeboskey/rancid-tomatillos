@@ -1,5 +1,6 @@
 const baseUrl = 'https://rancid-tomatillos.herokuapp.com/api/v2'
 const commentsUrl = 'http://localhost:3001/api/v1/movies'
+const favoritesUrl = 'http://localhost:3001/api/v1/favorites'
 
 export const getMovies = () => {
   return fetch(`${baseUrl}/movies`)
@@ -97,7 +98,7 @@ export const deleteRating = (userId, ratingId) => {
 }
 
 export const getFavoriteMovieIds = () => {
-	return fetch('http://localhost:3001/api/v1/favorites')
+	return fetch(`${favoritesUrl}`)
     .then(response => {
       if (response.ok) {
         return response.json()
@@ -119,7 +120,7 @@ export const getComments = movieId => {
 }
 
 export const postFavorite = movieId => {
-	return fetch('http://localhost:3001/api/v1/favorites', {
+	return fetch(`${favoritesUrl}`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ id: movieId })
@@ -135,7 +136,7 @@ export const postFavorite = movieId => {
  
 export const postComment = (movieId, comment, author) => {
 	return fetch(`${commentsUrl}/${movieId}/comments`, {
-    method: "POST",
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
 			comment: comment,

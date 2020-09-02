@@ -92,7 +92,7 @@ class MovieDetails extends Component {
 
   handleUserRatingInput = (event) => {
     const inputValue = event.target.value
-    this.setState({ userRating: inputValue })
+    this.setState({ userRating: +inputValue })
   }
 
   formatGenres(genres) {

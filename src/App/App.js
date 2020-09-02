@@ -33,7 +33,7 @@ class App extends Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		if (this.state.isLoggedIn !== prevState.isLoggedIn ||
-			this.state.userRatings !== prevState.userRatings) {
+			this.state.userRatings.length !== prevState.userRatings.length) {
 				this.updateUserRatings()
 		}
 		if (this.state.isLoggedIn !== prevState.isLoggedIn) {

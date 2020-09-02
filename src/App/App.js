@@ -140,9 +140,14 @@ class App extends Component {
         />
         {this.state.error && <h2>{this.state.error}</h2>}
 				{this.state.isLoggedIn &&
-				<Link
-					to='/favorites' className='view-favorite-button'
-				>View Favorite Movies</Link>}
+				<div className='nav'>
+					<Link
+						to='/favorites' className='view-favorite-button'
+					>View Favorite Movies</Link>
+					<Link
+						to='/' className='view-home-button'
+					>View All Movies</Link>
+				</div>}
         <Route exact path='/' render={() => (
 						<Movies
 							movies={this.state.movies}

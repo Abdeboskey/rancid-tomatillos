@@ -17,19 +17,19 @@ This was a Mod 3 project in Turing School of Software and Design's Front End Eng
 ## App in Action
 
 #### While logged in, a user can see all of their personal ratings
-<img src="http://g.recordit.co/Z6Yjc445Sx.gif" alt="User logging in to view their ratings" height=auto width=75%/>
+<img src="http://g.recordit.co/IhG4IHvThC.gif" alt="User logging in to view their ratings" height=auto width=75%/>
 
 #### While logged in, a user can submit a new rating
 <img src="http://g.recordit.co/Zh2qJratpc.gif" alt="User submitting a new rating" height=auto width=75%/>
 
 #### While logged in, a user can favorite movies and then view them by clicking 'View Favorite Movies'
-<img src="http://g.recordit.co/giQ2XkDdpM.gif" alt="User favoriting a movie and viewing all favorite movies" height=auto width=75%/>
+<img src="http://g.recordit.co/PTejMyCxQN.gif" alt="User favoriting a movie and viewing all favorite movies" height=auto width=75%/>
 
 #### Users can view comments on movies
-<img src="http://g.recordit.co/nHElNH1uDn.gif" alt="User viewing comments on a movie" height=auto width=75%/>
+<img src="http://g.recordit.co/k5WGoMTEeW.gif" alt="User viewing comments on a movie" height=auto width=75%/>
 
 #### While logged in, a user can add a comment to a movie
-<img src="http://g.recordit.co/aK09BKozNR.gif" alt="User adding a comment to a movie" height=auto width=75%/>
+<img src="http://g.recordit.co/QBhMGCSn7g.gif" alt="User adding a comment to a movie" height=auto width=75%/>
 
 #### When a user clicks the 'Log Out' button, they are directed to the Home Page
 <img src="http://g.recordit.co/3SakAdTqc0.gif" alt="User logging out" height=auto width=75%/>

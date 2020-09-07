@@ -114,7 +114,11 @@ class MovieDetails extends Component {
 	}
 
 	determineIfFavorite() {
-		return this.props.favoriteMovies.find(favoriteMovie => favoriteMovie.id === this.props.movieId)
+		if (this.props.favoriteMovies) {
+      return this.props.favoriteMovies.find(favoriteMovie => favoriteMovie.id === this.props.movieId)
+    } else {
+      return false
+    }
 	}
 	
   render() {

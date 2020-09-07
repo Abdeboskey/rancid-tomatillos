@@ -24,7 +24,7 @@ describe('Ratings Component', () => {
         userId={2000}
         changeFavoriteStatus={mockChangeFavoriteStatus}
 				userRating={4}
-				isFavorite={{}}
+				isFavorite={true}
       />
     )
 

@@ -94,5 +94,5 @@ Ratings.propTypes = {
   userId: PropTypes.number.isRequired,
 	userRating: PropTypes.number,
 	changeFavoriteStatus: PropTypes.func.isRequired,
-	isFavorite: PropTypes.object
+	isFavorite: PropTypes.bool.isRequired
 }

@@ -6,15 +6,27 @@ import '@testing-library/jest-dom'
 describe('Ratings Component', () => {
 	
 	it('should show the correct content when rendered', () => {
+		const mockHandleUserRatingInput = jest.fn()
+		const mockSubmitRating = jest.fn()
+		const mockChangeFavoriteStatus = jest.fn()
+
 		render(
-			<Ratings
-				title='Rancid Tomatillos'
-				poster='www.posterpath.com/poster'
-				releaseDate='2021'
-				averageRating={8}
+      <Ratings
+        title="Rancid Tomatillos"
+        poster="www.posterpath.com/poster"
+        releaseDate="2021"
+        averageRating={8}
+        handleUserRatingInput={mockHandleUserRatingInput}
+        isLoggedIn={true}
+        movieId={1234}
+        submitRating={mockSubmitRating}
+        success={true}
+        userId={2000}
+        changeFavoriteStatus={mockChangeFavoriteStatus}
 				userRating={4}
-			/>
-		)
+				isFavorite={{}}
+      />
+    )
 
 		const title = screen.getByRole('heading', { name: /rancid tomatillos/i })
 		const poster = screen.getByAltText(/movie poster/i)

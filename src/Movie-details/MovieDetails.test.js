@@ -10,9 +10,19 @@ window.MutationObserver = MutationObserver
 
 describe('MovieDetails Component', () => {
 
-	let getFavoriteMovieIdsResolved, getCommentsResolved
+	let getFavoriteMovieIdsResolved, 
+			getCommentsResolved,
+			getMovieDetailsResolved, 
+			mockFormatAverageRating, 
+			mockSubmitRating, 
+			mockChangeFavoriteStatus,
+			mockGetFavoriteMovies
 
 	beforeEach(() => {
+		mockFormatAverageRating = jest.fn()
+    mockSubmitRating = jest.fn()
+    mockChangeFavoriteStatus = jest.fn()
+    mockGetFavoriteMovies = jest.fn()
 		getFavoriteMovieIdsResolved = [ 1234 ]
 		getCommentsResolved = { 
 			comments: [
@@ -30,49 +40,41 @@ describe('MovieDetails Component', () => {
 				}, 			
 			]
 		}
+		getMovieDetailsResolved = {
+      movie: {
+        id: 1234,
+        title: "Die Hard Again",
+        poster_path: "www.posterpath.com/poster1",
+        backdrop_path: "www.posterpath.com/backdrop1",
+        release_date: "3001-01-01",
+        overview: "He doesn't die hard, again",
+        genres: ["Action", "Crime", "Drama", "Thriller"],
+        budget: 3685532,
+        revenue: 2047575,
+        runtime: 95,
+        tagline: "HERE COMES ANOTHA ONE",
+        average_rating: 10,
+      },
+    }
 	})
 
 	it('should display all movie details', async () => {
 		getFavoriteMovieIds.mockResolvedValueOnce(getFavoriteMovieIdsResolved)
-		getMovieDetails.mockResolvedValueOnce({
-			movie: {
-				'id': 1234,
-				'title': 'Die Hard Again',
-				'poster_path': 'www.posterpath.com/poster1',
-				'backdrop_path': 'www.posterpath.com/backdrop1',
-				'release_date': '3001-01-01',
-				'overview': 'He doesn\'t die hard, again',
-				'genres': [
-					'Action',
-					'Crime',
-					'Drama',
-					'Thriller'
-				],
-				'budget': 3685532,
-				'revenue': 2047575,
-				'runtime': 95,
-				'tagline': 'HERE COMES ANOTHA ONE',
-				'average_rating': 10
-			}
-		})
+		getMovieDetails.mockResolvedValueOnce(getMovieDetailsResolved)
 		getComments.mockResolvedValueOnce(getCommentsResolved)
-		
-		const mockFormatAverageRating = jest.fn()
-		const mockSubmitRating = jest.fn()
-		const mockChangeFavoriteStatus = jest.fn()
 
 		const { findByAltText, findByText } = render(
       <MovieDetails
-        // username='Twilly'
-        // userId={1}
-        // isLoggedIn={true}
-        // movieId={1234}
-        // formatAverageRating={mockFormatAverageRating}
-        // userRatings={[]}
-        // submitRating={mockSubmitRating}
-        // success={true}
-        // changeFavoriteStatus={mockChangeFavoriteStatus}
-        // favoriteMovies={this.getFavoriteMovies()}
+        username='Twilly'
+        userId={1}
+        isLoggedIn={true}
+        movieId={1234}
+        formatAverageRating={mockFormatAverageRating}
+        userRatings={[]}
+        submitRating={mockSubmitRating}
+        success={true}
+        changeFavoriteStatus={mockChangeFavoriteStatus}
+        favoriteMovies={mockGetFavoriteMovies()}
       />
     )
 
@@ -89,7 +91,20 @@ describe('MovieDetails Component', () => {
 	it('should notify user of a server error', async () => {
 		getMovieDetails.mockRejectedValueOnce({ status: 666 })
 		getComments.mockResolvedValueOnce(getCommentsResolved)
-		const { findByText } = render(<MovieDetails />)
+		const { findByText } = render(
+      <MovieDetails
+        username="Twilly"
+        userId={1}
+        isLoggedIn={true}
+        movieId={1234}
+        formatAverageRating={mockFormatAverageRating}
+        userRatings={[]}
+        submitRating={mockSubmitRating}
+        success={true}
+        changeFavoriteStatus={mockChangeFavoriteStatus}
+        favoriteMovies={mockGetFavoriteMovies()}
+      />
+    )
 
 		const errorMessage = await findByText(/error status: 666/i)
 

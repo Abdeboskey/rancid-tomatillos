@@ -2,7 +2,7 @@ import React from 'react'
 import MovieDetails from './MovieDetails'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { getMovieDetails, getFavoriteMovieIds } from '../apiCalls'
+import { getMovieDetails, getFavoriteMovieIds, getComments } from '../apiCalls'
 jest.mock('../apiCalls.js')
 
 import MutationObserver from '@sheerun/mutationobserver-shim'
@@ -10,13 +10,30 @@ window.MutationObserver = MutationObserver
 
 describe('MovieDetails Component', () => {
 
-	let getFavoriteMovieIdsResolved
+	let getFavoriteMovieIdsResolved, getCommentsResolved
 
 	beforeEach(() => {
-    getFavoriteMovieIdsResolved = [ 1234 ]
+		getFavoriteMovieIdsResolved = [ 1234 ]
+		getCommentsResolved = { 
+			comments: [
+				{
+					comment: 'It was the best of movies, it was the worst of movies', 
+					author: 'Dr. Cool', 
+					movieId: 32487, 
+					id: 11223344, 
+				}, 			
+				{
+					comment: 'These shoes were a size smaller than I though they\'d be', 
+					author: 'Shoe Shopper', 
+					movieId: 78423, 
+					id: 22334455, 
+				}, 			
+			]
+		}
 	})
 
 	it('should display all movie details', async () => {
+		getFavoriteMovieIds.mockResolvedValueOnce(getFavoriteMovieIdsResolved)
 		getMovieDetails.mockResolvedValueOnce({
 			movie: {
 				'id': 1234,
@@ -38,9 +55,26 @@ describe('MovieDetails Component', () => {
 				'average_rating': 10
 			}
 		})
-		getFavoriteMovieIds.mockResolvedValueOnce(getFavoriteMovieIdsResolved)
+		getComments.mockResolvedValueOnce(getCommentsResolved)
+		
+		const mockFormatAverageRating = jest.fn()
+		const mockSubmitRating = jest.fn()
+		const mockChangeFavoriteStatus = jest.fn()
 
-		const { findByAltText, findByText } = render(<MovieDetails />)
+		const { findByAltText, findByText } = render(
+      <MovieDetails
+        // username='Twilly'
+        // userId={1}
+        // isLoggedIn={true}
+        // movieId={1234}
+        // formatAverageRating={mockFormatAverageRating}
+        // userRatings={[]}
+        // submitRating={mockSubmitRating}
+        // success={true}
+        // changeFavoriteStatus={mockChangeFavoriteStatus}
+        // favoriteMovies={this.getFavoriteMovies()}
+      />
+    )
 
 		const backdrop = await findByAltText(/movie backdrop/i)
 		const poster = await findByAltText(/movie poster/i)
@@ -54,6 +88,7 @@ describe('MovieDetails Component', () => {
 
 	it('should notify user of a server error', async () => {
 		getMovieDetails.mockRejectedValueOnce({ status: 666 })
+		getComments.mockResolvedValueOnce(getCommentsResolved)
 		const { findByText } = render(<MovieDetails />)
 
 		const errorMessage = await findByText(/error status: 666/i)

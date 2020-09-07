@@ -2,13 +2,19 @@ import React from 'react'
 import MovieDetails from './MovieDetails'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { getMovieDetails } from '../apiCalls'
+import { getMovieDetails, getFavoriteMovieIds } from '../apiCalls'
 jest.mock('../apiCalls.js')
 
 import MutationObserver from '@sheerun/mutationobserver-shim'
 window.MutationObserver = MutationObserver
 
 describe('MovieDetails Component', () => {
+
+	let getFavoriteMovieIdsResolved
+
+	beforeEach(() => {
+    getFavoriteMovieIdsResolved = [ 1234 ]
+	})
 
 	it('should display all movie details', async () => {
 		getMovieDetails.mockResolvedValueOnce({
@@ -18,7 +24,7 @@ describe('MovieDetails Component', () => {
 				'poster_path': 'www.posterpath.com/poster1',
 				'backdrop_path': 'www.posterpath.com/backdrop1',
 				'release_date': '3001-01-01',
-				'overview': 'He doesn't die hard, again',
+				'overview': 'He doesn\'t die hard, again',
 				'genres': [
 					'Action',
 					'Crime',
@@ -32,6 +38,7 @@ describe('MovieDetails Component', () => {
 				'average_rating': 10
 			}
 		})
+		getFavoriteMovieIds.mockResolvedValueOnce(getFavoriteMovieIdsResolved)
 
 		const { findByAltText, findByText } = render(<MovieDetails />)
 

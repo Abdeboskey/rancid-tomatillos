@@ -1,8 +1,8 @@
 import React from 'react'
 import MovieDetails from './MovieDetails'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { getMovieDetails, getFavoriteMovieIds, getComments } from '../apiCalls'
+import { getMovieDetails, getFavoriteMovieIds, getComments, postComment } from '../apiCalls'
 jest.mock('../apiCalls.js')
 
 import MutationObserver from '@sheerun/mutationobserver-shim'
@@ -16,7 +16,8 @@ describe('MovieDetails Component', () => {
 			mockFormatAverageRating, 
 			mockSubmitRating, 
 			mockChangeFavoriteStatus,
-			mockGetFavoriteMovies
+			mockGetFavoriteMovies,
+			postCommentResolved
 
 	beforeEach(() => {
 		mockFormatAverageRating = jest.fn()
@@ -39,6 +40,14 @@ describe('MovieDetails Component', () => {
 					id: 22334455, 
 				}, 			
 			]
+		}
+		postCommentResolved = {
+			newComment: {
+				comment: 'It was utterly unwatchable', 
+				author: 'Twilly', 
+				movieId: 1234, 
+				id: 7654321, 
+			} 			
 		}
 		getMovieDetailsResolved = {
       movie: {
@@ -111,21 +120,36 @@ describe('MovieDetails Component', () => {
 		expect(errorMessage).toBeInTheDocument()
 	})
 
-	it('should notify user if there are no movie details', async () => {
-		// for this, we will need to add in a p tag 'There are currently no details for this movie. Please try another one!' if the movie key is assigned to an empty object
-		// add conditional rendering so that if movie details obj is empty, it shows p tag with message
-		// to test:
-		// set up
-		// getMovieDetails.mockResolvedValueOnce({movie: {}})
-		// mockResolvedValueOnce with empty movie obj
-		// render the component
-		// const { getByText, findByText } = render(<MovieDetails />)
-		// execution
-		// find the p tag
-		// const noDetailsMessage = await findByText(/there are currently no details for this movie. please try another one!/i)
-		// assertion
-		// assert that the p tag is in the document
-		// expect(noDetailsMessage).toBeInTheDocument()
-	})
+	it('should allow a user to post a comment', async () => {
+		getFavoriteMovieIds.mockResolvedValueOnce(getFavoriteMovieIdsResolved)
+		getMovieDetails.mockResolvedValueOnce(getMovieDetailsResolved)
+		getComments.mockResolvedValueOnce(getCommentsResolved)
+		postComment.mockResolvedValueOnce(postCommentResolved)
 
+		const { findByText, getByPlaceholderText, getByRole } = render(
+      <MovieDetails
+        username='Twilly'
+        userId={1}
+        isLoggedIn={true}
+        movieId={1234}
+        formatAverageRating={mockFormatAverageRating}
+        userRatings={[]}
+        submitRating={mockSubmitRating}
+        success={true}
+        changeFavoriteStatus={mockChangeFavoriteStatus}
+        favoriteMovies={mockGetFavoriteMovies()}
+      />
+		)
+		
+		fireEvent.change(getByPlaceholderText(/add comment here/i), 
+			{ target: { value: 'It was utterly unwatchable' } }
+		)
+		const commentButton = getByRole('button', { name: 'Comment!'})
+		fireEvent.click(commentButton)
+
+		const newComment = await findByText(/unwatchable/i)
+		const author = await findByText(/twilly/i)
+		expect(newComment).toBeInTheDocument()
+		expect(author).toBeInTheDocument()	
+	})
 })

@@ -14,7 +14,7 @@ const Ratings = ( props ) => {
 					{props.isLoggedIn && !props.isFavorite &&
 						<input
 							type='image'
-							alt='Star Icon'
+							alt='Empty Star Icon'
 							src={whiteStar}
 							className='favorite'
 							onClick={(event) => props.changeFavoriteStatus(props.movieId, event)}>
@@ -23,7 +23,7 @@ const Ratings = ( props ) => {
 					{props.isLoggedIn && props.isFavorite &&
 						<input
 							type='image'
-							alt='Star Icon'
+							alt='Yellow Star Icon'
 							src={yellowStar}
 							className='favorite'
 							onClick={(event) => props.changeFavoriteStatus(props.movieId, event)}>

@@ -1,16 +1,20 @@
 import React from 'react'
 import App from './App'
-import { render, fireEvent } from '@testing-library/react'
+import { screen, render, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { MemoryRouter } from 'react-router-dom'
-import { getMovies, getUserRatings, submitLoginCredentials, getFavoriteMovieIds } from '../apiCalls'
+import { getMovies, getMovieDetails, getUserRatings, submitLoginCredentials, getFavoriteMovieIds, postFavorite } from '../apiCalls'
 jest.mock('../apiCalls.js')
 
 import MutationObserver from '@sheerun/mutationobserver-shim'
 window.MutationObserver = MutationObserver
 
 describe('App Component', () => {
-	let getMoviesResolved, getUserRatingsResolved, submitLoginCredentialsResolved, getFavoriteMovieIdsResolved
+	let getMoviesResolved, 
+			getUserRatingsResolved, 
+			submitLoginCredentialsResolved, 
+			getFavoriteMovieIdsResolved, 
+			getMovieDetailsResolved
 
 	beforeEach(() => {
 		getMoviesResolved = {
@@ -57,6 +61,27 @@ describe('App Component', () => {
 			}
 		}
 		getFavoriteMovieIdsResolved = [420]
+		getMovieDetailsResolved = [
+      {
+        movie: {
+          id: 1234,
+          title: 'Die Hard Again',
+          poster_path: 'www.posterpath.com/poster1',
+          backdrop_path: 'www.posterpath.com/backdrop1',
+          release_date: '3001-01-01',
+          overview: 'He doesn\'t die hard, again',
+          genres: ['Action', 'Crime', 'Drama', 'Thriller'],
+          budget: 3685532,
+          revenue: 2047575,
+          runtime: 95,
+          tagline: 'HERE COMES ANOTHA ONE',
+          average_rating: 10,
+        }
+      },
+      {
+        videos: []
+      },
+    ]
 	})
 
 	it('should display all the movies when the app loads', async () => {
@@ -67,11 +92,11 @@ describe('App Component', () => {
 				<App />
 			</MemoryRouter>
 		) 
-
 		const movieOne = await findByText(/brave/i)
 		const movieTwo = await findByText(/hack\w+/i)
 		const movieThree = await findByText(/perks/i)
-
+  
+		
 		expect(movieOne).toBeInTheDocument()
 		expect(movieTwo).toBeInTheDocument()
 		expect(movieThree).toBeInTheDocument()
@@ -136,6 +161,33 @@ describe('App Component', () => {
 		expect(userRating1).toBeInTheDocument()
 		expect(userRating2).toBeInTheDocument()
 		expect(userRating3).toBeInTheDocument()
+	})
+
+	it('should allow a user to toggle favorite status of a movie', async () => {
+		getMovies.mockResolvedValue(getMoviesResolved)
+		getMovieDetails.mockResolvedValue(getMovieDetailsResolved)
+		submitLoginCredentials.mockResolvedValue(submitLoginCredentialsResolved)
+		getUserRatings.mockResolvedValue(getUserRatingsResolved)
+		getFavoriteMovieIds.mockResolvedValue(getFavoriteMovieIdsResolved)
+		
+		const { findByAltText, findAllByAltText, getByRole, findByRole } = render(
+			<MemoryRouter>
+			 <App />
+		 </MemoryRouter>
+		)
+		
+    const logInButton = getByRole('link', { name: /log in/i });
+		fireEvent.click(logInButton)
+		
+		const actionButton = await findByRole('button', { name: /action!/i });
+    fireEvent.click(actionButton)
+		
+		postFavorite.mockResolvedValueOnce({ message: 'Movie with an id of 1234 was favorited' })
+		const emptyStarButton = await findAllByAltText(/empty star icon/i)
+		fireEvent.click(emptyStarButton[0])
+
+		const yellowStarButton = await findByAltText(/yellow star icon/i)
+		expect(yellowStarButton).toBeInTheDocument()
 	})
 
 	it('should allow a user to post a rating', () => {

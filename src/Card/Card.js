@@ -20,7 +20,7 @@ const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn, isFavori
 				{isLoggedIn && !isFavorite &&
 				<input
 					type='image'
-					alt='Star Icon'
+					alt='Empty Star Icon'
 					src={whiteStar}
 					className='favorite'
 					onClick={(event) => changeFavoriteStatus(movieId, event)}>
@@ -29,7 +29,7 @@ const Card = ({ movieId, title, poster, rating, userRating, isLoggedIn, isFavori
 				{isLoggedIn && isFavorite &&
 				<input
 					type='image'
-					alt='Star Icon'
+					alt='Yellow Star Icon'
 					src={yellowStar}
 					className='favorite'
 					onClick={(event) => changeFavoriteStatus(movieId, event)}>

@@ -9,10 +9,17 @@ This was a Mod 3 project in Turing School of Software and Design's Front End Eng
 - Practice a professional GitHub workflow
 
 ## Setup/Installation
+**FrontEnd**
 - Clone down the repo using `git clone git@github.com:Abdeboskey/rancid-tomatillos.git`
 - Run `npm install` in the root of the newly created directory to install the necessary dependencies
 - Running `npm start` in your terminal should launch the application in your browser. If not, navigate to `http://localhost:3000/` to view the application in action
 - If you'd like to log in as a user, you can do so with the username `Tinsel@turing.io` and password `zxcvb`
+
+**BackEnd**
+- Clone down the repo using `git clone git@github.com:turingschool-examples/rancid-tomatillos-microservice.git`
+- Run `npm install` in the root of the newly created directory to install the necessary dependencies
+- Run `npm start` in your terminal
+- You should now see "Rancid Tomatillos Microservice Server is now listening on port 3001!" in your terminal
 
 ## App in Action
 
@@ -26,10 +33,10 @@ This was a Mod 3 project in Turing School of Software and Design's Front End Eng
 <img src="http://g.recordit.co/VjA204Mesf.gif" alt="User favoriting a movie and viewing all favorite movies" height=auto width=75%/>
 
 #### Users can view comments on movies
-<img src="http://g.recordit.co/5HsQyJ0nIE.gif" alt="User viewing comments on a movie" height=auto width=75%/>
+<img src="http://g.recordit.co/6aPX1sXM3q.gif" alt="User viewing comments on a movie" height=auto width=75%/>
 
 #### While logged in, a user can add a comment to a movie
-<img src="http://g.recordit.co/5FzQMz3tDv.gif" alt="User adding a comment to a movie" height=auto width=75%/>
+<img src="http://g./recordit.co/fgLeSjZIkC.gif" alt="User adding a comment to a movie" height=auto width=75%/>
 
 #### When a user clicks the 'Log Out' button, they are directed to the Home Page
 <img src="http://g.recordit.co/gcxgqZl4SL.gif" alt="User logging out" height=auto width=75%/>

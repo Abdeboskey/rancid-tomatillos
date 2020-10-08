@@ -32,12 +32,6 @@ This was a Mod 3 project in Turing School of Software and Design's Front End Eng
 #### While logged in, a user can favorite movies and then view them by clicking 'View Favorite Movies'
 <img src="http://g.recordit.co/VjA204Mesf.gif" alt="User favoriting a movie and viewing all favorite movies" height=auto width=75%/>
 
-#### Users can view comments on movies
-<img src="http://g.recordit.co/6aPX1sXM3q.gif" alt="User viewing comments on a movie" height=auto width=75%/>
-
-#### While logged in, a user can add a comment to a movie
-<img src="http://g./recordit.co/fgLeSjZIkC.gif" alt="User adding a comment to a movie" height=auto width=75%/>
-
 #### When a user clicks the 'Log Out' button, they are directed to the Home Page
 <img src="http://g.recordit.co/gcxgqZl4SL.gif" alt="User logging out" height=auto width=75%/>
 
